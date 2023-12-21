@@ -1,0 +1,9 @@
+@tailwind base; 
+
+@import 'config.css';
+@import 'estilos.css';
+@import 'aos/dist/aos.css';
+
+
+@tailwind components;
+@tailwind utilities;
