@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperTours</title>
+    <title>Super Tours</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
                 <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md h-max text-center grid gap-6 font-bold shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static custom-ul">
 
                     <li>
-                        <a href="#">Home</a>
+                        <a href="/home">Home</a>
                     </li>
         
                     <li>
@@ -87,11 +87,20 @@
 
     <main>
 
-        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24">
-
-            <div class="homeCard flex flex-col md:flex-row">
+        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass">
+            <div class="buttonround ml-auto flex-col md:flex md:ml-40 mkd:flex">
+                <label>
+                    <input type="checkbox" name="tripType" value="roundTrip">
+                    <span>Round Trip</span>
+                </label>
+                <label>
+                    <input type="checkbox" name="tripType" value="oneWay">
+                    <span>One Way</span>
+                </label>
+            </div>            
+            <div class="homeCard gap-6 flex-col mhd:flex">
                 <div
-                    class="originDiv mb-4 md:mb-0 md:w-1/5"
+                    class="originDiv"
                 >
                     <select name="origin" id="origin" onchange="uod()" class="w-full">
                         <option value="1">Orlando</option>
@@ -108,7 +117,7 @@
                     </select>
                 </div>
                 <div
-                    class="destinationDiv mb-4 md:mb-0 md:w-1/5"
+                    class="destinationDiv "
                 >
                     <select name="destination" id="destination" class="w-full">
                         <option value="1" disabled>Orlando</option>
@@ -125,17 +134,35 @@
                     </select>
                 </div>
                 <div
-                    class="originDate mb-4 md:mb-0 md:w-1/5"
+                    class="originDate"
                 >
                     <input type="date" class="w-full" />
                 </div>
                 <div
-                    class="destinationDate mb-4 md:mb-0 md:w-1/5"
+                    class="destinationDate"
                 >
                     <input type="date" class="w-full" />
                 </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Passengers</button>
+                    <div class="dropdown-content">
+                        <div class="flex">
+                                <label>Adults</label>
+                                <button>-</button>
+                                <input type="number" value="1" />
+                                <button>+</button>
+                        </div>
+                        <div class="flex">
+                            <label>Childs</label>
+                            <button>-</button>
+                            <input type="number" value="0" />
+                            <button>+</button>
+                        </div>
+                    </div>
+
+                </div>
                 <button
-                    class="btn w-full md:w-1/5"
+                    class="btn"
                 >
                     Search
                 </button>
@@ -145,14 +172,13 @@
         
         
 
-        <section class="wrapper text-center py-24 max-w-xl mx-auto">
+        <section class="wrapper text-center py-24p max-w-xl mx-auto md:py-24">
 
             <h2 class="text-3xl font-bold text-very-dark-blue md:text-4xl mb-8 md:mb-12">
                 Bus Schedules
             </h2>
         
-            <div class="flex flex-col md:flex-row gap-8 items-center">
-        
+            <div class="flex-col md:flex-row mfd:flex gap-8 items-center">
                 <section class="mb-12 md:mb-0">
                     <div class="mt-24 mb-14">
                         <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
@@ -192,9 +218,11 @@
 
         </section>
     </main>
+
+    {{-- QUEDE AQUI --}}
     
     <footer class="bg-very-dark-blue custom-footer-py">
-        <section class="wrapper grid gap-12 justify-items-center footer-area md:footer-area-md md:grid-cols-2 md:justify-items-stretch py-1 custom-footer-margin">
+        <section class="wrapper-footer grid gap-12 justify-items-center footer-area md:footer-area-md md:grid-cols-2 md:justify-items-stretch py-1 custom-footer-margin">
     
             <div class="flex flex-wrap gap-4 justify-start w-full md:w-[50%]">
                 <a href="#" class="[grid-area:logo]">
