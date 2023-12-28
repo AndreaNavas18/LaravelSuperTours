@@ -7,6 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <link rel="stylesheet" href="./css/estilos.css">
     <script src="{{ asset('js/home.js') }}"></script>
     
@@ -102,6 +106,7 @@
                 <div
                     class="originDiv"
                 >
+                    <label for="origin" class="labels">From</label>
                     <select name="origin" id="origin" onchange="uod()" class="w-full">
                         <option value="1">Orlando</option>
                         <option value="2">Orlando Int Airport</option>
@@ -116,9 +121,15 @@
                         <option value="11">Miami Downtown</option>
                     </select>
                 </div>
+                <div class="exchangeButtonDiv">
+                    <button type="button" onclick="exchangeLocations()">
+                        <img src="./images/dos-flechas.png" class="flechasmn flechaspq">   
+                    </button>
+                </div>
                 <div
                     class="destinationDiv "
                 >
+                <label for="destination">To</label>
                     <select name="destination" id="destination" class="w-full">
                         <option value="1" disabled>Orlando</option>
                         <option value="2">Orlando Int Airport</option>
@@ -136,30 +147,51 @@
                 <div
                     class="originDate"
                 >
-                    <input id="dateOrigin" type="date" class="w-full" />
+                    <label for="dateOrigin">Departure</label>
+                    <input type="text" id="departureDate" class="w-full datepicker" placeholder="DD/MM/AAAA">
                 </div>
                 <div
                     class="destinationDate"
                 >
-                    <input id="dateDestination" type="date" class="w-full" />
+                    <label for="dateDestination">Return</label>
+                    <input type="text" id="returnDate" class="w-full datepicker" placeholder="DD/MM/AAAA">
                 </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Passengers</button>
-                    <div class="dropdown-content">
-                        <div class="flex">
-                                <label>Adults</label>
-                                <button>-</button>
-                                <input type="number" value="1" />
-                                <button>+</button>
+                <div
+                    class="passengersDiv"
+                >
+                    <label for="passengers">Passengers</label>
+                    <div class="dropdown">
+                        <button id="passengersButton" class="dropbtn">
+                            <span id="passengerCount">Adult, Child</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <div class="flex">
+                                <label class="items-start">Adults</label>
+                                <div class="centr">
+                                    <button onclick="adjustPassengers('adults', -1)">
+                                        <img src="./images/menos.png" class="flechasmn flechaspq">     
+                                    </button>
+                                    <input type="text" id="adultsCount" pattern="\d*" inputmode="numeric" value="1" class="text-center" />
+                                    <button onclick="adjustPassengers('adults', 1)">
+                                        <img src="./images/mas.png" class="flechasmn flechaspq">   
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex centr">
+                                <label>Children</label>
+                                <div class="centr">
+                                    <button onclick="adjustPassengers('children', -1)">
+                                        <img src="./images/menos.png" class="flechasmn flechaspq">     
+                                    </button>
+                                    <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
+                                    <button onclick="adjustPassengers('children', 1)">
+                                        <img src="./images/mas.png" class="flechasmn flechaspq">     
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex">
-                            <label>Childs</label>
-                            <button>-</button>
-                            <input type="number" value="0" />
-                            <button>+</button>
-                        </div>
+    
                     </div>
-
                 </div>
                 <button
                     class="btn"

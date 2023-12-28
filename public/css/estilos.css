@@ -9,7 +9,9 @@
 
 /* Colors */
 :root {
+  /* #F60808 */
   --PrimaryColor: hsl(0, 93%, 50%);
+  /* #CB0A0A */
   --HoverColor: hsl(0, 90%, 42%);
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(0, 0%, 18%);
@@ -421,14 +423,16 @@ menu {
 .homeCard .originDiv,
 .homeCard .destinationDiv,
 .homeCard .originDate,
-.homeCard .destinationDate {
+.homeCard .destinationDate,
+.homeCard .passengersDiv {
   width: 100%;
 }
 
 .homeCard .originDiv label,
 .homeCard .destinationDiv label,
 .homeCard .originDate label,
-.homeCard .destinationDate label {
+.homeCard .destinationDate label,
+.homeCard .passengersDiv label {
   color: var(--textColor);
   font-weight: 500;
   font-size: 13px;
@@ -464,6 +468,27 @@ menu {
   background-color: var(--PrimaryColor);
   border-radius: 10px;
   font-weight: 600;
+}
+
+.exchangeButtonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .flechaspq {
+    width: 200px !important;
+  }
+}
+.flechasmn {
+  width: 20px;
+}
+
+.centr {
+  display: flex;
+  margin-left: auto !important;
 }
 
 .bg-primarycolor {
@@ -519,11 +544,11 @@ menu {
 
 .buttonround input:checked + span::before {
   /* content: '\2713'; Caracter de marca de verificación */
-  content: '\1F687';
+  content: url('../images/circulito.png');
   color: #1842ff; /* Color del icono de marca de verificación */
-  font-size: 18px; /* Tamaño del icono de marca de verificación */
+  font-size: 1px; /* Tamaño del icono de marca de verificación */
   position: absolute;
-  left: 4px; /* Alinea el icono dentro del círculo */
+  left: 1.5px; /* Alinea el icono dentro del círculo */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -1576,3 +1601,8 @@ video {
 .day:hover {
   background-color: #f2f2f2;
 }
+
+.labels {
+  color: black;
+}
+
