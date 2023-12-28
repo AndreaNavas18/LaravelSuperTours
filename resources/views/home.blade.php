@@ -90,11 +90,11 @@
         <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass">
             <div class="buttonround ml-auto flex-col md:flex md:ml-40 mkd:flex">
                 <label>
-                    <input type="checkbox" name="tripType" value="roundTrip">
+                    <input type="radio" id="tripType" name="tripType" value="roundTrip">
                     <span>Round Trip</span>
                 </label>
                 <label>
-                    <input type="checkbox" name="tripType" value="oneWay">
+                    <input type="radio" id="tripType" name="tripType" value="oneWay">
                     <span>One Way</span>
                 </label>
             </div>            
@@ -136,12 +136,12 @@
                 <div
                     class="originDate"
                 >
-                    <input type="date" class="w-full" />
+                    <input id="dateOrigin" type="date" class="w-full" />
                 </div>
                 <div
                     class="destinationDate"
                 >
-                    <input type="date" class="w-full" />
+                    <input id="dateDestination" type="date" class="w-full" />
                 </div>
                 <div class="dropdown">
                     <button class="dropbtn">Passengers</button>
