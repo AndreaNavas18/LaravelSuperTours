@@ -6,15 +6,19 @@ document.addEventListener('DOMContentLoaded', function () {
     function generateCalendar(container, monthOffset = 0) {
         let currentMonth = '';
         let currentYear = '';
-        if (selectedDate.getMonth() === 11 && container.id == 'calendar-next') {
+        if (container.id == 'calendar-next') {
             // Si el mes actual es diciembre, cambia al enero del siguiente año
-            currentMonth = selectedDate.setMonth(0);
-            currentYear = selectedDate.setFullYear(selectedDate.getFullYear() + 1);
+            if (selectedDate.getMonth() === 11) {
+                currentMonth = 0;
+                currentYear = selectedDate.getFullYear() + 1;
+            } else {
+                currentMonth = selectedDate.setMonth(selectedDate.getMonth() + 1);
+                currentYear = selectedDate.setFullYear(selectedDate.getFullYear());
+            }
         } else {
-            currentMonth = selectedDate.getMonth() + monthOffset;
+            currentMonth = selectedDate.getMonth();
             currentYear = selectedDate.getFullYear();
         }
-
         const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
         const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
         const daysInMonth = lastDayOfMonth.getDate();
