@@ -91,7 +91,7 @@
 
     <main>
 
-        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass">
+        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd">
             <div class="buttonround ml-auto flex-col md:flex md:ml-40 mkd:flex">
                 <label>
                     <input type="radio" id="tripType" name="tripType" value="roundTrip">
@@ -102,7 +102,7 @@
                     <span>One Way</span>
                 </label>
             </div>            
-            <div class="homeCard gap-6 flex-col mhd:flex">
+            <div class="homeCard gap-6 flex-col mhd:flex mqd">
                 <div
                     class="originDiv"
                 >

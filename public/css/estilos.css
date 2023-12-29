@@ -412,6 +412,16 @@ menu {
 
 /* Mis media queries */
 
+@media (min-width: 1360px) {
+  .mjd {
+      padding-top: 40px !important;
+  }
+  .mqd {
+    width: 160vh !important;
+
+}
+}
+
 @media (min-width: 768px) {
   .mhd\:flex {
       display: flex !important;
