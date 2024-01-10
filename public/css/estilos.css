@@ -621,7 +621,7 @@ menu {
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  backdrop-filter: blur(6px);
+  /* backdrop-filter: blur(6px); */
   gap: 1rem;
 }
 
@@ -1637,7 +1637,14 @@ video {
 @media (min-width: 768px) {
   .mkd\:flex {
       width: 270px;
-
+  }
+  .buttonroundPc {
+    text-align: left !important;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(6px) !important;
+    gap: 1rem;
   }
 }
 

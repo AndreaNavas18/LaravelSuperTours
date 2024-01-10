@@ -97,7 +97,7 @@
     <main>
 
         <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
-            <div class="buttonround ml-auto flex-col md:flex md:ml-40 mkd:flex">
+            <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
                 <label>
                     <input type="radio" id="tripType" name="tripType" value="roundTrip" checked>
                     <span>Round Trip</span>
