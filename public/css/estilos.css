@@ -10,9 +10,10 @@
 /* Colors */
 :root {
   /* #F60808 */
-  --PrimaryColor: hsl(0, 93%, 50%);
+  --PrimaryColor: hsl(219, 100%, 51%);
   /* #CB0A0A */
-  --HoverColor: hsl(0, 90%, 42%);
+  /* #055CFF */
+  --HoverColor: hsl(219, 100%, 56%);
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(0, 0%, 18%);
   --textColor: hsl(240, 1%, 48%);
@@ -389,8 +390,13 @@ menu {
   .custom-footer-margin {
     margin-left: 280px !important;
   }
+  
+  .containerr {
+    padding-top: 6rem;
+    padding-bottom: 1rem;
+  
+  }
 }
-
 
 .homeCard {
   /*Quiero centrar este article*/
@@ -399,7 +405,7 @@ menu {
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
   border-radius: 1rem;
-  padding: 2.5rem;
+  padding: 1.2rem;
   background: var(--whiteColor);
   position: absolute;
   gap: 1rem;
@@ -414,7 +420,7 @@ menu {
 
 @media (min-width: 1360px) {
   .mjd {
-      padding-top: 40px !important;
+      padding-top: 1px !important;
   }
   .mqd {
     width: 160vh !important;
@@ -424,53 +430,123 @@ menu {
 
 @media (min-width: 768px) {
   .mhd\:flex {
-      display: flex !important;
-  width: 130vh;
-
+    display: flex !important;
+    width: 130vh;
+  }
+  .homeCardPc {
+    /*Quiero centrar este article*/
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+    border-radius: 1rem;
+    padding: 1.8rem;
+    background: var(--whiteColor);
+    position: absolute;
+    gap: 1rem;
+    justify-content: center;
+    transform: translate(-50%);
+    left: 50%;
+    box-shadow: 0 2px 8px 4px rgba(178, 178, 178, 0.45);
+    width: 100%;
   }
 }
 
-.homeCard .originDiv,
-.homeCard .destinationDiv,
-.homeCard .originDate,
-.homeCard .destinationDate,
-.homeCard .passengersDiv {
+.divscards{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 
-.homeCard .originDiv label,
-.homeCard .destinationDiv label,
-.homeCard .originDate label,
-.homeCard .destinationDate label,
-.homeCard .passengersDiv label {
-  color: var(--textColor);
-  font-weight: 500;
+.selectscards {
+  background: var(--inputColor);
+  border-radius: 10px;
+  border: none;
+  padding: 17px 10px 10px 24px;
   font-size: 13px;
-  padding-bottom: 0.4rem;
+  font-weight: 500;
 }
 
-.homeCard .originDate input,
-.homeCard .destinationDate input {
+.inputscards {
   width: 100%;
   background: var(--inputColor);
   border-radius: 10px;
   border: none;
-  padding: 10px;
+  padding: 17px 10px 10px 24px;
   font-size: 13px;
   font-weight: 500;
+
 }
 
-.homeCard .originDiv select,
-.homeCard .destinationDiv select {
-  width: 100%;
-  background: var(--inputColor);
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  font-size: 13px;
-  font-weight: 500;
+.spancard {
+  position: absolute;
+  left: 25px;
+  top: 40px;
 }
 
+.spancard2 {
+  position: absolute;
+  left: 25px;
+  top: 90px;
+}
+
+.spancard3 {
+  position: absolute;
+  left: 25px;
+  top: 132px;
+}
+
+.spancard4 {
+  position: absolute;
+  left: 25px;
+  top: 178px;
+}
+
+@media (min-width: 768px) {
+    .homeCard .originDiv label,
+    .homeCard .destinationDiv label,
+    .homeCard .originDate label,
+    .homeCard .destinationDate label,
+    .homeCard .passengersDiv label {
+      color: var(--textColor);
+      font-weight: 500;
+      font-size: 13px;
+      padding-bottom: 0.4rem;
+      position: relative;
+    }
+
+    .homeCard .originDiv,
+    .homeCard .destinationDiv,
+    .homeCard .originDate,
+    .homeCard .destinationDate,
+    .homeCard .passengersDiv {
+      width: 100%;
+    }
+
+    .homeCard .originDiv select,
+    .homeCard .destinationDiv select {
+      width: 100%;
+      background: var(--inputColor);
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  
+    .homeCard .originDate input,
+    .homeCard .destinationDate input {
+      width: 100%;
+      background: var(--inputColor);
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+}
+ 
 .homeCard .btn {
   width: 100%;
   padding: 0.6rem 1.5rem;
@@ -482,18 +558,49 @@ menu {
 
 .exchangeButtonDiv {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+  box-sizing: border-box;
+  margin-top: 6px;
+  position: initial;
+}
+
+.flech {
+  position: absolute;
+  left: 305px;
+  top: 56px;
 }
 
 @media (min-width: 768px) {
   .flechaspq {
-    width: 200px !important;
+    width: 150px !important;
+    display: flex !important;
+    margin-top: 20px;
+  }
+  .flechaspss {
+    width: 25px !important;
+    display: flex !important;
+  }
+  .exchangePc {
+    display: flex;
+    box-sizing: border-box;
+    margin-top: 6px;
+    position: initial;
+  }
+  
+  .flechPc {
+    position: initial !important;
+  
   }
 }
 .flechasmn {
-  width: 20px;
+  width: 18px;
+}
+
+.calendar1 {
+  width: 18px;
+}
+
+.calendar2 {
+  width: 18px;
 }
 
 .centr {
@@ -502,11 +609,11 @@ menu {
 }
 
 .bg-primarycolor {
-  background-color: hsl(0, 93%, 50%);
+  background-color: var(--PrimaryColor);
 }
 
 .text-primarycolor {
-    color: hsl(0, 93%, 50%) !important;
+    color: var(--PrimaryColor) !important;
 }
 
 .buttonround {
@@ -542,7 +649,7 @@ menu {
   content: '';
   width: 20px; /* Tamaño del círculo */
   height: 20px;
-  border: 2px solid #ff0000; /* Borde del círculo */
+  border: 2px solid #055CFF; /* Borde del círculo */
   border-radius: 50%; /* Hace el círculo redondo */
   display: inline-block;
   position: absolute;
@@ -554,11 +661,11 @@ menu {
 
 .buttonround input:checked + span::before {
   /* content: '\2713'; Caracter de marca de verificación */
-  content: url('../images/circulito.png');
-  color: #1842ff; /* Color del icono de marca de verificación */
-  font-size: 1px; /* Tamaño del icono de marca de verificación */
+  content: url('../images/circulo.png');
+  color: #055CFF; /* Color del icono de marca de verificación */
+  font-size: 0.3px; /* Tamaño del icono de marca de verificación */
   position: absolute;
-  left: 1.5px; /* Alinea el icono dentro del círculo */
+  left: 2px; /* Alinea el icono dentro del círculo */
   top: 50%;
   transform: translateY(-50%);
 }
@@ -572,6 +679,31 @@ menu {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.sombras{
+  box-shadow: #12316bb6;
+}
+
+.tgextos{
+  color: #fff;
+  /* text-shadow:
+    3px 3px 2px #000,
+    -3px 3px 2px #000,
+    -3px -3px 0 #000,
+    3px -3px 0 #000; */
+}
+
+.tmextos{
+  font-size: 30px;
+  line-height: 30px;
+  color: #fff;
+  text-shadow:
+    1px 1px 1px #000,
+    -1px 1px 1px #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000;
+    font-family: fantasy, sans-serif;
 }
 /*
 Reset default styling for dialogs.
@@ -648,9 +780,35 @@ object {
 
 .custom-height {
   /* KAN estilos del fondo del home*/
-  height: 680px !important; /* Ajusta el valor según sea necesario */
-  opacity: 0.75;
+  height: 150px; /* Ajusta el valor según sea necesario */
+  /* opacity: 0.75; */
+  width: fit-content;
 }
+
+@media (min-width: 768px) {
+  .mdcustom-height {
+    height: 520px !important; /* Ajusta el valor según sea necesario */
+    opacity: 0.90;
+    width: 100%;
+  }
+
+  .stylebtn {
+    padding-top: 0.45rem !important;
+    padding-right:  40px !important;
+    padding-bottom: 0.45rem !important;
+    padding-left: 40px !important;
+  }
+}
+
+.ocult {
+  display: none;
+}
+
+.logp{
+  width: 200px;
+  top: auto;
+}
+
 
 .custom-black {
   height: 680px !important; /* Ajusta el valor según sea necesario */
@@ -773,12 +931,33 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.wrapper {
+.wrappermovil {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
   width: 90%;
+  height: fit-content;
   max-width: 90%;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+    width: 90%;
+    max-width: 90%;
+    overflow: hidden;
+    /* height: 80px; */
+  }
+
+  .container {
+    padding-top: 1.5rem;
+    padding-bottom: 80px;
+  }
+  
+  
 }
 
 .wrapperclean {
@@ -816,12 +995,12 @@ video {
 }
 
 .button {
-  display: block;
+  /* display: block; */
   width: -moz-max-content;
   width: max-content;
   border-radius: 9999px;
   --tw-bg-opacity: 1;
-  background-color: hsl(0 100% 50% / var(--tw-bg-opacity));
+  background-color: hsl(219 100% 50% / var(--tw-bg-opacity));
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 3rem;
@@ -1442,6 +1621,20 @@ video {
 /* Mis media queries */
 
 @media (min-width: 768px) {
+  .mdocult {
+      display: none;
+
+  }
+}
+
+@media (min-width: 768px) {
+  .mdview {
+      display: block;
+
+  }
+}
+
+@media (min-width: 768px) {
   .mkd\:flex {
       width: 270px;
 
@@ -1513,16 +1706,16 @@ video {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content input:hover {background-color: #ddd;}
+/* .dropdown-content input:hover {background-color: #ddd;} */
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+/* .dropdown:hover .dropdown-content {display: block;} */
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
+/* .dropdown:hover .dropbtn {
   background-color: var(--PrimaryColor);
   color: var(--whiteColor);
-} 
+}  */
 
  /* DROPDOWN CALENDARS */
  .droppbtn {
@@ -1538,8 +1731,8 @@ video {
 }
 
 /* Dropdown button on hover & focus */
-.droppbtn:hover, .dropbtn:focus {
-  background-color: hsl(0, 93%, 50%);
+.droppbtn:hover {
+  background-color: hsl(219, 100%, 51%);
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -1590,7 +1783,7 @@ video {
 }
 
 .header {
-  background-color: hsl(0, 93%, 50%);
+  background-color: var(--PrimaryColor);
   color: #fff;
   text-align: center;
   padding: 10px;
@@ -1614,5 +1807,8 @@ video {
 
 .labels {
   color: black;
+  font-size: 12px;
+  padding-bottom: 0.1rem;
+  position: absolute;
 }
 

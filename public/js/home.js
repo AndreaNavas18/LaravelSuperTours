@@ -3,6 +3,53 @@ document.addEventListener("DOMContentLoaded", function() {
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');
     const tripTypeSelect = document.querySelectorAll('#tripType');
+    console.log("Cargando home.js");
+    // traer las areas de origen y destino
+    const originArea = document.getElementById('origin');
+    const destinationArea = document.getElementById('destination');
+        // traer las areas desde el controlador con axios
+        axios.get('/areas')
+            .then(function(response) {
+                console.log("Áreas de origen y destino");
+                console.log(response.data);
+    
+                // recorrer el arreglo de áreas
+                response.data.forEach(function(area) {
+                    // crear el elemento option para el origen
+                let originOption = document.createElement('option');
+                // asignar el valor del área al option
+                originOption.value = area.id;
+                // asignar el nombre del área al option
+                originOption.text = area.nombre;
+
+                // agregar el option al select de origen
+                originSelect.appendChild(originOption);
+
+                // crear el elemento option para el destino
+                let destinationOption = document.createElement('option');
+                // asignar el valor del área al option
+                destinationOption.value = area.id;
+                // asignar el nombre del área al option
+                destinationOption.text = area.nombre;
+
+                // agregar el option al select de destino
+                destinationSelect.appendChild(destinationOption);
+
+                // Deshabilitar "Orlando" en el destino
+                if (area.nombre === 'Orlando') {
+                    destinationOption.disabled = true;
+                }
+            
+            });
+
+            // Al cargar la página, establece la opción predeterminada del destino
+                destinationSelect.value = "3";  // Asigna el valor correspondiente
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+
 
     // Cambio de tipo de viaje
     tripTypeSelect.forEach(function(tripType) {
@@ -17,8 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-    // Al cargar la página, establece la opción predeterminada del destino como "Miami"
-    destinationSelect.value = "11";  // Asigna el valor correspondiente a "Miami"
 
     originSelect.addEventListener('change', function uod() {
         console.log("Cambio detectado");  // Agrega esta línea
@@ -42,18 +87,25 @@ function exchangeLocations() {
     destinationSelect.value = tempValue;
 }
 // Función para ajustar el número de pasajeros
-function adjustPassengers(type, amount) {
-    var inputElement = document.getElementById(type + 'Count');
-    var currentValue = parseInt(inputElement.value);
-    var newValue = currentValue + amount;
+// function adjustPassengers(type, amount) {
+//     var inputElement = document.getElementById(type + 'Count');
+//     var currentValue = parseInt(inputElement.value);
+//     var newValue = currentValue + amount;
 
-    // Evitar valores negativos
-    if (newValue < 0) {
-        newValue = 0;
+//     // Evitar valores negativos
+//     if (newValue < 0) {
+//         newValue = 0;
+//     }
+
+//     inputElement.value = newValue;
+// }
+
+//funcion para el menu desplegable 
+
+    function toggleDropdown(dropdownId) {
+        var dropdown = document.getElementById(dropdownId);
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
     }
-
-    inputElement.value = newValue;
-}
 
 // Función para contar el número de pasajeros
 

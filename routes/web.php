@@ -15,7 +15,5 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/home', HomeController::class);
-
-Route::get('/prueba', function () {
-    return view('prueba');
-});
+// peticion a index de homeController
+Route::get('/areas', [HomeController::class, 'areas'])->name('areas');

@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('ratesblock', function (Blueprint $table) {
+            $table->integer('id');
+            $table->integer('id_hotel')->nullable();
+            $table->string('fecha_ini', 50)->nullable();
+            $table->string('fecha_fin', 50)->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('ratesblock');
+    }
+};

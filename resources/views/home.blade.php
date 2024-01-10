@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
     <script src="{{ asset('js/home.js') }}"></script>
     
@@ -19,10 +19,10 @@
 
     <header>
 
-        <nav class="wrapper h-20 flex items-center justify-between">
+        <nav class="wrapper flex items-center justify-between wrappermovil">
 
             <a href="./" class="w-1/3 max-w-[140px]">
-                <img src="./images/logo.png" class="w-full">
+                <img src="./images/logo.png" class="w-full ocult mdview">
             </a>
 
             <input type="checkbox" id="menu" class="peer hidden">
@@ -61,22 +61,25 @@
 
             </div>
 
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block">Login</a>
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block">Sign Up</a>
+            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden stylebtn lg:block">Login</a>
+            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden stylebtn lg:block">Sign Up</a>
             
         </nav>
 
-        <section class="wrapper container grid gap-8 justify-items-center items-center pb-12 md:grid-cols-1 md:py-24">
+        <section class="wrapper containerr grid gap-8 justify-items-center items-center pb-4 md:grid-cols-1 wrappermovil">
 
             <article class="text-center space-y-6 md:text-center md:space-y-8 custom-article">
 
-                <h1 class="text-4xl font-bold text-blue-950 md:text-5xl">Plan Your Trip Whit <br> Travel Super Tours
+                {{-- <h1 class="tmextos md:text-5xl mdocult">SUPER TOURS --}}
+                <img src="./images/logo.png" class="mdocult logp">
+
                 </h1>
 
-                <p class="text-blue-950">Travel to your favorite city with respectful of the <br> enviroment!
-                </p>
+                <h1 class="text-4xl font-bold tgextos md:text-5xl ocult mdview">Plan Your Trip Whit <br> Travel Super Tours
+                </h1>
 
-                <a href="#" class="button mx-auto shadow-xl shadow-bright-red/30 md:mx-auto">Explore Now</a>
+                <p class="text-blue-950 ocult mdview">Travel to your favorite city with respectful of the <br> enviroment!
+                </p>
 
             </article>
 
@@ -86,15 +89,17 @@
 
     <figure class="absolute inset-0 overflow-hidden pointer-events-none">
         {{-- <img src="./images/black.png" class="absolute w-full -z-10 top-0 right-0 max-w-full custom-black"> --}}
-        <img src="./images/bg-tablet-pattern.jpg" class="absolute w-full -z-10 top-0 right-0 max-w-full custom-height">
+        <img src="./images/bg-tablet-pattern.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview">
+        <img src="./images/orlandoimg.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height mdocult">
+
     </figure>
 
     <main>
 
-        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd">
+        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
             <div class="buttonround ml-auto flex-col md:flex md:ml-40 mkd:flex">
                 <label>
-                    <input type="radio" id="tripType" name="tripType" value="roundTrip">
+                    <input type="radio" id="tripType" name="tripType" value="roundTrip" checked>
                     <span>Round Trip</span>
                 </label>
                 <label>
@@ -102,78 +107,83 @@
                     <span>One Way</span>
                 </label>
             </div>            
-            <div class="homeCard gap-6 flex-col mhd:flex mqd">
+            <div class="homeCard gap-6 flex-col mhd:flex mqd homeCardPc">
                 <div
-                    class="originDiv"
+                    class="originDiv divscards"
                 >
                     <label for="origin" class="labels">From</label>
-                    <select name="origin" id="origin" onchange="uod()" class="w-full">
-                        <option value="1">Orlando</option>
-                        <option value="2">Orlando Int Airport</option>
-                        <option value="3">Kissimmee</option>
-                        <option value="4">Fort Pierce</option>
-                        <option value="5">West Palm Beach</option>
-                        <option value="6">Pompano</option>
-                        <option value="7">Boca Raton</option>
-                        <option value="8">Hollywood</option>
-                        <option value="9">North Miami Beach</option>
-                        <option value="10">South Miami Beach</option>
-                        <option value="11">Miami Downtown</option>
+                    <select name="origin" id="origin" onchange="uod()" class="w-full selectscards">
+                        @isset($areas)
+                        {{ dd($areas) }}
+                            @foreach($areas as $area)
+                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                            @endforeach
+                        @endisset
                     </select>
+                    <span class="spancard"> 
+                        <img src="./images/entrega.png" class="flechasmn mdocult">
+                    </span>
+
                 </div>
-                <div class="exchangeButtonDiv">
-                    <button type="button" onclick="exchangeLocations()">
-                        <img src="./images/dos-flechas.png" class="flechasmn flechaspq">   
+                <div class="exchangeButtonDiv exchangePc">
+                    <button type="button" onclick="exchangeLocations()" class="flech flechPc">
+                        <img src="./images/dos-flechas.png" class="flechaspq ocult">   
+                        <img src="./images/flechamovil.png" class="flechasmn mdocult">
                     </button>
                 </div>
                 <div
-                    class="destinationDiv "
+                    class="destinationDiv divscards"
                 >
-                <label for="destination">To</label>
-                    <select name="destination" id="destination" class="w-full">
-                        <option value="1" disabled>Orlando</option>
-                        <option value="2">Orlando Int Airport</option>
-                        <option value="3">Kissimmee</option>
-                        <option value="4">Fort Pierce</option>
-                        <option value="5">West Palm Beach</option>
-                        <option value="6">Pompano</option>
-                        <option value="7">Boca Raton</option>
-                        <option value="8">Hollywood</option>
-                        <option value="9">North Miami Beach</option>
-                        <option value="10">South Miami Beach</option>
-                        <option value="11">Miami Downtown</option>
+                <label for="destination" class="labels">To</label>
+                    <select name="destination" id="destination" class="w-full selectscards">
+                        @isset($areas)
+                        {{ dd($areas) }}
+                            @foreach($areas as $area)
+                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                            @endforeach
+                        @endisset
                     </select>
+                    <span class="spancard2"> 
+                        <img src="./images/entrega.png" class="flechasmn mdocult">
+                    </span>
                 </div>
                 <div
-                    class="originDate"
+                    class="originDate divscards"
                 >
-                    <label for="dateOrigin">Departure</label>
-                    <input type="text" id="departureDate" class="w-full datepicker" placeholder="DD/MM/AAAA">
+                    <label for="dateOrigin" class="labels">Departure</label>
+                    <input type="text" id="departureDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                    <span class="spancard3"> 
+                        <img src="./images/calendario.png" class="calendar1 mdocult">
+                    </span>
                 </div>
                 <div
-                    class="destinationDate"
+                    class="destinationDate divscards"
                 >
-                    <label for="dateDestination">Return</label>
-                    <input type="text" id="returnDate" class="w-full datepicker" placeholder="DD/MM/AAAA">
+                    <label for="dateDestination" class="labels">Return</label>
+                    <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                    <span class="spancard4"> 
+                        <img src="./images/calendario.png" class="calendar2 mdocult">
+                    </span>
+                
                 </div>
                 <div
-                    class="passengersDiv"
+                    class="passengersDiv divscards"
                 >
-                    <label for="passengers">Passengers</label>
+                    <label for="passengers" class="labels">Passengers</label>
                     <div class="dropdown">
-                        <button id="passengersButton" class="dropbtn">
+                        <button id="passengersButton" class="dropbtn" onclick="toggleDropdown('passengersDropdown')">
                             <span id="passengerCount">Adult, Child</span>
                         </button>
-                        <div class="dropdown-content">
+                        <div class="dropdown-content" id="passengersDropdown">
                             <div class="flex">
                                 <label class="items-start">Adults</label>
                                 <div class="centr">
                                     <button onclick="adjustPassengers('adults', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspq">     
+                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
                                     </button>
                                     <input type="text" id="adultsCount" pattern="\d*" inputmode="numeric" value="1" class="text-center" />
                                     <button onclick="adjustPassengers('adults', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspq">   
+                                        <img src="./images/mas.png" class="flechasmn flechaspss">   
                                     </button>
                                 </div>
                             </div>
@@ -181,11 +191,11 @@
                                 <label>Children</label>
                                 <div class="centr">
                                     <button onclick="adjustPassengers('children', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspq">     
+                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
                                     </button>
                                     <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
                                     <button onclick="adjustPassengers('children', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspq">     
+                                        <img src="./images/mas.png" class="flechasmn flechaspss">     
                                     </button>
                                 </div>
                             </div>
@@ -204,7 +214,7 @@
         
         
 
-        <section class="wrapper text-center py-24p max-w-xl mx-auto md:py-24">
+        <section class="wrapper text-center py-24p max-w-xl mx-auto md:py-24 wrappermovil">
 
             <h2 class="text-3xl font-bold text-very-dark-blue md:text-4xl mb-8 md:mb-12">
                 Bus Schedules
@@ -239,7 +249,7 @@
 
         <section class="bg-primarycolor font-bold">
 
-            <div class="wrapper py-24 text-center grid gap-6 md:grid-cols-[40%_40%] md:justify-between md:items-center md:text-left">
+            <div class="wrapper py-24 text-center grid gap-6 md:grid-cols-[40%_40%] md:justify-between md:items-center md:text-left wrappermovil">
 
                 <h2 class="text-4xl text-very-pale-red">What do we have?.
                 </h2>
