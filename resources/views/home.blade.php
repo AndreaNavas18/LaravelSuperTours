@@ -112,11 +112,10 @@
                     class="originDiv divscards"
                 >
                     <label for="origin" class="labels">From</label>
-                    <select name="origin" id="origin" onchange="uod()" class="w-full selectscards">
+                    <select name="origin" id="origin" class="w-full selectscards">
                         @isset($areas)
-                        {{ dd($areas) }}
                             @foreach($areas as $area)
-                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
                             @endforeach
                         @endisset
                     </select>
@@ -137,9 +136,8 @@
                 <label for="destination" class="labels">To</label>
                     <select name="destination" id="destination" class="w-full selectscards">
                         @isset($areas)
-                        {{ dd($areas) }}
                             @foreach($areas as $area)
-                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
                             @endforeach
                         @endisset
                     </select>
