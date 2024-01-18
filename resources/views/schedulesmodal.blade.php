@@ -1,0 +1,43 @@
+@php
+    $modalContent = $modalContent ?? '<div>Contenido del modal en mismo archivo</div>';
+@endphp
+<!-- Modal -->
+<div id="modalContent">
+    {!! $modalContent !!}
+    <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="modal">
+      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Fondo del modal -->
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+    
+        <!-- Contenido del modal -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <!-- Título del modal -->
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+              Título del Modal
+            </h3>
+    
+            <!-- Contenido del modal -->
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                Este es el contenido del modal.
+              </p>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <!-- Botones del modal -->
+            <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" data-close="modal">
+              Cerrar
+            </button>
+            <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+              Guardar cambios
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

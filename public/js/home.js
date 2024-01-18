@@ -1,18 +1,56 @@
-const variableSeccion = {};
+const variableSesion = {};
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');
     const tripTypeSelect = document.querySelectorAll('#tripType');
-    console.log("Cargando home.js");
     // traer las areas desde el controlador con axios
-    /* axios.get('/areas')
+    
+
+    // Cambio de tipo de viaje
+    tripTypeSelect.forEach(function (tripType) {
+        tripType.addEventListener('change', function () {
+            const selectedTripType = document.querySelector('#tripType:checked').value;
+            const returnDateInput = document.querySelector('.destinationDate');
+
+            if (selectedTripType == 'roundTrip') {
+                returnDateInput.style.display = 'block';
+            } else {
+                returnDateInput.style.display = 'none';
+            }
+        });
+    });
+
+    originSelect.addEventListener('change', function origin(e) {
+        const selectedOrigin = e.target.value;
+        variableSesion.origin = selectedOrigin;
+        /* Object.values(destinationSelect.options).forEach(function (option) {
+            (option.value == selectedOrigin) ? option.disabled = true : option.disabled = false;
+        }); */
+        axios.get('/areas', {
+            params: {
+                origin: selectedOrigin
+            }
+        })
         .then(function (response) {
             console.log("Áreas de origen y destino");
             console.log(response.data);
+            // crear las nuevas opciones del select de destino
+            destinationSelect.innerHTML = '';
+            response.data.forEach(function (area) {
+                // crear el elemento option para el destino
+                let destinationOption = document.createElement('option');
+                // asignar el valor del área al option
+                destinationOption.value = area.id;
+                // asignar el nombre del área al option
+                destinationOption.text = area.nombre;
+
+                // agregar el option al select de destino
+                destinationSelect.appendChild(destinationOption);
+            });
 
             // recorrer el arreglo de áreas
-            response.data.forEach(function (area) {
+           /*  response.data.forEach(function (area) {
                 // crear el elemento option para el origen
                 let originOption = document.createElement('option');
                 // asignar el valor del área al option
@@ -41,41 +79,19 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // Al cargar la página, establece la opción predeterminada del destino
-            destinationSelect.value = "3"; // Asigna el valor correspondiente
+            destinationSelect.value = "3"; // Asigna el valor correspondiente */
         })
         .catch(function (error) {
             console.log(error);
         });
- */
 
-
-    // Cambio de tipo de viaje
-    tripTypeSelect.forEach(function (tripType) {
-        tripType.addEventListener('change', function () {
-            const selectedTripType = document.querySelector('#tripType:checked').value;
-            const returnDateInput = document.querySelector('.destinationDate');
-
-            if (selectedTripType == 'roundTrip') {
-                returnDateInput.style.display = 'block';
-            } else {
-                returnDateInput.style.display = 'none';
-            }
-        });
-    });
-
-    originSelect.addEventListener('change', function origin(e) {
-        const selectedOrigin = e.target.value;
-        variableSeccion.origin = selectedOrigin;
-        Object.values(destinationSelect.options).forEach(function (option) {
-            (option.value == selectedOrigin) ? option.disabled = true : option.disabled = false;
-        });
-        console.log(variableSeccion);
+        console.log(variableSesion);
     });
 
     destinationSelect.addEventListener('change', function destination(e) {
         const selectedDestination = e.target.value;
-        variableSeccion.destination = selectedDestination;
-        console.log(variableSeccion);
+        variableSesion.destination = selectedDestination;
+        console.log(variableSesion);
     });
 
 });
@@ -96,18 +112,18 @@ function exchangeLocations() {
     destinationSelect.dispatchEvent(event);
 }
 // Función para ajustar el número de pasajeros
-// function adjustPassengers(type, amount) {
-//     var inputElement = document.getElementById(type + 'Count');
-//     var currentValue = parseInt(inputElement.value);
-//     var newValue = currentValue + amount;
+function adjustPassengers(type, amount) {
+    var inputElement = document.getElementById(type + 'Count');
+    var currentValue = parseInt(inputElement.value);
+    var newValue = currentValue + amount;
 
-//     // Evitar valores negativos
-//     if (newValue < 0) {
-//         newValue = 0;
-//     }
+    // Evitar valores negativos
+    if (newValue < 0) {
+        newValue = 0;
+    }
 
-//     inputElement.value = newValue;
-// }
+    inputElement.value = newValue;
+}
 
 //funcion para el menu desplegable 
 
@@ -133,15 +149,16 @@ function adjustPassengers(type, amount) {
     // Actualizar el texto del botón con la cantidad de adultos y niños
     var adultsCount = parseInt(document.getElementById('adultsCount').value);
     var childrenCount = parseInt(document.getElementById('childrenCount').value);
+    var totalPassengers = adultsCount + childrenCount;
 
     var adultsText = adultsCount > 0 ? adultsCount + ' Adult' + (adultsCount > 1 ? 's' : '') : '';
     var childrenText = childrenCount > 0 ? childrenCount + ' Child' + (childrenCount > 1 ? 'ren' : '') : '';
 
     var totalCountText = [adultsText, childrenText].filter(Boolean).join(', ');
-console.log(totalCountText);
+    console.log(totalCountText);
     document.getElementById('passengerCount').textContent = totalCountText || 'Adult, Child';
-    variableSeccion.passengerCount = totalCountText;
-    console.log(variableSeccion);
+    variableSesion.passengerCount = totalPassengers;
+    console.log(variableSesion);
 }
 
 // $(function() {
@@ -159,12 +176,34 @@ $(function () {
         onSelect: function (dateText, inst) {
             // Acciones cuando se selecciona una fecha
             if (inst.id === 'departureDate') {
-                variableSeccion.departureDate = dateText;
+                variableSesion.departureDate = dateText;
                 console.log("Departure Date selected: " + dateText);
             } else if (inst.id === 'returnDate') {
-                variableSeccion.returnDate = dateText;
+                variableSesion.returnDate = dateText;
                 console.log("Return Date selected: " + dateText);
             }
         }
     });
 });
+
+function searchRoutes() {
+    // Obtener los valores de los campos del formulario
+    var origin = document.getElementById('origin').value;
+    var destination = document.getElementById('destination').value;
+    var departureDate = document.getElementById('departureDate').value;
+    var returnDate = document.getElementById('returnDate').value;
+    var passengerCount = document.getElementById('passengerCount').innerText;  // Ajusta según la estructura real de tu contador de pasajeros
+    var tripType = document.querySelector('input[name="tripType"]:checked').value;
+
+    // Construir la URL con los datos
+    var url = '/show-routes?' +
+        'origin=' + encodeURIComponent(origin) +
+        '&destination=' + encodeURIComponent(destination) +
+        '&departureDate=' + encodeURIComponent(departureDate) +
+        '&returnDate=' + encodeURIComponent(returnDate) +
+        '&passengerCount=' + encodeURIComponent(passengerCount) +
+        '&tripType=' + encodeURIComponent(tripType);
+
+    // Redirigir al controlador con los datos
+    window.location.href = url;
+}

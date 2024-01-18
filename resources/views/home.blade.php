@@ -12,7 +12,10 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
-    <script src="{{ asset('js/home.js') }}"></script>
+    {{-- Llamar la vista que tiene el modal  --}}
+    <script src="{{ asset('/js/schedulesmodal.js') }}"></script>
+    <script src="{{ asset('/js/home.js') }}"></script>
+
     
 </head>
 <body class="font-principal">
@@ -38,11 +41,7 @@
                     </li>
         
                     <li>
-                        <a href="#">Our Company</a>
-                    </li>
-        
-                    <li>
-                        <a href="#">Our Services</a>
+                        <a href="#">Services</a>
                     </li>
         
                     <li>
@@ -95,120 +94,120 @@
     </figure>
 
     <main>
+            <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
+                <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
+                    <label>
+                        <input type="radio" id="tripType" name="tripType" value="roundTrip" checked>
+                        <span>Round Trip</span>
+                    </label>
+                    <label>
+                        <input type="radio" id="tripType" name="tripType" value="oneWay">
+                        <span>One Way</span>
+                    </label>
+                </div>            
+                <div class="homeCard gap-6 flex-col mhd:flex mqd homeCardPc">
+                    <div
+                        class="originDiv divscards"
+                    >
+                        <label for="origin" class="labels">From</label>
+                        <select name="origin" id="origin" class="w-full selectscards">
+                            @isset($areas)
+                                @foreach($areas as $area)
+                                    <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                        <span class="spancard"> 
+                            <img src="./images/entrega.png" class="flechasmn mdocult">
+                        </span>
 
-        <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
-            <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
-                <label>
-                    <input type="radio" id="tripType" name="tripType" value="roundTrip" checked>
-                    <span>Round Trip</span>
-                </label>
-                <label>
-                    <input type="radio" id="tripType" name="tripType" value="oneWay">
-                    <span>One Way</span>
-                </label>
-            </div>            
-            <div class="homeCard gap-6 flex-col mhd:flex mqd homeCardPc">
-                <div
-                    class="originDiv divscards"
-                >
-                    <label for="origin" class="labels">From</label>
-                    <select name="origin" id="origin" class="w-full selectscards">
-                        @isset($areas)
-                            @foreach($areas as $area)
-                                <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
-                            @endforeach
-                        @endisset
-                    </select>
-                    <span class="spancard"> 
-                        <img src="./images/entrega.png" class="flechasmn mdocult">
-                    </span>
-
-                </div>
-                <div class="exchangeButtonDiv exchangePc">
-                    <button type="button" onclick="exchangeLocations()" class="flech flechPc">
-                        <img src="./images/dos-flechas.png" class="flechaspq ocult">   
-                        <img src="./images/flechamovil.png" class="flechasmn mdocult">
+                    </div>
+                    <div class="exchangeButtonDiv exchangePc">
+                        <button type="button" onclick="exchangeLocations()" class="flech flechPc">
+                            <img src="./images/dos-flechas.png" class="flechaspq ocult">   
+                            <img src="./images/flechamovil.png" class="flechasmn mdocult">
+                        </button>
+                    </div>
+                    <div
+                        class="destinationDiv divscards"
+                    >
+                    <label for="destination" class="labels">To</label>
+                        <select name="destination" id="destination" class="w-full selectscards">
+                            @isset($areasDestination)
+                                @foreach($areasDestination as $area)
+                                    <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                @endforeach
+                            @endisset
+                        </select>
+                        <span class="spancard2"> 
+                            <img src="./images/entrega.png" class="flechasmn mdocult">
+                        </span>
+                    </div>
+                    <div
+                        class="originDate divscards"
+                    >
+                        <label for="dateOrigin" class="labels">Departure</label>
+                        <input type="text" id="departureDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                        <span class="spancard3"> 
+                            <img src="./images/calendario.png" class="calendar1 mdocult">
+                        </span>
+                    </div>
+                    <div
+                        class="destinationDate divscards"
+                    >
+                        <label for="dateDestination" class="labels">Return</label>
+                        <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                        <span class="spancard4"> 
+                            <img src="./images/calendario.png" class="calendar2 mdocult">
+                        </span>
+                    
+                    </div>
+                    <div
+                        class="passengersDiv divscards"
+                    >
+                        <label for="passengers" class="labels">Passengers</label>
+                        <div class="dropdown">
+                            <button id="passengersButton" class="dropbtn" onclick="toggleDropdown('passengersDropdown')">
+                                <span id="passengerCount">Adult, Child</span>
+                            </button>
+                            <div class="dropdown-content" id="passengersDropdown">
+                                <div class="flex">
+                                    <label class="items-start">Adults</label>
+                                    <div class="centr">
+                                        <button onclick="adjustPassengers('adults', -1)">
+                                            <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                        </button>
+                                        <input type="text" id="adultsCount" pattern="\d*" inputmode="numeric" value="1" class="text-center" />
+                                        <button onclick="adjustPassengers('adults', 1)">
+                                            <img src="./images/mas.png" class="flechasmn flechaspss">   
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex centr">
+                                    <label>Children</label>
+                                    <div class="centr">
+                                        <button onclick="adjustPassengers('children', -1)">
+                                            <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                        </button>
+                                        <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
+                                        <button onclick="adjustPassengers('children', 1)">
+                                            <img src="./images/mas.png" class="flechasmn flechaspss">     
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <button
+                        onclick="searchRoutes()"
+                        class="btn"
+                    >
+                        Search
                     </button>
                 </div>
-                <div
-                    class="destinationDiv divscards"
-                >
-                <label for="destination" class="labels">To</label>
-                    <select name="destination" id="destination" class="w-full selectscards">
-                        @isset($areas)
-                            @foreach($areas as $area)
-                                <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
-                            @endforeach
-                        @endisset
-                    </select>
-                    <span class="spancard2"> 
-                        <img src="./images/entrega.png" class="flechasmn mdocult">
-                    </span>
-                </div>
-                <div
-                    class="originDate divscards"
-                >
-                    <label for="dateOrigin" class="labels">Departure</label>
-                    <input type="text" id="departureDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
-                    <span class="spancard3"> 
-                        <img src="./images/calendario.png" class="calendar1 mdocult">
-                    </span>
-                </div>
-                <div
-                    class="destinationDate divscards"
-                >
-                    <label for="dateDestination" class="labels">Return</label>
-                    <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
-                    <span class="spancard4"> 
-                        <img src="./images/calendario.png" class="calendar2 mdocult">
-                    </span>
                 
-                </div>
-                <div
-                    class="passengersDiv divscards"
-                >
-                    <label for="passengers" class="labels">Passengers</label>
-                    <div class="dropdown">
-                        <button id="passengersButton" class="dropbtn" onclick="toggleDropdown('passengersDropdown')">
-                            <span id="passengerCount">Adult, Child</span>
-                        </button>
-                        <div class="dropdown-content" id="passengersDropdown">
-                            <div class="flex">
-                                <label class="items-start">Adults</label>
-                                <div class="centr">
-                                    <button onclick="adjustPassengers('adults', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
-                                    </button>
-                                    <input type="text" id="adultsCount" pattern="\d*" inputmode="numeric" value="1" class="text-center" />
-                                    <button onclick="adjustPassengers('adults', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspss">   
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex centr">
-                                <label>Children</label>
-                                <div class="centr">
-                                    <button onclick="adjustPassengers('children', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
-                                    </button>
-                                    <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
-                                    <button onclick="adjustPassengers('children', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspss">     
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                </div>
-                <button
-                    class="btn"
-                >
-                    Search
-                </button>
-            </div>
-            
-        </section>
+            </section>
         
         
 
@@ -223,7 +222,15 @@
                     <div class="mt-24 mb-14">
                         <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
                             <img src="./images/avatar-alii.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
-                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">Orlando to Miami</h3>
+                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">ORLANDO BUS SCHEDULES</h3>
+                            {{-- Boton para abrir el modal --}}
+                            <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded" id="modalschedule" onclick="openModal()">Look</button>
+                            <!-- Contenedor del modal (oculto inicialmente) -->
+                            <div id="myModal" class="modal" style="display: none">
+                                <!-- Contenido del modal cargado desde la vista 'modal' -->
+                                
+                                Hola mundo
+                            </div>
                             <p class="text-dark-grayish-blue">“We have been able to cancel so many other subscriptions since using Manage. There is no more cross-channel confusion and everyone is much more focused.”</p>
                         </article>
                     </div>
@@ -289,8 +296,7 @@
                 <nav class="grid 
                 grid-cols-[max-content_max-content] gap-y-3 text-white">
                     <a href="#">Home</a>
-                    <a href="#">Our Company</a>
-                    <a href="#">Our Services</a>
+                    <a href="#">Services</a>
                     <a href="#">Destinations</a>
                     <a href="#">FAQ</a>
                     <a href="#">Contact Us</a>
