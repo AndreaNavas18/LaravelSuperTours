@@ -93,25 +93,30 @@ class HomeController extends Controller
         return view('dashboard', ['schedules' => $schedules]);
     }
 
-    public function areas(Request $request)
+        public function areas(Request $request)
     {
         try {
+            $idDesautorizados = array(
+                1 => [2],
+                21 => [2],
+                2 => [1, 21],
+            );
             $origin = $request->input('origin');
             $areas = Route::leftJoin('areas', 'routes.trip_to', '=', 'areas.id')
-            ->select('areas.nombre', 'areas.id')
-            ->where('routes.trip_from', '=', $origin)
-            ->where('routes.fecha_ini', 'like', '2%')
+                ->select('areas.nombre', 'areas.id')
+                ->where('routes.trip_from', '=', $origin)
+                ->whereNotIn('routes.trip_to', $idDesautorizados[$origin])
+                // ->where('routes.fecha_ini', 'like', '2%')
             // ->where('routes.fecha_ini', '=', date('Y-m-d'))
-            ->groupBy('areas.nombre', 'areas.id')
-            ->orderBy('areas.orden')
-            ->get();
+                ->groupBy('areas.nombre', 'areas.id')
+                ->orderBy('areas.orden')
+                ->get();
             //$areas = Area::all();
             return ($areas);
             } catch (\Exception $e) {
                 Log::alert("Error al obtener las areas");
                 // Imprimir cualquier error que se pueda estar produciendo
                 dd($e->getMessage());
-            }
-                 
-        }
+            }         
+    }
 }
