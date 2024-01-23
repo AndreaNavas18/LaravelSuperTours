@@ -12,9 +12,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
-    {{-- Llamar la vista que tiene el modal  --}}
-    <script src="{{ asset('/js/schedulesmodal.js') }}"></script>
     <script src="{{ asset('/js/home.js') }}"></script>
+    <script src="{{ asset('/js/modal.js') }}" defer></script>
 
     
 </head>
@@ -209,44 +208,41 @@
                 
             </section>
         
-        
 
-        <section class="wrapper text-center py-24p max-w-xl mx-auto md:py-24 wrappermovil">
-
-            <h2 class="text-3xl font-bold text-very-dark-blue md:text-4xl mb-8 md:mb-12">
-                Bus Schedules
-            </h2>
+        <section class="wrapper text-center max-w-xl mx-auto wrappermovil schedulesSty sch">
         
             <div class="flex-col md:flex-row mfd:flex gap-8 items-center">
                 <section class="mb-12 md:mb-0">
                     <div class="mt-24 mb-14">
                         <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
-                            <img src="./images/avatar-alii.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
+                            <img src="./images/horarioicon.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
                             <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">ORLANDO BUS SCHEDULES</h3>
                             {{-- Boton para abrir el modal --}}
-                            <button class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded" id="modalschedule" onclick="openModal()">Look</button>
-                            <!-- Contenedor del modal (oculto inicialmente) -->
-                            <div id="myModal" class="modal" style="display: none">
-                                <!-- Contenido del modal cargado desde la vista 'modal' -->
-                                
-                                Hola mundo
-                            </div>
-                            <p class="text-dark-grayish-blue">“We have been able to cancel so many other subscriptions since using Manage. There is no more cross-channel confusion and everyone is much more focused.”</p>
-                        </article>
+                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadow-bright-red/30 schedulesBtn">SHOW</button> 
+                            <dialog id="modal">
+                                <h3>Hola</h3>
+                                @include('schedules')
+                                <button id="btn-cerrar-modal">CERRAR MODAL </button>
+                            </dialog>
+                            
+                           </article>
                     </div>
-                    <a href="#" class="button mx-auto shadow-xl shadow-bright-red/30">Discover More</a>
                 </section>
         
                 <section class="mb-12 md:mb-0">
                     <div class="mt-24 mb-14">
                         <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
-                            <img src="./images/avatar-alii.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
-                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">Miami to Orlando</h3>
-                            <p class="text-dark-grayish-blue">“We have been able to cancel so many other subscriptions since using Manage. There is no more cross-channel confusion and everyone is much more focused.”</p>
+                            <img src="./images/horarioicon.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
+                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">MIAMI BUS SCHEDULES</h3>
+                            {{-- Boton para abrir el modal --}}
+                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadow-bright-red/30 schedulesBtn">SHOW</button> 
+                            <dialog id="modal">
+                                <h3>Hola</h3>
+                                <button id="btn-cerrar-modal">CERRAR MODAL </button>
+                            </dialog>
                         </article>
                     </div>
-                    <a href="#" class="button mx-auto shadow-xl shadow-bright-red/30">Discover More</a>
-                </section>
+                 </section>
         
             </div>
         

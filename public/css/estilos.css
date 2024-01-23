@@ -941,6 +941,10 @@ video {
   overflow: hidden;
 }
 
+.sch {
+  padding-top: 100px !important;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     margin-left: auto;
@@ -955,6 +959,19 @@ video {
   .container {
     padding-top: 1.5rem;
     padding-bottom: 80px;
+  }
+
+  .schedulesSty {
+    padding-top: 0.1rem !important;
+    padding-bottom: 6rem;
+    padding-left: 300px;
+  }
+
+  .schedulesBtn {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
   
   
