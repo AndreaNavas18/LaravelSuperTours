@@ -219,8 +219,8 @@
                             <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">ORLANDO BUS SCHEDULES</h3>
                             {{-- Boton para abrir el modal --}}
                             <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadow-bright-red/30 schedulesBtn">SHOW</button> 
-                            <dialog id="modal">
-                                <h3>Hola</h3>
+                            <dialog id="modal" class="dialog1">
+                                <h3>Schedules Today</h3>
                                 @include('schedules')
                                 <button id="btn-cerrar-modal">CERRAR MODAL </button>
                             </dialog>

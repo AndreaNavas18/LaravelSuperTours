@@ -973,6 +973,52 @@ video {
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;
   }
+
+  .schDiv1 {
+    border: 3px #002c7d;
+    border-radius: 10px;
+    /* fondo degradado con poca opacidad */
+    background: linear-gradient(to bottom, #055dff35, rgba(228, 238, 255, 0.331));
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 10px);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .content2 {
+    display: flex;
+    gap: 3px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px;
+  }
+
+  .contenedor1 {
+    display: flex;
+    width: 800px;
+    height: 600px;
+    justify-content: center;
+  }
+
+  .schIcon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+
+  .dialog1 {
+    border-radius: 15px;
+  }
+
+  .schBtn {
+    color: var(--PrimaryColor);
+    font-size: 15px;
+
+  }
   
   
 }
