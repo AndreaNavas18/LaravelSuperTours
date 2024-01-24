@@ -12,6 +12,22 @@ use DB;
 
 class HomeController extends Controller
 {
+    // array de destinos desautorizados
+    protected  $idDesautorizados = array(
+        1 => [2],
+        21 => [2],
+        2 => [1, 21],
+        3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => [], 13 => [], 14 => [], 15 => [], 16 => [], 17 => [], 18 => [], 19 => [], 20 => [], 21 => [], 22 => [],
+        4 => [3],
+        17 => [7,8,9,10,12],
+        6 => [4,7,8,10,11,12],
+        7 => [17,8,10,11,12],
+        8 => [17],
+        10 => [14,15,16,17],
+        12 => [17,13,14,15,16],
+        14 => []
+    );
+
     public function __invoke()
     {
         $areas = Area::where('areas.id', '!=', 20)
@@ -21,9 +37,10 @@ class HomeController extends Controller
         // ->where('routes.fecha_ini', '=', date('Y-m-d'))
         // ->groupBy('areas.nombre', 'areas.id')
         // ->orderBy('orden')->get();
-        $areasDestination = Route::leftJoin('areas', 'routes.trip_to', '=', 'areas.id')
+        $areasDestination = Route::join('areas', 'routes.trip_to', '=', 'areas.id')
         ->select('areas.nombre', 'areas.id')
         ->where('routes.trip_from', '=', 1)
+        ->whereNotIn('routes.trip_to', $this->idDesautorizados[1])
         ->where('routes.fecha_ini', '=', date('Y-m-d'))
         ->groupBy('areas.nombre', 'areas.id')
         ->orderBy('areas.orden')
@@ -96,24 +113,11 @@ class HomeController extends Controller
         public function areas(Request $request)
     {
         try {
-            $idDesautorizados = array(
-                1 => [2],
-                21 => [2],
-                2 => [1, 21],
-                3 => [], 4 => [], 5 => [], 6 => [], 7 => [], 8 => [], 9 => [], 10 => [], 11 => [], 12 => [], 13 => [], 14 => [], 15 => [], 16 => [], 17 => [], 18 => [], 19 => [], 20 => [], 21 => [], 22 => [],
-                4 => [3],
-                17 => [7,8,9,10,12],
-                6 => [4,7,8,10,11,12],
-                7 => [17,8,10,11,12],
-                8 => [17],
-                10 => [14,15,16,17],
-                12 => [17,13,14,15,16]
-            );
             $origin = $request->input('origin');
-            $areas = Route::leftJoin('areas', 'routes.trip_to', '=', 'areas.id')
+            $areas = Route::join('areas', 'routes.trip_to', '=', 'areas.id')
                 ->select('areas.nombre', 'areas.id')
                 ->where('routes.trip_from', '=', $origin)
-                ->whereNotIn('routes.trip_to', $idDesautorizados[$origin])
+                ->whereNotIn('routes.trip_to', $this->idDesautorizados[$origin])
                 // ->where('routes.fecha_ini', 'like', '2%')
             // ->where('routes.fecha_ini', '=', date('Y-m-d'))
                 ->groupBy('areas.nombre', 'areas.id')
