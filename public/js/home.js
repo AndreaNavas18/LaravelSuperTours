@@ -207,3 +207,47 @@ function searchRoutes() {
     // Redirigir al controlador con los datos
     window.location.href = url;
 }
+
+  //Funcion para el slider
+//Aqui quede, necesito que los slider se separen, y no se muestren juntos 
+//   document.addEventListener('DOMContentLoaded', function () {
+//     const carousell = document.querySelector('.carousell');
+//     let currentIndex = 0;
+//     const slideWidth = carousell.clientWidth;
+
+//     function nextSlide() {
+//         currentIndex = (currentIndex + 1) % carousell.children.length;
+//         updateCarousell();
+//     }
+
+//     function updateCarousell() {
+//         const translateValue = -currentIndex * slideWidth;
+//         carousell.style.transform = `translateX(${translateValue}px)`;
+//     }
+
+//     // Cambia de slide cada 3 segundos
+//     setInterval(nextSlide, 3000);
+// });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const carousell = document.querySelector('.carousell');
+    const divSliders = document.querySelectorAll('.divSlider');
+    const slideWidth = divSliders[0].clientWidth; // Asume que todos los sliders tienen el mismo ancho
+
+    let currentIndex = 0;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % divSliders.length;
+        updateCarousell();
+    }
+
+    function updateCarousell() {
+        const translateValue = -currentIndex * slideWidth;
+        carousell.style.transform = `translateX(${translateValue}px)`;
+    }
+
+    // Cambia de slide cada 3 segundos
+    setInterval(nextSlide, 3000);
+});
+
+  

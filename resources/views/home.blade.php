@@ -15,6 +15,7 @@
     <script src="{{ asset('/js/home.js') }}"></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
 
+
     
 </head>
 <body class="font-principal">
@@ -23,13 +24,13 @@
 
         <nav class="wrapper flex items-center justify-between wrappermovil">
 
-            <a href="./" class="w-1/3 max-w-[140px]">
+            <a href="./" class="w-1/3 max-w-[180px]">
                 <img src="./images/logo.png" class="w-full ocult mdview">
             </a>
 
             <input type="checkbox" id="menu" class="peer hidden">
 
-            <label for="menu" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu transition-all z-50 md:hidden"></label>
+            <label for="menu" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu transition-all z-50 md:hidden menuhamburguer"></label>
 
             <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform z-40 md:static md:bg-none md:translate-x-0">
 
@@ -59,9 +60,10 @@
 
             </div>
 
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden stylebtn lg:block">Login</a>
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden stylebtn lg:block">Sign Up</a>
-            
+            <div class="divLogins">
+                <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Login</a>
+                <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Sign Up</a>
+            </div>
         </nav>
 
         <section class="wrapper containerr grid gap-8 justify-items-center items-center pb-4 md:grid-cols-1 wrappermovil">
@@ -76,8 +78,8 @@
                 <h1 class="text-4xl font-bold tgextos md:text-5xl ocult mdview">Plan Your Trip Whit <br> Travel Super Tours
                 </h1>
 
-                <p class="text-blue-950 ocult mdview">Travel to your favorite city with respectful of the <br> enviroment!
-                </p>
+                {{-- <p class="text-blue-950 ocult mdview">Travel to your favorite city with respectful of the <br> enviroment!
+                </p> --}}
 
             </article>
 
@@ -87,7 +89,13 @@
 
     <figure class="absolute inset-0 overflow-hidden pointer-events-none">
         {{-- <img src="./images/black.png" class="absolute w-full -z-10 top-0 right-0 max-w-full custom-black"> --}}
-        <img src="./images/bg-tablet-pattern.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview">
+
+
+        {{-- <img src="./images/bg-tablet-pattern.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview"> --}}
+        <video class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview mdcustom-video" autoplay muted loop>
+            <source src="./videos/fondov.mp4" type="video/mp4">
+            Tu navegador no soporta el tag de video.
+        </video>
         <img src="./images/orlandoimg.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height mdocult">
 
     </figure>
@@ -211,14 +219,14 @@
 
         <section class="wrapper text-center max-w-xl mx-auto wrappermovil schedulesSty sch">
         
-            <div class="flex-col md:flex-row mfd:flex gap-8 items-center">
-                <section class="mb-12 md:mb-0">
+            <div class="flex-col md:flex-row mfd:flex gap-8 items-center schDiv2">
+                <section class="mb-12 md:mb-0 schEach">
                     <div class="mt-24 mb-14">
-                        <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
-                            <img src="./images/horarioicon.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
-                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">ORLANDO BUS SCHEDULES</h3>
+                        <article class="bg-vary-light-gray pt-8 pb-8 px-4 relative fondoSchHome">
+                            <img src="./images/calenblack.png" class="absolute aspect-square -top-12 inset-x-0 mx-auto calenblack imgSc">
+                            <h3 class="textxll mb-4 text-very-dark-blue">Bus Schedules from Orlando to Miami</h3>
                             {{-- Boton para abrir el modal --}}
-                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadow-bright-red/30 schedulesBtn">SHOW</button> 
+                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadowAzul schedulesBtn buttonSc">SHOW</button> 
                             <dialog id="modal" class="dialog1">
                                 <h3>Schedules Today</h3>
                                 @include('schedules')
@@ -229,13 +237,13 @@
                     </div>
                 </section>
         
-                <section class="mb-12 md:mb-0">
+                <section class="mb-12 md:mb-0 schEach">
                     <div class="mt-24 mb-14">
-                        <article class="bg-vary-light-gray pt-16 pb-12 px-4 relative">
-                            <img src="./images/horarioicon.png" class="absolute w-24 aspect-square -top-12 inset-x-0 mx-auto">
-                            <h3 class="text-xl mb-4 pt-2 font-bold text-very-dark-blue">MIAMI BUS SCHEDULES</h3>
+                        <article class="bg-vary-light-gray pt-8 pb-8 px-4 relative fondoSchHome">
+                            <img src="./images/calenblue.png" class="absolute aspect-square -top-12 inset-x-0 mx-auto calenblack imgSc">
+                            <h3 class="textxll mb-4 text-very-dark-blue">Bus Schedules from Miami to Orlando</h3>
                             {{-- Boton para abrir el modal --}}
-                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadow-bright-red/30 schedulesBtn">SHOW</button> 
+                            <button id="btn-abrir-modal" class="button mx-auto shadow-xl shadowAzul schedulesBtn buttonSc">SHOW</button> 
                             <dialog id="modal">
                                 <h3>Hola</h3>
                                 <button id="btn-cerrar-modal">CERRAR MODAL </button>
@@ -248,60 +256,23 @@
         
         </section>
 
-        <section class="bg-primarycolor font-bold">
-
-            <div class="wrapper py-24 text-center grid gap-6 md:grid-cols-[40%_40%] md:justify-between md:items-center md:text-left wrappermovil">
-
-                <h2 class="text-4xl text-very-pale-red">What do we have?.
-                </h2>
-
-                <a href="#" class="button bg-vary-light-gray mx-auto md:mx-0 md:justify-self-end text-primarycolor">View</a>
-
+        <section class="font-bold containerBenefits">
+            <div class="secondsectionDiv1 wrapper text-center wrappermovil">
+                <h2 class="titleBenefits titleBenefitsMovil">What do we have?.</h2>
             </div>
-
+            <hr class="hrBenefits hrBenefitsMovil">
+            <div class="secondsectionC">
+                <div class="secondsectionDiv2 wrapper gap-6 px-4">
+                    @include('secondsection')
+                </div>
+            </div>
+                
         </section>
     </main>
 
-    {{-- QUEDE AQUI --}}
-    
-    <footer class="bg-very-dark-blue custom-footer-py">
-        <section class="wrapper-footer grid gap-12 justify-items-center footer-area md:footer-area-md md:grid-cols-2 md:justify-items-stretch py-1 custom-footer-margin">
-    
-            <div class="flex flex-wrap gap-4 justify-start w-full md:w-[50%]">
-                <a href="#" class="[grid-area:logo]">
-                    <img src="./images/logo-white.png" class="">
-                </a>
-    
-                <div class="flex flex-wrap gap-4 justify-start md:self-start">
-                    <a href="#">
-                        <img src="./images/icon-facebook.svg" class="w-8">
-                    </a>
-                    <a href="#">
-                        <img src="./images/icon-youtube.svg" class="w-8">
-                    </a>
-                    <a href="#">
-                        <img src="./images/icon-twitter.svg" class="w-8">
-                    </a>
-                    <a href="#">
-                        <img src="./images/icon-instagram.svg"  class="w-8">
-                    </a>
-                </div>
-            </div>
-    
-            <div class="flex flex-wrap gap-4 justify-end md:w-[50%] md:col-span-1 md:self-end">
-                <nav class="grid 
-                grid-cols-[max-content_max-content] gap-y-3 text-white">
-                    <a href="#">Home</a>
-                    <a href="#">Services</a>
-                    <a href="#">Destinations</a>
-                    <a href="#">FAQ</a>
-                    <a href="#">Contact Us</a>
-                </nav>
-            </div>
-    
-            <p class="text-dark-grayish-blue text-center w-full md:w-auto md:col-span-2 md:self-center">© 2023 Super Tours Inc. Copyright © 1989 - 2023 Super Tours Inc. All Rights Reserved.</p>
-        </section>
-    </footer>
+    <div>
+        @include('footer')
+    </div>
     
 
 </body>
