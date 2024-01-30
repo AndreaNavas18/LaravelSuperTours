@@ -6,6 +6,12 @@
                 <img src="./images/logo-white.png" class="logoFooter1 logoFooterMovil1">
                 <img src="./images/logosin.png" class="logoFooter2">
             </a>
+            <div class="flex gap-4 justify-start md:self-start footer2Div footer2DivMovil">
+                <h3 class="socialMediaFooter socialMediaFooterMovil">Follow Us</h3>
+                <a href="#">
+                    <img src="./images/facebook.png" class="w-8">
+                </a>
+            </div>
             <div class="footer1Div2 footer1DivMovil2">
                 <h3 class="titlesFooter titlesFooterMovil">Contact</h3>
                 <p class="text-dark-grayish-blue">Orlando (407)-370-3001</p>
@@ -14,14 +20,8 @@
                 <p class="text-dark-grayish-blue">reservations@supertours.com</p>
             </div>
         </div>
-            <div class="flex gap-4 justify-start md:self-start footer2Div footer2DivMovil">
-                <h3 class="socialMediaFooter socialMediaFooterMovil">Follow Us</h3>
-                <a href="#">
-                    <img src="./images/facebook.png" class="w-8">
-                </a>
-            </div>
         <div class="footer3Div footer3DivMovil">
-            <p class="text-dark-grayish-blue text-center w-full md:w-auto md:col-span-2 md:self-center copyMovil copyPc">© 2023 Super Tours Inc. Copyright © 1989 - 2023 Super Tours Inc. All Rights Reserved.</p>
+            <p class="text-center w-full md:w-auto md:col-span-2 md:self-center copyMovil copyPc">© 2023 Super Tours Inc. Copyright © 1989 - 2023 Super Tours Inc. All Rights Reserved.</p>
         </div>
     </section>
 </footer>

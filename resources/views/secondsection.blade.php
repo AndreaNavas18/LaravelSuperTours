@@ -14,7 +14,7 @@
           </div>
         </div>
 
-        <div class="divSlider sliderMovil">
+        {{-- <div class="divSlider sliderMovil">
           <div class="divSlider1 sliderMovil1">
             <h1 class="titleSlider titleSliderMovil titleSliderMovil2">Gps System</h1>
             <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
@@ -79,9 +79,7 @@
           <div class="divSlider2 sliderMovil2 sliderMovil22">
             <img src="./images/slider6.png" alt="Imagen 6" class="sliderS sliderSMovil">
           </div>
-        </div>
+        </div>  --}}
 
-        
-        
     </div>
   </div>

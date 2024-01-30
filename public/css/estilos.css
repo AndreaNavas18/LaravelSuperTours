@@ -363,7 +363,8 @@ menu {
 }
 
 .custom-ul {
-  color: #262659 !important;
+  color: #ffffff !important;
+  font-size: 22px;
 }
 
 .custom-article {
@@ -378,7 +379,10 @@ menu {
 }
 
 .custom-footer-py {
-  padding: 30px;
+  /* padding: 30px; */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 200px;
 }
 
 .custom-footer-sv {
@@ -443,6 +447,7 @@ menu {
 
   .footer1Div2 {
     margin-right: 150px;
+    font-size: 17px;
   }
 
   .footer2Div {
@@ -456,17 +461,18 @@ menu {
   }
 
   .logoFooter1 {
-    width: 60px;
-    margin-left: 70px;
+    width: 40px;
+    margin-left: 60px;
     margin-bottom: 15px;
   }
 
   .logoFooter2 {
-    width: 200px;
+    width: 180px;
   }
 
   .copyPc {
-    font-size: 18px;
+    font-size: 16px;
+    color: honeydew;
   }
   
   .socialMediaFooter {
@@ -1212,7 +1218,7 @@ video {
   }
 
   .sliderS {
-    width: 150px;
+    width: 100px;
   }
 
   .divSlider {
@@ -1243,14 +1249,14 @@ video {
   }
 
   .titleSlider {
-    font-size: 22px;
+    font-size: 18px;
     color: hsl(0, 0%, 18%);
   }
 
   .descriptionSlider {
     margin-top: 10px;
     padding-right: 100px;
-    font-size: 17px;
+    font-size: 14px;
     color: hsl(240,1%,48%);
     font-weight: lighter;
   }
@@ -1261,7 +1267,7 @@ video {
   }
 
   .titleBenefits {
-    font-size: 30px;
+    font-size: 25px;
     color: hsl(0, 0%, 18%);
     font-weight: lighter;
     margin-bottom: 10px;
