@@ -1,17 +1,42 @@
 <div class="carousel-containerr">
     <div class="carousell">
         <div class="divSlider sliderMovil">
-          <div class="divSlider1 sliderMovil1">
-            <h1 class="titleSlider titleSliderMovil titleSliderMovil2">WIFI Access</h1>
-            <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
-              "Surf without limits on your journey: 
-              Connect to our onboard WIFI and stay online throughout your trip. 
-              Your entertainment knows no boundaries!"
-            </p>
-          </div>
-          <div class="divSlider2 sliderMovil2 sliderMovil22">
-            <img src="./images/slider1.png" alt="Imagen 1" class="sliderS sliderSMovil">
-          </div>
+          <div class="sliderCards">
+
+            <div class="card1">
+
+              <div class="divSlider1 sliderMovil1">
+                <h1 class="titleSlider titleSliderMovil titleSliderMovil2">WIFI Access</h1>
+                <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
+                  "Surf without limits on your journey: 
+                  Connect to our onboard WIFI and stay online throughout your trip. 
+                  Your entertainment knows no boundaries!"
+                </p>
+              </div>
+              <div class="divSlider2 sliderMovil2 sliderMovil22">
+                <img src="./images/slider1.png" alt="Imagen 1" class="sliderS sliderSMovil">
+              </div>
+
+            </div>
+
+            <div class="card1">
+
+              <div class="divSlider1 sliderMovil1">
+                <h1 class="titleSlider titleSliderMovil titleSliderMovil2">WIFI Access</h1>
+                <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
+                  "Surf without limits on your journey: 
+                  Connect to our onboard WIFI and stay online throughout your trip. 
+                  Your entertainment knows no boundaries!"
+                </p>
+              </div>
+              <div class="divSlider2 sliderMovil2 sliderMovil22">
+                <img src="./images/slider1.png" alt="Imagen 1" class="sliderS sliderSMovil">
+              </div>
+
+            </div>
+
+         </div>
+
         </div>
 
         {{-- <div class="divSlider sliderMovil">
