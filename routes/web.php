@@ -18,4 +18,5 @@ Route::get('/home', HomeController::class);
 // peticion a index de homeController
 Route::get('/areas', [HomeController::class, 'areas'])->name('areas');
 Route::get('/show-routes', [HomeController::class, 'showRoutes'])->name('showRoutes');
+Route::view('/services','services');
 

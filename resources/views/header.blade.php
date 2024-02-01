@@ -1,48 +1,66 @@
 <header>
-        <nav class="wrapper h-20 flex items-center justify-between">
 
-            <a href="./" class="w-1/3 max-w-[140px]">
-                <img src="./images/logo.png" class="w-full">
-            </a>
+    <nav class="wrapper flex items-center justify-between wrappermovil">
 
-            <input type="checkbox" id="menu" class="peer hidden">
+        <a href="./" class="w-1/3 max-w-[180px]">
+            <img src="./images/logo.png" class="w-full ocult mdview">
+        </a>
 
-            <label for="menu" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu transition-all z-50 md:hidden"></label>
+        <input type="checkbox" id="menu" class="peer hidden">
 
-            <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform z-40 md:static md:bg-none md:translate-x-0">
+        <label for="menu" class="bg-open-menu w-6 h-5 bg-cover bg-center cursor-pointer peer-checked:bg-close-menu transition-all z-50 md:hidden menuhamburguer"></label>
 
-                <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md h-max text-center grid gap-6 font-bold shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static custom-ul">
+        <div class="fixed inset-0 bg-gradient-to-b from-white/70 to-black/70 translate-x-full peer-checked:translate-x-0 transition-transform z-40 md:static md:bg-none md:translate-x-0">
 
-                    <li>
-                        <a href="/home">Home</a>
-                    </li>
-        
-                    <li>
-                        <a href="#">Our Company</a>
-                    </li>
-        
-                    <li>
-                        <a href="#">Our Services</a>
-                    </li>
-        
-                    <li>
-                        <a href="#">Destinations</a>
-                    </li>
-        
-                    <li>
-                        <a href="#">FAQ</a>
-                    </li>
+            <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md h-max text-center grid gap-6 font-bold shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static custom-ul">
 
-                    <li>
-                        <a href="#">Contact Us</a>
-                    </li>
+                <li>
+                    <a href="/home">Home</a>
+                </li>
+    
+                <li>
+                    <a href="/services">Services</a>
+                </li>
+    
+                <li>
+                    <a href="/destinations">Destinations</a>
+                </li>
+    
+                <li>
+                    <a href="/faq">FAQ</a>
+                </li>
 
-                </ul>
+                <li>
+                    <a href="/contact-us">Contact Us</a>
+                </li>
 
-            </div>
+            </ul>
 
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block">Login</a>
-            <a href="#" class="button shadow-sm shadow-bright-red/30 hidden py-3 lg:block">Sign Up</a>
-            
-        </nav>
+        </div>
+
+        <div class="divLogins">
+            <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Login</a>
+            <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Sign Up</a>
+        </div>
+    </nav>
+
+    <section class="wrapper containerr grid gap-8 justify-items-center items-center pb-4 md:grid-cols-1 wrappermovil">
+
+        <article class="text-center space-y-6 md:text-center md:space-y-8 custom-article">
+
+            {{-- <h1 class="tmextos md:text-5xl mdocult">SUPER TOURS --}}
+            <img src="./images/logo.png" class="mdocult logp">
+
+            </h1>
+
+            <h1 class="text-4xl font-bold tgextos md:text-5xl ocult mdview">Plan Your Trip Whit <br> Travel Super Tours
+            </h1>
+
+            {{-- <p class="text-blue-950 ocult mdview">Travel to your favorite city with respectful of the <br> enviroment!
+            </p> --}}
+
+        </article>
+
+    </section>
+
 </header>

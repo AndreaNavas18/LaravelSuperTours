@@ -1,0 +1,12 @@
+@media (min-width: 768px)  {
+    .listaH{
+        list-style-type: none;
+    }
+
+    .sli {
+        float: left;
+        margin-right: 3px;
+        padding: 0 2px;
+    }
+    
+}
