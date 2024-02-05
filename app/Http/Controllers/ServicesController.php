@@ -12,4 +12,19 @@ class ServicesController extends Controller
         return view('services');
     }
 
+    public function aboutus()
+    {
+        return view('aboutus');
+    }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
 }

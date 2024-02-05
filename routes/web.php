@@ -14,9 +14,14 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/home', HomeController::class);
+Route::get('/home', HomeController::class)->name('home');
 // peticion a index de homeController
 Route::get('/areas', [HomeController::class, 'areas'])->name('areas');
 Route::get('/show-routes', [HomeController::class, 'showRoutes'])->name('showRoutes');
 Route::view('/services','services');
+Route::view('/destinations','destinations');
+Route::view('/aboutus','aboutus');
+Route::view('/faq','faq');
+Route::view('/contact','contact');
+
 

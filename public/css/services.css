@@ -8,5 +8,92 @@
         margin-right: 3px;
         padding: 0 2px;
     }
-    
+
+    .section2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        flex-direction: column;
+    }
+
+    .divSection2 {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+    }
+
+    .card1S2 {
+        display: flex;
+        flex-direction: column;
+        background-color: #46799d;
+        color: white;
+        width: 250px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card1S2:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card2S2 {
+        display: flex;
+        flex-direction: column;
+        background-color: #0b2b59;
+        color: white;
+        width: 250px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card2S2:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card3S2 {
+        display: flex;
+        flex-direction: column;
+        background-color: #81adc6;
+        color: white;
+        width: 250px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card3S2:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .div1Section2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+    }
+
+    .btn4S2 {
+        background-color: #055CFF;
+        color: white;
+
+    }
+
+    .btn4S2:hover {
+        background-color: #ffffff;
+        color: #055CFF;
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
 }

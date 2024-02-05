@@ -12,6 +12,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/services.css">
     <script src="{{ asset('/js/home.js') }}"></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
 
@@ -201,8 +202,18 @@
                     @include('secondsection')
                 </div>
             </div>
-                
         </section>
+
+        <div id="services2" class="homeSection2">
+            <div class="secondsectionDiv1 wrapper text-center wrappermovil">
+                <h2 class="titleBenefits titleBenefitsMovil">Our Services</h2>
+            </div>
+            <hr class="hrBenefits hrBenefitsMovil">
+            @include('section2')
+        </div>
+
+
+
     </main>
 
     <div>

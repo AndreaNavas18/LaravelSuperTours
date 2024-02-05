@@ -1,0 +1,13 @@
+@media (min-width: 768px) {
+
+.containerCU {
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionCU {
+    display: flex;
+    flex-direction: column;
+}
+
+}

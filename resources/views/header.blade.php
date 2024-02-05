@@ -2,7 +2,7 @@
 
     <nav class="wrapper flex items-center justify-between wrappermovil">
 
-        <a href="./" class="w-1/3 max-w-[180px]">
+        <a href="/home" class="w-1/3 max-w-[180px]">
             <img src="./images/logo.png" class="w-full ocult mdview">
         </a>
 
@@ -19,11 +19,16 @@
                 </li>
     
                 <li>
-                    <a href="/services">Services</a>
+                    <a href="#services2">Services</a>
+
                 </li>
     
                 <li>
                     <a href="/destinations">Destinations</a>
+                </li>
+
+                <li>
+                    <a href="/aboutus">About Us</a>
                 </li>
     
                 <li>
@@ -31,7 +36,7 @@
                 </li>
 
                 <li>
-                    <a href="/contact-us">Contact Us</a>
+                    <a href="/contact">Contact Us</a>
                 </li>
 
             </ul>
@@ -39,8 +44,8 @@
         </div>
 
         <div class="divLogins">
-            <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Login</a>
-            <a href="#" class="button shadow-sm shadowAzul hidden stylebtn lg:block">Sign Up</a>
+            <a href="#" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Login</a>
+            <a href="#" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Sign Up</a>
         </div>
     </nav>
 

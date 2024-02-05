@@ -38,6 +38,7 @@
          </div>
 
         </div>
+        {{-- //Aqui afuera pongo otro divSlider sliderMovil  --}}
 
         {{-- <div class="divSlider sliderMovil">
           <div class="divSlider1 sliderMovil1">

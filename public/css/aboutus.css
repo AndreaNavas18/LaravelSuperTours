@@ -1,0 +1,214 @@
+@media (min-width: 768px) {
+
+.menuHD {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.listaH{
+    list-style-type: none;
+}
+
+.sli {
+    float: left;
+    margin-right: 3px;
+    padding: 0 2px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.contentAll {
+    display: flex;
+    flex-direction: column;
+}
+
+.containerUs {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1100px;
+    margin-top: 20px;
+}
+
+.divUs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleUs {
+    color: #1e336c;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card1Us {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card1Us1 {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 300px;
+    background-color: #1e336c;
+    padding: 20px;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.title1 {
+    color: white;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.descrip1 {
+    color: white;
+    text-align: justify;
+    font-size: 18px;
+    
+}
+
+.card1Us2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 300px;
+    background-color: white;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.imgUs {
+    width: 250px;
+}
+
+.card2Us {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.card2Us1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 310px;
+    background-color: white;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.card2Us2 {
+    display: flex;
+    width: 50%;
+    height: 320px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.reviTUs {
+    color: #1e336c;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.fleets {
+    display: flex;
+    flex-direction: column;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.divFl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleFl {
+    color: #1e336c;
+    font-size: 40px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.busF {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vanF {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.bFImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 200px;
+
+}
+
+.DesF {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    width: 600px;
+    height: 200px;
+    background-color: #d2d2d2;
+}
+
+.tiF1 {
+    color: #7e7e7e;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 20px;
+
+}
+
+.ulF {
+    color: #1e336c;
+    font: 20px;
+    font-weight: 500;
+    text-align: left;
+    margin-left: 20px;
+
+
+
+}
+
+
+}
