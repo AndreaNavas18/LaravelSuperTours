@@ -1,43 +1,73 @@
+@php
+    $slider = [
+        [[
+            'title' => 'WIFI Access',
+            'description' => 'Surf without limits on your journey: Connect to our onboard WIFI and stay online throughout your trip. Your entertainment knows no boundaries!',
+            'image' => './images/slider1.png'
+        ],
+        [
+            'title' => 'Gps System',
+            'description' => 'Worry-free travel: Our advanced GPS system will guide you accurately from one destination to another. Your journey, in the best hands.',
+            'image' => './images/slider2.png'
+        ]],
+        [[
+            'title' => 'Movies On Board',
+            'description' => 'Cinema on wheels: Immerse yourself in the magic of movies while you travel. Onboard movies to make your journey even more exciting.',
+            'image' => './images/slider3.png'
+        ],
+        [
+            'title' => 'Power Equipped',
+            'description' => 'Recharge your day: Keep your devices powered throughout the journey. With onboard power outlets, the energy is in your hands.',
+            'image' => './images/slider4.png'
+        ]],
+        [[
+            'title' => 'Restroom Equipped',
+            'description' => 'Comfort at every step: Don\'t worry about pit stops—our bus is equipped with an onboard restroom. Travel in total comfort.',
+            'image' => './images/slider5.png'
+        ],
+        [
+            'title' => 'Air Conditioner',
+            'description' => 'Travel cool and relaxed: Our air conditioning system ensures a comfortable journey in any weather. Make every mile refreshing.',
+            'image' => './images/slider6.png'
+        ]]
+    ];
+@endphp
+
 <div class="carousel-containerr">
-    <div class="carousell">
-        <div class="divSlider sliderMovil">
-          <div class="sliderCards">
-
-            <div class="card1">
-
-              <div class="divSlider1 sliderMovil1">
-                <h1 class="titleSlider titleSliderMovil titleSliderMovil2">WIFI Access</h1>
-                <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
-                  "Surf without limits on your journey: 
-                  Connect to our onboard WIFI and stay online throughout your trip. 
-                  Your entertainment knows no boundaries!"
-                </p>
-              </div>
-              <div class="divSlider2 sliderMovil2 sliderMovil22">
-                <img src="./images/slider1.png" alt="Imagen 1" class="sliderS sliderSMovil">
-              </div>
-
+  <div class="carousell">
+    @foreach ($slider as $slide)
+      <div class="divSlider sliderMovil">
+        <div class="sliderCards">
+          <div class="card1">
+            <div class="divSlider1 sliderMovil1">
+              <h1 class="titleSlider titleSliderMovil titleSliderMovil2">
+                {{ $slide[0]['title'] }}
+              </h1>
+              <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
+                {{ $slide[0]['description'] }}
+              </p>
             </div>
-
-            <div class="card1">
-
-              <div class="divSlider1 sliderMovil1">
-                <h1 class="titleSlider titleSliderMovil titleSliderMovil2">WIFI Access</h1>
-                <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
-                  "Surf without limits on your journey: 
-                  Connect to our onboard WIFI and stay online throughout your trip. 
-                  Your entertainment knows no boundaries!"
-                </p>
-              </div>
-              <div class="divSlider2 sliderMovil2 sliderMovil22">
-                <img src="./images/slider1.png" alt="Imagen 1" class="sliderS sliderSMovil">
-              </div>
-
+            <div class="divSlider2 sliderMovil2 sliderMovil22">
+              <img src="{{ $slide[0]['image'] }}" alt="Imagen {{$slide[0]['title']}}" class="sliderS sliderSMovil">
             </div>
-
-         </div>
-
+          </div>
+          <div class="card1">
+            <div class="divSlider1 sliderMovil1">
+              <h1 class="titleSlider titleSliderMovil titleSliderMovil2">
+                {{ $slide[1]['title'] }}
+              </h1>
+              <p class="descriptionSlider descriptionSliderMovil descriptionSliderMovil2">
+                {{ $slide[1]['description'] }}
+              </p>
+            </div>
+            <div class="divSlider2 sliderMovil2 sliderMovil22">
+              <img src="{{ $slide[1]['image'] }}" alt="Imagen {{$slide[1]['title']}}" class="sliderS sliderSMovil">
+            </div>
+          </div>
         </div>
+      </div>
+    @endforeach
+    
         {{-- //Aqui afuera pongo otro divSlider sliderMovil  --}}
 
         {{-- <div class="divSlider sliderMovil">
@@ -107,5 +137,5 @@
           </div>
         </div>  --}}
 
-    </div>
   </div>
+</div>

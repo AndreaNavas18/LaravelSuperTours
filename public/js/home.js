@@ -112,7 +112,7 @@ function exchangeLocations() {
     destinationSelect.dispatchEvent(event);
 }
 // Función para ajustar el número de pasajeros
-function adjustPassengers(type, amount) {
+/* function adjustPassengers(type, amount) {
     var inputElement = document.getElementById(type + 'Count');
     var currentValue = parseInt(inputElement.value);
     var newValue = currentValue + amount;
@@ -123,7 +123,7 @@ function adjustPassengers(type, amount) {
     }
 
     inputElement.value = newValue;
-}
+} */
 
 //funcion para el menu desplegable 
 
@@ -144,6 +144,11 @@ function adjustPassengers(type, amount) {
         newValue = 0;
     }
 
+    // Evitar que el numero de adultos sea menor a 1
+    if (type === 'adults' && newValue < 1) {
+        newValue = 1;
+    }
+
     inputElement.value = newValue;
 
     // Actualizar el texto del botón con la cantidad de adultos y niños
@@ -155,8 +160,7 @@ function adjustPassengers(type, amount) {
     var childrenText = childrenCount > 0 ? childrenCount + ' Child' + (childrenCount > 1 ? 'ren' : '') : '';
 
     var totalCountText = [adultsText, childrenText].filter(Boolean).join(', ');
-    console.log(totalCountText);
-    document.getElementById('passengerCount').textContent = totalCountText || 'Adult, Child';
+    document.getElementById('passengerCount').textContent = totalCountText || '1 Adult';
     variableSesion.passengerCount = totalPassengers;
     console.log(variableSesion);
 }

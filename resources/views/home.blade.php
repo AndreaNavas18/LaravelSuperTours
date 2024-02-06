@@ -111,7 +111,7 @@
                         <label for="passengers" class="labels">Passengers</label>
                         <div class="dropdown">
                             <button id="passengersButton" class="dropbtn" onclick="toggleDropdown('passengersDropdown')">
-                                <span id="passengerCount">Adult, Child</span>
+                                <span id="passengerCount">1 Adult</span>
                             </button>
                             <div class="dropdown-content" id="passengersDropdown">
                                 <div class="flex">
