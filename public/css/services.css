@@ -30,11 +30,12 @@
         flex-direction: column;
         background-color: #46799d;
         color: white;
-        width: 250px;
-        height: 300px;
+        width: 300px;
+        height: 400px;
         justify-content: center;
         align-items: center;
         text-align: center;
+        border-radius: 20px;
     }
 
     .card1S2:hover {
@@ -47,11 +48,13 @@
         flex-direction: column;
         background-color: #0b2b59;
         color: white;
-        width: 250px;
-        height: 300px;
+        width: 300px;
+        height: 400px;
         justify-content: center;
         align-items: center;
         text-align: center;
+        border-radius: 20px;
+
     }
 
     .card2S2:hover {
@@ -64,16 +67,23 @@
         flex-direction: column;
         background-color: #81adc6;
         color: white;
-        width: 250px;
-        height: 300px;
+        width: 300px;
+        height: 400px;
         justify-content: center;
         align-items: center;
         text-align: center;
+        border-radius: 20px;
+
     }
 
     .card3S2:hover {
         transform: scale(1.1);
         transition: transform 0.3s ease;
+    }
+
+    .h2S2 {
+        margin-bottom: 10px;
+        font-weight: 600;
     }
 
     .div1Section2 {
@@ -84,16 +94,54 @@
 
     }
 
+    .btnBN {
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 10px;
+        color: #0e3874;
+        margin-top: 20px;
+    }
+
+    .btnBN:hover {
+        background-color: #0e3874;
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .btnBN2 {
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 10px;
+        color: #81adc6;
+        margin-top: 20px;
+    }
+
+    .btnBN2:hover {
+        background-color: #81adc6;
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
     .btn4S2 {
-        background-color: #055CFF;
+        background-color: #324059;
         color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-weight: 700;
 
     }
 
     .btn4S2:hover {
         background-color: #ffffff;
-        color: #055CFF;
+        color: #324059;
         transform: scale(1.1);
         transition: transform 0.3s ease;
+        border-color: #324059;
+        border-width: 1px;
     }
 }

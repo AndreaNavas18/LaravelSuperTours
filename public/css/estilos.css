@@ -1280,9 +1280,9 @@ video {
 
   .hrBenefits {
     height: 3px;
-    width: 1100px;
+    width: 300px;
     background-color: var(--PrimaryColor);
-    margin-left: 220px;
+    margin-left: 700px;
     /* border-color: black; */
     margin-bottom: 10px;
   }
