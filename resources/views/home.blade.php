@@ -206,7 +206,7 @@
 
         <div id="services2" class="homeSection2">
             <div class="secondsectionDiv1 wrapper text-center wrappermovil">
-                <h2 class="titleBenefits titleBenefitsMovil">Our Services</h2>
+                <h2 class="titleBenefits titleBenefitsMovil ">Our Services</h2>
             </div>
             <hr class="hrBenefits hrBenefitsMovil">
             @include('section2')
