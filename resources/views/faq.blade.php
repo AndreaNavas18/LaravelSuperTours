@@ -17,7 +17,10 @@
            <h1 class="faqtitle">FAQ</h1>
             <div class="div-faq">
                 <div class="dropdown-trigger">
-                    <h2>Where does Super Tours Travel?</h2>
+                    <h2 class="qtrigger">Where does Super Tours Travel?</h2>
+                    <button class="btntrigger">
+                        +
+                    </button>
                     <div class="dropdown-content">
                     <p >We offer daily service Between Orlando, Fort Pierce, 
                         Lake Worth/West Palm Beach, Pompano Beach, Ft. Lauderdale/Hollywood, 
