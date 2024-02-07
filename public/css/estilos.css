@@ -81,6 +81,7 @@ body {
   /* 2 */
   font-family: Arial, Helvetica, sans-serif;
   background-color: #f1f1f1;
+  overflow-x: hidden;
 }
 
 /*
@@ -403,7 +404,7 @@ menu {
 }
 
 .titlesFooterMovil {
-  color: honeydew;
+  color: white;
 }
 
 .footer2DivMovil {
@@ -414,7 +415,7 @@ menu {
 }
 
 .socialMediaFooterMovil {
-  color: honeydew;
+  color: white;
   font-size: 15px;
 }
 
@@ -474,18 +475,18 @@ menu {
 
   .copyPc {
     font-size: 16px;
-    color: honeydew;
+    color: white;
   }
   
   .socialMediaFooter {
-    color: honeydew;
+    color: white;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
   }
 
   .titlesFooter {
-    color: honeydew;
+    color: white;
   }
 
   .carousel-containerr {
@@ -549,6 +550,10 @@ menu {
     left: 50%;
     box-shadow: 0 2px 8px 4px rgba(178, 178, 178, 0.45);
     width: 100%;
+  }
+
+  .homeSection2 {
+    margin-right: 50px;
   }
 }
 
@@ -1105,7 +1110,6 @@ video {
   color: var(--textColor);
 
 }
-
 /* Estilos específicos para pantallas pequeñas (móviles) */
 @media (max-width: 767px) {
   .titleSliderMovil2 {
@@ -1269,6 +1273,7 @@ video {
   .containerBenefits {
     display: flex;
     flex-direction: column;
+    margin-right: 40px;
   }
 
   .titleBenefits {
@@ -1280,9 +1285,9 @@ video {
 
   .hrBenefits {
     height: 3px;
-    width: 300px;
+    width: 1100px;
     background-color: var(--PrimaryColor);
-    margin-left: 700px;
+    margin-left: 290px;
     /* border-color: black; */
     margin-bottom: 10px;
   }
@@ -2193,4 +2198,16 @@ video {
   padding-bottom: 0.1rem;
   position: absolute;
 }
+
+@media screen and (max-width: 1366px) {
+  /* PC mesa resolución */
+
+  
+}
+
+@media screen and (max-width: 1536px) {
+  /*Surface resolución */
+ 
+}
+
 
