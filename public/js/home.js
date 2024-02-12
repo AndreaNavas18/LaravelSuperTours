@@ -4,8 +4,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
     const destinationSelect = document.getElementById('destination');
     const tripTypeSelect = document.querySelectorAll('#tripType');
-    // traer las areas desde el controlador con axios
+
+    // bloquear la entrada de letras y caracteres especiales en el campo de número de pasajeros
+    const passengerCount = document.getElementById('adultsCount');
+    passengerCount.addEventListener('input', function (e) {
+        this.value = (this.value == 0) ? 1 : this.value;
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    passengerCount.addEventListener('change', function (e) {
+        this.value = (this.value == '') ? 1 : this.value;
+        adjustPassengers('adults', 0);
+    });
     
+    // bloquear la entrada de letras y caracteres especiales en el campo de número de niños
+    const childrenCount = document.getElementById('childrenCount');
+    childrenCount.addEventListener('input', function (e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    });
+    childrenCount.addEventListener('change', function (e) {
+        this.value = (this.value == '') ? 0 : this.value;
+        adjustPassengers('children', 0);
+    });
 
     // Cambio de tipo de viaje
     tripTypeSelect.forEach(function (tripType) {

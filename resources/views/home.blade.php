@@ -38,17 +38,17 @@
 
     <main>
             <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
-                <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
-                    <label>
-                        <input type="radio" id="tripType" name="tripType" value="roundTrip" checked>
-                        <span>Round Trip</span>
-                    </label>
-                    <label>
-                        <input type="radio" id="tripType" name="tripType" value="oneWay">
-                        <span>One Way</span>
-                    </label>
-                </div>            
                 <div class="homeCard gap-6 flex-col mhd:flex mqd homeCardPc">
+                    <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
+                        <label>
+                            <input type="radio" id="tripType" name="tripType" value="roundTrip">
+                            <span>Round Trip</span>
+                        </label>
+                        <label>
+                            <input type="radio" id="tripType" name="tripType" value="oneWay" checked>
+                            <span>One Way</span>
+                        </label>
+                    </div>            
                     <div
                         class="originDiv divscards"
                     >
@@ -96,7 +96,7 @@
                         </span>
                     </div>
                     <div
-                        class="destinationDate divscards"
+                        class="destinationDate divscards ocult"
                     >
                         <label for="dateDestination" class="labels">Return</label>
                         <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
@@ -120,7 +120,7 @@
                                         <button onclick="adjustPassengers('adults', -1)">
                                             <img src="./images/menos.png" class="flechasmn flechaspss">     
                                         </button>
-                                        <input type="text" id="adultsCount" pattern="\d*" inputmode="numeric" value="1" class="text-center" />
+                                        <input type="text" id="adultsCount" inputmode="numeric" value="1" class="text-center" />
                                         <button onclick="adjustPassengers('adults', 1)">
                                             <img src="./images/mas.png" class="flechasmn flechaspss">   
                                         </button>
