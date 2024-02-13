@@ -4,7 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
     dropdownTriggers.forEach(trigger => {
         trigger.addEventListener('click', function () {
             const dropdownContent = this.querySelector('.dropdown-content');
-            dropdownContent.classList.toggle('show');
+            // dropdownContent.classList.toggle('show');
+            const isShowing = dropdownContent.classList.toggle('show');
+            if (isShowing) {
+                const height = dropdownContent.offsetHeight;
+                this.style.height = (this.offsetHeight + height) + 'px';
+            } else {
+                this.style.height = null;
+            }
         });
     });
 
@@ -13,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!event.target.closest('.dropdown-trigger')) {
             const dropdownContents = document.querySelectorAll('.dropdown-content');
             dropdownContents.forEach(content => {
+                // content.classList.remove('show');
                 content.classList.remove('show');
+                content.closest('.dropdown-trigger').style.height = null;
             });
         }
     });
