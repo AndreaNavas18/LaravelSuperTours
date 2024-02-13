@@ -12,8 +12,34 @@
 <body>
     @include('header2')
     <div class="containerCU">
-        <h1 class="tituloCN">Contact Us</h1>
         <section class="sectionCU">
+            <div class="s2CU">
+                <h1 class="tituloCN">What can we help with?</h1>
+                <div class="s1">
+                    <h2 class="h2CN">EMAIL</h2>
+                    <p class="pCN">
+                        reservations@supertours.com
+                    </p>
+                </div>
+                <div class="s1">
+                    <h2 class="h2CN">PHONE</h2>
+                    <p class="pCN">
+                       Orlando<br>
+                       (407)-370-3001
+                    </p>
+                    <p class="pCN">
+                        Miami<br>
+                        (305)-677-2676
+                    </p>
+                </div>
+                <div class="s1">
+                    <h2 class="h2CN">ADDRESS</h2>
+                    <p class="pCN">
+                        BUS STOP, 4953 International Dr, <br>
+                        Orlando, FL 32819, Estados Unidos.
+                    </p>
+                </div>
+            </div>
             <form action="" class="formClass">
                 <div class="rowsCN">
                     <label for="reason" >
