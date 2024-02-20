@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="./css/services.css">
     <script src="{{ asset('/js/home.js') }}"></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
+    <script src="{{ asset('/js/select-init.js') }}"></script>
+    <link rel="stylesheet" href="./css/select2.min.css">
+    <script src="{{ asset('/js/select2.min.js') }}"></script>
 
-
-    
 </head>
 <body class="font-principal">
 
@@ -54,7 +55,10 @@
                             class="originDiv divscards"
                         >
                             <label for="origin" class="labels">From</label>
-                            <select name="origin" id="origin" class="w-full selectscards">
+                            <select 
+                                name="origin" 
+                                id="origin" 
+                                class="origin w-full selectscards">
                                 @isset($areas)
                                     @foreach($areas as $area)
                                         <option value="{{ $area->id }}">{{ $area->nombre }}</option>
@@ -76,7 +80,9 @@
                             class="destinationDiv divscards"
                         >
                         <label for="destination" class="labels">To</label>
-                            <select name="destination" id="destination" class="w-full selectscards">
+                            <select name="destination" 
+                                id="destination" 
+                                class="destination w-full selectscards">
                                 @isset($areasDestination)
                                     @foreach($areasDestination as $area)
                                         <option value="{{ $area->id }}">{{ $area->nombre }}</option>
@@ -198,7 +204,7 @@
             <div class="secondsectionDiv1 wrapper text-center wrappermovil">
                 <h2 class="titleBenefits titleBenefitsMovil">What do we have?.</h2>
             </div>
-            <hr class="hrBenefits hrBenefitsMovil">
+            {{-- <hr class="hrBenefits hrBenefitsMovil"> --}}
             <div class="secondsectionC">
                 <div class="secondsectionDiv2 wrapper gap-6 px-4">
                     @include('secondsection')
@@ -210,7 +216,7 @@
             <div class="secondsectionDiv1 wrapper text-center wrappermovil">
                 <h2 class="titleBenefits titleBenefitsMovil ">Our Services</h2>
             </div>
-            <hr class="hrBenefits hrBenefitsMovil">
+            {{-- <hr class="hrBenefits hrBenefitsMovil"> --}}
             @include('section2')
         </div>
 

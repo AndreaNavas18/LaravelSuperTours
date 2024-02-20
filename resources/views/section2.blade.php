@@ -20,6 +20,9 @@
         </div>
     </div>
     <div class="div1Section2">
-        <button class="btn4S2">Discover More</button>
+        <a href="/destinations" class="btn4S2">Discover More</a>
+        {{-- <button class="btn4S2">
+            Discover More
+        </button> --}}
     </div>
 </section>

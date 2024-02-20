@@ -664,6 +664,34 @@ menu {
       gap: 10px;
       align-items: center;
     }
+
+    /* Estilos para el dropdown del select */
+    .select2-container.originDiv .select2-selection--single,
+    .select2-container.destinationDiv .select2-selection--single {
+      background: var(--inputColor);
+      border-radius: 10px;
+      border: none !important;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .homeCard .originDiv .select2-selection__rendered,
+    .homeCard .destinationDiv .select2-selection__rendered{
+      background: var(--inputColor);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--textColor);
+      padding: 5px !important;
+      border-radius: 10px !important;
+
+    }
+
+    .homeCard .originDiv .select2-results__option {
+      padding: 10px 15px;
+      font-size: 10px;
+      color: var(--textColor);
+    }
 }
  
 .homeCard .btn {
@@ -1221,12 +1249,15 @@ video {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
+
   }
 
   .secondsectionDiv1 {
     padding-top: 15px;
   }
   .secondsectionDiv2 {
+    border-top: 5px #002c7d;
     /* border-color: #000;
     border-width: 2px; */
     margin-bottom: 5px;
@@ -1287,8 +1318,9 @@ video {
   .titleBenefits {
     font-size: 25px;
     color: hsl(0, 0%, 18%);
-    font-weight: lighter;
+    font-weight: 700;
     margin-bottom: 10px;
+    border-bottom: 3px solid #055CFF;
   }
 
   .hrBenefits {
