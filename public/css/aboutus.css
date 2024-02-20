@@ -208,5 +208,227 @@
 
 }
 
+}
+
+/* Estilos para movil - tablet  */
+@media (max-width: 900px) {
+
+    .McontentAll {
+        display: flex;
+        flex-direction: column;
+        max-width: 90%;
+        margin: 0 auto;
+
+    }
+
+    .MmenuHD {
+        margin-left: 10px;
+        margin-top: 20px;
+        display: none;
+
+    }
+
+    .MlistaH {
+        list-style-type: none;
+    }
+
+    .Msli {
+        float: left;
+        margin-right: 3px;
+        padding: 0 2px;
+        font-size: 17px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 500;
+
+    }
+
+    .McontainerUs {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .MdivUs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+
+    }
+
+    .MtitleUs {
+        color: #1e336c;
+        font-size: 30px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .Mcard1Us {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+    }
+
+    .Mcard1Us1 {
+        display: flex;
+        flex-direction: column;
+        background-color: #1e336c;
+        padding: 20px;
+        border-radius: 10px;
+
+    }
+
+    .Mtitle1 {
+        color: white;
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 600;
+
+    }
+
+    .Mdescrip1 {
+        color: white;
+        text-align: justify;
+        font-size: 18px;
+        
+    }
+
+    .Mcard1Us2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .Mcard1Us2:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .MimgUs {
+        width: 150px;
+
+    }
+
+    .Mcard2Us {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .Mcard2Us1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border-radius: 10px;
+
+    }
+
+    .MreviTUs {
+        color: #1e336c;
+        font-size: 25px;
+        font-weight: 600;
+
+    }
+
+    .Mcard2Us2 {
+        display: flex;
+        overflow: hidden;
+        object-fit: cover;
+        object-position: center;
+
+    }
+
+    .Mfleets {
+        display: flex;
+        flex-direction: column;
+        max-width: 90%;
+        margin: 0 auto;
+
+    }
+
+    .MdivFl {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+
+    }
+
+    .MtitleFl {
+        color: #1e336c;
+        font-size: 30px;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    .MbusF {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+
+    }
+
+    .MbFImg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 100px;
+
+    }
+
+    .MDesF {
+        display: fit-content;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #d2d2d2;
+        margin-left: 20px;
+
+    }
+
+    .MtiF1 {
+        color: #1e336c;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 10px;
+        
+    }
+
+    .MulF {
+        color: #1e336c;
+        font: 15px;
+        font-weight: 500;
+        text-align: center;
+        margin: 20px;
+
+    }
+
+    .MvanF {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+
+    }
 
 }

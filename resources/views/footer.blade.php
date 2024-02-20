@@ -1,4 +1,4 @@
-<footer class="bg-very-dark-blue custom-footer-py">
+<footer class="bg-very-dark-blue custom-footer-py footerMovil">
     <section class="wrapper-footer footer-area md:footer-area-md py-1 custom-footerr">
 
         <div class="flex gap-4 justify-start w-full md:w-[50%] footer1Div">

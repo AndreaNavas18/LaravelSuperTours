@@ -1,16 +1,17 @@
 @media (min-width: 768px) {
-
-.faq-section {
-    display: flex;
-    flex-direction: column;
-}
-
+    
 .containerFAQ {
     display: flex;
     flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.faq-section {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .div-faq, .div-faq2 {
     text-align: center;
@@ -86,4 +87,77 @@
 }
     
     
+}
+
+/* Estilos para movil - tablet  */
+@media (max-width: 900px) {
+
+    .McontainerFAQ {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 90%;
+        margin: 0 auto;
+
+    }
+
+    .Mfaq-section {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .Mfaqtitle {
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1e336c;
+        margin-left: 200px;
+        margin-top: 15px;
+
+    }
+
+    .Mdiv-faq, .Mdiv-faq2 {
+        text-align: center;
+
+    }
+
+    .Mdropdown-trigger {
+        border: #1e336c 1px solid;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+
+    }
+
+    .Mqtrigger {
+        color: #1e336c;
+        font-weight: 500;
+        font-size: 17px;
+    }
+
+    .Mbtntrigger {
+        background-color: #1e336c;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 0 8px 0 8px;
+        margin-bottom: 5px;
+
+    }
+
+    .Mdropdown-content {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        max-width: 80%;
+        margin-left: 25px; 
+        margin-bottom: 8px;
+        background-color: #1e336c;
+        color: #ffffff;
+
+    }
+
 }

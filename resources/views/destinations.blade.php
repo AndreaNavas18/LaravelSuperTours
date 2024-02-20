@@ -22,28 +22,28 @@
 </head>
 <body>
     @include('header2')
-      <div class="containerD">
-        <div class="menuHD">
-            <ul class="listaH">
-                <li class="sli">
+      <div class="containerD McontainerD">
+        <div class="menuHD MmenuHD">
+            <ul class="listaH MlistaH">
+                <li class="sli Msli">
                     <a href="/home">Home</a>
                 </li>
-                <li class="sli">
+                <li class="sli Msli">
                     <img src="./images/flechanav2.png" style="width: 20px">
                 </li>
-                <li class="sli">
+                <li class="sli Msli">
                     <a href="/destinations">Destinations</a>
                 </li>
-                <li class="sli4">
+                <li class="sli4 Msli4">
                   <img src="./images/flechanav2.png" style="width: 20px">
                 </li>
-                <li class="sli5">
+                <li class="sli5 Msli5">
                     <a href="/destinations">Cities</a>
                 </li>
-                <li class="sli2" style="display: none">
+                <li class="sli2 Msli2" style="display: none">
                   <img src="./images/flechanav2.png" style="width: 20px">
                 </li>
-                <li class="sli3" style="display: none">
+                <li class="sli3 Msli3" style="display: none">
                     <a href="/destinations">Parks</a>
                 </li>
             </ul>
@@ -93,321 +93,326 @@
             $imIsl = asset('images/parks/islandadventure.jpg');
             $imUni = asset('images/parks/universalstudios.jpg');
         @endphp
-        <section class="sectionDes">
-          <div class="titleDes">
-            <h1 class="h1Des">Destinations</h1>
+        <section class="sectionDes MsectionDes">
+          <div class="titleDes MtitleDes">
+            <h1 class="h1Des Mh1Des">Destinations</h1>
           </div>
-          <div class="btnDes">
-            <button class="btnDes1" onclick="showContent('cities')">Cities</button>
-            <button class="btnDes1" onclick="showContent('parks')">Parks</button>
+          <div class="btnDes MbtnDes">
+            <button class="btnDes1 MbtnDes1" onclick="showContent('cities')">Cities</button>
+            <button class="btnDes1 MbtnDes1" onclick="showContent('parks')">Parks</button>
           </div>
-          <div class="containerCities"> 
+        <div class="container1">         
+          <div class="containerCities McontainerCities"> 
               {{-- //Primera --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imOrl }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Orlando</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Orlando</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imKis }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Kissimmee</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Kissimmee</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imPie }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Fort Pierce</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Fort Pierce</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imWes }}'); position: relative;"
                 >
-                    <h2 class="titleCard">West Palm Beach</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">West Palm Beach</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- //Segunda --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imOInt }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Orlando Int Airport</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Orlando Int Airport</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imPom }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Pompano</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Pompano</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imNor }}'); position: relative;"
                 >
-                    <h2 class="titleCard">North Miami Beach</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">North Miami Beach</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imMiami }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Miami Beach</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Miami Beach</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- //Tercera --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imSou }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Miami South Beach</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Miami South Beach</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imDown }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Miami Downtown</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Miami Downtown</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imAirMT }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Miami Airport (Main Terminal)</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Miami Airport (Main Terminal)</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imAiZ }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Miami Airport (Zone)</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Miami Airport (Zone)</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- ///Cuarta --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imStP }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Saint Petersburg</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Saint Petersburg</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imTam }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Tampa</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Tampa</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imSar }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Sarasota</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Sarasota</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imForM }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Fort Myers</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Fort Myers</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- //Quinta  --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imForL }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Fort Lauderdale</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Fort Lauderdale</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imBoc }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Boca Ratón</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Boca Ratón</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imHol }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Hollywood</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Hollywood</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
           </div>
-          <div class="containerParks" style="display: none">
+        </div>
+
+        <div class="container2" style="display: none">
+          <div class="containerParks McontainerParks">
               {{-- //PARQUES --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imMK }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Magic Kingdom</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Magic Kingdom</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imEPC }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Epcot</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Epcot</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imHS }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Hollywood Studios</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Hollywood Studios</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imAK }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Animal kingdom Pierce</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Animal kingdom Pierce</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- segunda  --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imVol }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Volcano Bay</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Volcano Bay</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imBah }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Bahamas Day Cruise</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Bahamas Day Cruise</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imDol }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Dolphin Mall</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Dolphin Mall</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imLego }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Legoland</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Legoland</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- tercera  --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imUni }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Universal Studios</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Universal Studios</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imPrem }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Premium Outlet</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Premium Outlet</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imCir }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Cirque Du Soleil</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Cirque Du Soleil</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imMedie }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Medieval Times</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Medieval Times</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- cuarta  --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imHoly }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Holy Land</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Holy Land</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imKenn }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Kennedy Space Cter.</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Kennedy Space Cter.</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imBlizz }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Blizzard Beach</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Blizzard Beach</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imTyp }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Typhoon Lagoon</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Typhoon Lagoon</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
               {{-- quinta  --}}
-              <div class="contentCards">
-                <div class="cardG" 
+              <div class="contentCards McontentCards">
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imAqu }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Aquatica</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Aquatica</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imBusch }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Busch Garden</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Busch Garden</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imSeaw }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Sea World</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Sea World</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
-                <div class="cardG" 
+                <div class="cardG McardG" 
                     style="background-image: linear-gradient(#055dff00, #055dff00), 
                     url('{{ $imIsl }}'); position: relative;"
                 >
-                    <h2 class="titleCard">Island of Adventure</h2>
-                    <hr class="hrTitle">
+                    <h2 class="titleCard MtitleCard">Island of Adventure</h2>
+                    <hr class="hrTitle MhrTitle">
                 </div>
               </div>
           </div>
+        </div>
         </section>
     </div>
     <div>
@@ -423,15 +428,15 @@
     <script>
       function showContent(contentType) {
           if (contentType === 'cities') {
-              document.querySelector('.containerCities').style.display = 'block';
-              document.querySelector('.containerParks').style.display = 'none';
+              document.querySelector('.container1').style.display = 'block';
+              document.querySelector('.container2').style.display = 'none';
               document.querySelector('.sli2').style.display = 'none';	
               document.querySelector('.sli3').style.display = 'none';
               document.querySelector('.sli4').style.display = 'block';	
               document.querySelector('.sli5').style.display = 'block';
           } else if (contentType === 'parks') {
-              document.querySelector('.containerCities').style.display = 'none';
-              document.querySelector('.containerParks').style.display = 'block';
+              document.querySelector('.container1').style.display = 'none';
+              document.querySelector('.container2').style.display = 'block';
               document.querySelector('.sli2').style.display = 'block';	
               document.querySelector('.sli3').style.display = 'block';	
               document.querySelector('.sli4').style.display = 'none';	

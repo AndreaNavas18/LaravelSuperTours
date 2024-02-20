@@ -1090,7 +1090,8 @@ video {
 .wrappermovil {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 90%;
   height: fit-content;
   max-width: 90%;
@@ -1099,6 +1100,18 @@ video {
 
 .menuhamburguer {
   margin-left: 220px;
+}
+
+@media (max-width: 900px) {
+  .sHidden {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) {
+  .sShow {
+    display: none;
+  }
 }
 
 .sch {
@@ -1157,6 +1170,16 @@ video {
   .sliderMovil22 {
     margin-left: 130px;
   }
+
+  .footerMovil {
+    position: relative;
+    bottom: 0;
+  }
+
+  .custom-ulMovil {
+    color: #002c7d !important;
+    font-size: 20px;
+  }
   
 }
 
@@ -1164,7 +1187,7 @@ video {
   .wrapper {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2px;
+    padding-top: 2px;
     width: 90%;
     max-width: 90%;
     overflow: hidden;

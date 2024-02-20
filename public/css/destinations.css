@@ -196,6 +196,193 @@
 
 }
 
+/* Estilos para movil y tablet  */
+@media (max-width: 900px) {
+    .McontainerD {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .MmenuHD {
+        margin-left: 8px;
+        margin-top: 20px;
+        display: none;
+
+    }
+
+    .MlistaH {
+        list-style-type: none;
+    }
+
+    .Msli, .Msli2, .Msli3, .Msli4, .Msli5 {
+        float: left;
+        margin-right: 3px;
+        padding: 0 2px;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+
+    }
+
+    .MsectionDes {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 20px;
+    }
+
+    .MtitleDes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        cursor: pointer;
+        height: 50px;
+
+    }
+
+    .Mh1Des {
+        font-size: 30px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #1e336c;
+        /* color: white; */
+
+    }
+
+    .MbtnDes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+    }
+
+    .MbtnDes1 {
+        background-color: #1e336c;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 8px;
+        margin-bottom: 20px;
+
+    }
+
+    .MbtnDes1:hover {
+        background-color: #ffffff;
+        color: #1e336c;
+        border-color: #1e336c;
+        border-width: 2px;
+    }
+
+    .McontainerCities {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      
+    }
+
+    .McontainerParks {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+
+    }
+
+    .McontentCards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 10px;
+
+    }
+
+    .McardG {
+        display: flex;
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border-color: #055CFF;
+        border-width: 2px;
+        border-radius: 15px;
+        overflow: hidden;
+        background-size: cover;
+
+    }
+
+    .McardG::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(5, 92, 255, 0);
+        transition: background-color 0.3s ease;
+    }
+
+    .McardG:hover::before {
+        background-color: rgba(5, 93, 255, 0.375);
+    }
+
+    .McardG:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+
+    .MtitleCard {
+        position: absolute;
+        bottom: 0;
+        color: white;
+        font-size: 25px;
+        width: 100%;
+        font-weight: 600;
+        font-family: Arial, Helvetica, sans-serif;
+        transform: translateY(0);
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .McardG:hover .MtitleCard {
+        transform: translateY(-100%);
+        font-weight: 700;
+    }
+
+    .MhrTitle {
+        display: none;
+        bottom: 0;
+        position: absolute;
+        width: 200px;
+        border: none; /* Cambiado de border-color a border */
+        border-top: 2px solid white;
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+        transform-origin: bottom; 
+
+    }
+
+    .McardG:hover .MhrTitle {
+        display: block;
+        transform: translateY(-100%);
+        margin-bottom: 40px;
+        margin-left: 1px;
+        border-top: 3px solid white;
+    
+    }
+
+    
+    
+}
+
 
 
 
