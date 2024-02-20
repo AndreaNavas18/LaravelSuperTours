@@ -1318,7 +1318,7 @@ video {
   .titleBenefits {
     font-size: 25px;
     color: hsl(0, 0%, 18%);
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 10px;
     border-bottom: 3px solid #055CFF;
   }
