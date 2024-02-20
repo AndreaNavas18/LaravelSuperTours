@@ -644,7 +644,7 @@ menu {
       border-radius: 10px;
       border: none;
       padding: 10px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
     }
   
@@ -655,7 +655,7 @@ menu {
       border-radius: 10px;
       border: none;
       padding: 10px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
     }
 
@@ -672,14 +672,14 @@ menu {
       border-radius: 10px;
       border: none !important;
       padding: 10px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
     }
 
     .homeCard .originDiv .select2-selection__rendered,
     .homeCard .destinationDiv .select2-selection__rendered{
       background: var(--inputColor);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
       color: var(--textColor);
       padding: 5px !important;
@@ -689,7 +689,7 @@ menu {
 
     .homeCard .originDiv .select2-results__option {
       padding: 10px 15px;
-      font-size: 10px;
+      font-size: 13px;
       color: var(--textColor);
     }
 }
@@ -2104,7 +2104,7 @@ video {
   background-color: var(--inputColor);
   color: rgb(0, 0, 0);
   padding: 10px;
-  font-size: 13px;
+  font-size: 15px;
   border: none;
   border-radius: 10px;
   font-weight: 500;
@@ -2150,7 +2150,7 @@ video {
   background-color: var(--inputColor);
   color: black;
   padding: 10px;
-  font-size: 13px;
+  font-size: 15px;
   border: none;
   border-radius: 10px;
   font-weight: 500;
