@@ -379,6 +379,9 @@ menu {
 
 .custom-py {
   padding-bottom: 10rem/* 96px */;
+  margin-top: 110px;
+  margin-bottom: 30px;
+
 }
 
 .custom-footer-py {
@@ -437,6 +440,7 @@ menu {
   .containerr {
     padding-top: 6rem;
     padding-bottom: 6rem;
+    margin-top: 90px;
   }
 
   .footer1Div {
