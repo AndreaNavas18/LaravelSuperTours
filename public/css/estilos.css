@@ -10,7 +10,7 @@
 /* Colors */
 :root {
   /* #F60808 */
-  --PrimaryColor: hsl(219, 100%, 51%);
+  --PrimaryColor: #055dff;
   /* #CB0A0A */
   /* #055CFF */
   --HoverColor: hsl(219, 100%, 56%);
@@ -743,6 +743,27 @@ menu {
     position: initial !important;
   
   }
+  .iconosType {
+    display: flex;
+  
+    width: 20px;
+    height: 20px;
+  }
+
+  .btnIcontype{
+    background-color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .titleNew{
+    color: #055dff;
+  }
 }
 .flechasmn {
   width: 18px;
@@ -773,6 +794,16 @@ menu {
   text-align: left !important;
   border-radius: 10px;
   display: flex;
+  justify-content: center;
+  /* backdrop-filter: blur(6px); */
+  gap: 1rem;
+}
+
+.buttonround1 {
+  text-align: left !important;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
   justify-content: center;
   /* backdrop-filter: blur(6px); */
   gap: 1rem;
@@ -2070,6 +2101,13 @@ video {
   .mkd\:flex {
       width: 270px;
   }
+  .mkd\:flex1 {
+    /* width: 270px; */
+    position: absolute;
+    margin-bottom: 40px;
+    padding: 15px;
+}
+
   .buttonroundPc {
     text-align: left !important;
     border-radius: 10px;
@@ -2078,6 +2116,22 @@ video {
     backdrop-filter: blur(6px) !important;
     gap: 1rem;
   }
+
+  .buttonroundPc1 {
+    text-align: left !important;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    gap: 1rem;
+  }
+
+  .centrarX1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 }
 
 @media (min-width: 768px) {

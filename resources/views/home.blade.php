@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
     <link rel="stylesheet" href="./css/services.css">
-    <script src="{{ asset('/js/home.js') }}"></script>
+    <script src="{{ asset('/js/home.js') }}" defer></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
     <script src="{{ asset('/js/select-init.js') }}"></script>
     <link rel="stylesheet" href="./css/select2.min.css">
@@ -40,6 +40,22 @@
     <main>
             <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
                 <div class="homeCard gap-6 flex-col mhd:flex mqd homeCardPc">
+                    <div class="centrarX1">
+                        <div class="buttonround1 bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex1 buttonroundPc1">
+                            <button id="fondo" class="btnIcontype" onclick="cambiarColorYImagen(this,'#055DFF', './images/busticket.png', 'white')">
+                                <img id="icono" src="./images/busticket(1).png" class="iconosType">
+                                <span id="texto" class="titleNew">Bus Ticket</span>
+                            </button>
+                            <button class="btnIcontype" onclick="cambiarColorYImagen(this, '#055DFF', './images/multi.png', 'white')">
+                                <img src="./images/multi(1).png" class="iconosType">
+                                <span id="texto" class="titleNew">Multi Day Tours</span>
+                            </button>
+                            <button class="btnIcontype" onclick="cambiarColorYImagen(this,'#055DFF', './images/one.png', 'white')">
+                                <img src="./images/one(1).png" class="iconosType">
+                                <span id="texto" class="titleNew">One Day Tours</span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="buttonround bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex buttonroundPc">
                         <label>
                             <input type="radio" id="tripType" name="tripType" value="roundTrip">

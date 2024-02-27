@@ -273,4 +273,37 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(nextSlide, 3000);
 });
 
+var botonAnterior = null;
+
+function cambiarColorYImagen(boton, color, nuevaImagen, colorTexto) {
+    // Restablecer el estilo del botón anterior si existe
+    if (botonAnterior) {
+        botonAnterior.classList.remove('clicked');
+        botonAnterior.querySelector('.btnIcontype').style.backgroundColor = ''; // Restablecer el color de fondo
+        botonAnterior.querySelector('.iconosType').src = ''; // Restablecer la imagen
+        botonAnterior.querySelector('.titleNew').style.color = ''; // Restablecer el color del texto
+    }
+  
+    // Aplicar el nuevo estilo al botón actual
+    boton.classList.add('clicked');
+    boton.querySelector('.btnIcontype').style.backgroundColor = color;
+    boton.querySelector('.iconosType').src = nuevaImagen;
+    boton.querySelector('.titleNew').style.color = colorTexto;
+
+    // Actualizar el botón anterior
+    botonAnterior = boton;
+}
+
+// function cambiarColorYImagen(color, nuevaImagen, colorTexto) {
+//     var fondo = document.getElementById('fondo');
+//     fondo.style.backgroundColor = color;
+  
+//     var imagen = document.getElementById('icono');
+//     imagen.src = nuevaImagen;
+
+//     var texto = document.getElementById('texto');
+//     texto.style.color = colorTexto;
+
+//     console.log("Si estoy cambiando ");
+//   }
   
