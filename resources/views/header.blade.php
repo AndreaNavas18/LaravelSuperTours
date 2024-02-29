@@ -15,7 +15,7 @@
             <ul class="absolute inset-x-0 top-24 p-12 bg-white w-[90%] mx-auto rounded-md h-max text-center grid gap-6 font-bold shadow-2xl md:w-max md:bg-transparent md:p-0 md:grid-flow-col md:static custom-ul custom-ulMovil">
 
                 <li>
-                    <a href="/home">Home</a>
+                    <a href="{{ url('home')}}">Home</a>
                 </li>
     
                 <li>
@@ -25,19 +25,19 @@
                 </li>
     
                 <li>
-                    <a href="/destinations">Destinations</a>
+                    <a href="{{ url('destinations')}}">Destinations</a>
                 </li>
 
                 <li>
-                    <a href="/aboutus">About Us</a>
+                    <a href="{{ url('aboutus')}}">About Us</a>
                 </li>
     
                 <li>
-                    <a href="/faq">FAQ</a>
+                    <a href="{{ url('faq')}}">FAQ</a>
                 </li>
 
                 <li>
-                    <a href="/contact">Contact Us</a>
+                    <a href="{{ url('contact')}}">Contact Us</a>
                 </li>
 
             </ul>

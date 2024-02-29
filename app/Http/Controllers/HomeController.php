@@ -123,6 +123,7 @@ class HomeController extends Controller
                 ->groupBy('areas.nombre', 'areas.id')
                 ->orderBy('areas.orden')
                 ->get();
+                Log::info("Si estoy trayendo los destinos");
             //$areas = Area::all();
             return ($areas);
             } catch (\Exception $e) {

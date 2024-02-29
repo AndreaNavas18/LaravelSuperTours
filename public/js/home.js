@@ -273,37 +273,49 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(nextSlide, 3000);
 });
 
-var botonAnterior = null;
+function cambiarColorYImxagen(boton, color, nuevaImagen, colorTexto) {
+
+    var fondo = boton;
+    fondo.style.backgroundColor = color;
+  
+    var imagen = boton.querySelector('.iconosType');
+    imagen.src = nuevaImagen;
+
+    var texto = boton.querySelector('.titleNew');
+    texto.style.color = colorTexto;
+
+    console.log("Si estoy cambiando ");
+  }
+
+  var botonSeleccionado = null;
 
 function cambiarColorYImagen(boton, color, nuevaImagen, colorTexto) {
-    // Restablecer el estilo del botón anterior si existe
-    if (botonAnterior) {
-        botonAnterior.classList.remove('clicked');
-        botonAnterior.querySelector('.btnIcontype').style.backgroundColor = ''; // Restablecer el color de fondo
-        botonAnterior.querySelector('.iconosType').src = ''; // Restablecer la imagen
-        botonAnterior.querySelector('.titleNew').style.color = ''; // Restablecer el color del texto
-    }
-  
-    // Aplicar el nuevo estilo al botón actual
-    boton.classList.add('clicked');
-    boton.querySelector('.btnIcontype').style.backgroundColor = color;
-    boton.querySelector('.iconosType').src = nuevaImagen;
-    boton.querySelector('.titleNew').style.color = colorTexto;
+    // Si el botón actualmente seleccionado es el mismo que el botón clicado, deselecciónalo
+    if (boton === botonSeleccionado) {
+        boton.classList.remove('clicked');
+        botonSeleccionado = null; // Reinicia el botón seleccionado
+    } else {
+        // Deselecciona el botón anterior si hay uno seleccionado
+        if (botonSeleccionado) {
+            botonSeleccionado.classList.remove('clicked');
+        }
 
-    // Actualizar el botón anterior
-    botonAnterior = boton;
+        // Selecciona el nuevo botón
+        boton.classList.add('clicked');
+        botonSeleccionado = boton; // Actualiza el botón seleccionado
+    }
+
+    // Aplica los estilos al botón
+    var fondo = boton;
+    fondo.style.backgroundColor = color;
+  
+    var imagen = boton.querySelector('.iconosType');
+    imagen.src = nuevaImagen;
+
+    var texto = boton.querySelector('.titleNew');
+    texto.style.color = colorTexto;
+
+    console.log("Si estoy cambiando ");
 }
 
-// function cambiarColorYImagen(color, nuevaImagen, colorTexto) {
-//     var fondo = document.getElementById('fondo');
-//     fondo.style.backgroundColor = color;
-  
-//     var imagen = document.getElementById('icono');
-//     imagen.src = nuevaImagen;
-
-//     var texto = document.getElementById('texto');
-//     texto.style.color = colorTexto;
-
-//     console.log("Si estoy cambiando ");
-//   }
   

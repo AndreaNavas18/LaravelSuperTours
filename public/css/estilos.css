@@ -379,7 +379,7 @@ menu {
 
 .custom-py {
   padding-bottom: 10rem/* 96px */;
-  margin-top: 110px;
+  /* margin-top: 110px; */
   margin-bottom: 30px;
 
 }
@@ -431,6 +431,11 @@ menu {
 }
 
 @media (min-width: 768px) {
+  .contenedorAll {
+    display: flex;
+    flex-direction: column;
+  }
+
   .custom-footerr {
     margin-left: 50px;
     display: flex;
@@ -547,7 +552,7 @@ menu {
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
     border-radius: 1rem;
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 15px 20px;
     background: var(--whiteColor);
     position: absolute;
     gap: 1rem;
@@ -566,6 +571,37 @@ menu {
 
   .homeSection2 {
     margin-right: 50px;
+  }
+  
+  .adults {
+    padding-left: 10.1px;
+    padding-right: 10.1px;
+    width: 370px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .children {
+    padding-left: 10.1px;
+    padding-right: 10px;
+    width: 370px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .passTitle {
+    color: #002c7d;
+    font-size: 20px;
+  }
+
+  .passLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -626,11 +662,12 @@ menu {
     .homeCard .originDate label,
     .homeCard .destinationDate label,
     .homeCard .passengersDiv label {
-      color: var(--textColor);
+      color: #002c7d;
       font-weight: 500;
-      font-size: 13px;
+      font-size: 15px;
       padding-bottom: 0.4rem;
       position: relative;
+
     }
 
     .homeCard .originDiv,
@@ -639,12 +676,17 @@ menu {
     .homeCard .destinationDate,
     .homeCard .passengersDiv {
       width: 100%;
+      background-color: #055dff23;
+      padding: 10px;
+      border-radius: 10px;
+      
     }
 
     .homeCard .originDiv select,
     .homeCard .destinationDiv select {
       width: 100%;
-      background: var(--inputColor);
+      /* background: var(--inputColor); */
+      background-color: #055dff23;
       border-radius: 10px;
       border: none;
       padding: 10px;
@@ -655,7 +697,8 @@ menu {
     .homeCard .originDate input,
     .homeCard .destinationDate input {
       width: 100%;
-      background: var(--inputColor);
+      /* background: var(--inputColor); */
+      background-color: #dce9ff;
       border-radius: 10px;
       border: none;
       padding: 10px;
@@ -672,7 +715,8 @@ menu {
     /* Estilos para el dropdown del select */
     .select2-container.originDiv .select2-selection--single,
     .select2-container.destinationDiv .select2-selection--single {
-      background: var(--inputColor);
+      /* background: var(--inputColor); */
+      background-color: #055dff23;
       border-radius: 10px;
       border: none !important;
       padding: 10px;
@@ -682,30 +726,59 @@ menu {
 
     .homeCard .originDiv .select2-selection__rendered,
     .homeCard .destinationDiv .select2-selection__rendered{
-      background: var(--inputColor);
+      /* background: var(--inputColor); */
+      background-color: #055dff23;
       font-size: 15px;
       font-weight: 500;
-      color: var(--textColor);
+      color: #002c7d;
       padding: 5px !important;
       border-radius: 10px !important;
+      text-align: left;
 
     }
 
     .homeCard .originDiv .select2-results__option {
       padding: 10px 15px;
       font-size: 13px;
-      color: var(--textColor);
+      color: #002c7d;
+      
+    }
+
+    .encap1 {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .lb2 {
+      text-align: start;
+      width: 80%;
+    }
+
+    .o2 {
+      width: 20%;
+      margin-left: 20px;
+      align-items: flex-end;
+    }
+
+    .searchbtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
     }
 }
  
 .homeCard .btn {
-  width: 100%;
+  width: 120px;
   height: 55px;
   margin-top: auto;
   /* padding: 0.6rem 1.5rem; */
   color: var(--whiteColor);
   background-color: var(--PrimaryColor);
-  border-radius: 10px;
+  border-radius: 15px;
   font-weight: 600;
 }
 
@@ -729,7 +802,7 @@ menu {
     margin-top: 20px;
   }
   .flechaspss {
-    width: 25px !important;
+    width: 35px !important;
     display: flex !important;
   }
   .exchangePc {
@@ -745,7 +818,6 @@ menu {
   }
   .iconosType {
     display: flex;
-  
     width: 20px;
     height: 20px;
   }
@@ -764,6 +836,19 @@ menu {
   .titleNew{
     color: #055dff;
   }
+  
+  .bticon {
+    width: 30px;
+    display: flex !important;
+    margin-bottom: 10px;
+  }
+
+  .btnPss {
+    background-color: #dde9ff;
+    border-radius: 99px;
+    padding: 8px;
+  }
+  
 }
 .flechasmn {
   width: 18px;
@@ -797,6 +882,7 @@ menu {
   justify-content: center;
   /* backdrop-filter: blur(6px); */
   gap: 1rem;
+  margin-bottom: 20px;
 }
 
 .buttonround1 {
@@ -1125,7 +1211,7 @@ video {
 .wrappermovil {
   margin-left: auto;
   margin-right: auto;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   padding-bottom: 10px;
   width: 90%;
   height: fit-content;
@@ -1137,9 +1223,83 @@ video {
   margin-left: 220px;
 }
 
+/* Medio query movil */
+
 @media (max-width: 900px) {
+
+  .sch {
+    padding-top: 100px !important;
+    width: 90%;
+    height: fit-content;
+    max-width: 90%;
+    overflow: hidden;
+    margin-top: 400px;
+  }
+
   .sHidden {
     display: none;
+  }
+
+  .divbtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .MiconosType {
+    display: flex;
+    width: 20px;
+    height: 20px;
+  }
+
+  .MbtnIcontype { background-color: #ffff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 6px;
+
+  }
+
+  .MtitleNew {
+    color: #055dff;
+
+  }
+
+  .mcardsX {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .mtitleD {
+    color: #002c7d;
+    font-size: 17px;
+
+  }
+
+  .mencap1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 50px; */
+  }
+
+  .mlabels {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .mdivscards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
   }
 }
 
@@ -1149,9 +1309,7 @@ video {
   }
 }
 
-.sch {
-  padding-top: 100px !important;
-}
+
 
 .sliderMovil {
 
@@ -1235,7 +1393,7 @@ video {
   }
 
   .schedulesSty {
-    padding-top: 0.1rem !important;
+    padding-top: 100px !important;
     /* padding-bottom: 6rem; */
     /* padding-left: 300px; */
   }
@@ -2132,6 +2290,11 @@ video {
     align-items: center;
   }
 
+  .clicked {
+    background-color: #002c7d; /* Cambia el color de fondo al ser seleccionado */
+    color: white; /* Cambia el color del texto al ser seleccionado */
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -2182,8 +2345,8 @@ video {
 
  /* DROPDOWN PASSENGERS */
  .dropbtn {
-  background-color: var(--inputColor);
-  color: rgb(0, 0, 0);
+  background-color: #dce9ff;
+  color: #002c7d;
   padding: 10px;
   font-size: 15px;
   border: none;
@@ -2203,7 +2366,7 @@ video {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: white;
   width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
