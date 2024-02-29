@@ -1301,6 +1301,12 @@ video {
     align-items: center;
     gap: 20px;
   }
+
+  .titleSliderMovil {
+    margin-bottom: 10px;
+    border-bottom: 3px solid #055CFF;
+    font-weight: 500;
+  }
 }
 
 @media (min-width: 901px) {
@@ -1465,8 +1471,6 @@ video {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-
   }
 
   .secondsectionDiv1 {

@@ -38,9 +38,67 @@
         margin-top: 10px;
         font-size: 15px;
         /* color: #002c7d; */
-        color: rgb(93, 93, 93);
+        color: #5d5d5d;
         text-align: center;
 
     }
-  }
+}
+/* Estilos específicos para servicios móviles */
+
+@media screen and (max-width: 768px) {
+    .serviciosw {
+        overflow: hidden;
+        width: 90%;
+        margin: 0 auto;
+    
+    }
+    .serviciow {
+        display: block;
+        float: left;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        background-color: #0e3874;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .h2S2w {
+        font-size: 20px;
+        /* color: #2f2f2f; */
+        color: white;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .psw {
+        font-size: 15px;
+        /* color: #5d5d5d; */
+        color: #e6e6e6;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .btnBNw {
+        background-color: rgb(255, 255, 255);
+        padding: 10px;
+        border-radius: 10px;
+        color: #0e3874;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btnBNw:hover {
+        background-color: #195fc1;
+        color: rgb(255, 255, 255);
+        font-weight: 600;
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+    }
+}
+
   

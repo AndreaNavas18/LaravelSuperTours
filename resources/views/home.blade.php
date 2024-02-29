@@ -251,7 +251,7 @@
         </section>
 
         <section class="font-bold containerBenefits">
-            <div class="secondsectionDiv1 wrapper text-center wrappermovil">
+            <div class="secondsectionDiv1 wrapper text-center wrappermovil titleSliderMovil">
                 <h2 class="titleBenefits titleBenefitsMovil">What do we have?.</h2>
             </div>
             {{-- <hr class="hrBenefits hrBenefitsMovil"> --}}
@@ -265,12 +265,17 @@
             </div>
         </section>
 
-        <div id="services2" class="homeSection2 sHidden">
-            <div class="secondsectionDiv1 wrapper text-center wrappermovil">
+        <div id="services2" class="homeSection2 ">
+            <div class="secondsectionDiv1 wrapper text-center wrappermovil titleSliderMovil">
                 <h2 class="titleBenefits titleBenefitsMovil ">Our Services</h2>
             </div>
             {{-- <hr class="hrBenefits hrBenefitsMovil"> --}}
-            @include('section2')
+            <div class="sHidden">
+                @include('section2')
+            </div>
+            <div class="mdocult">
+                @include('movilservicios')
+            </div>
         </div>
 
 
