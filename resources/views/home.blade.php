@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./css/estilos.css">
     <link rel="stylesheet" href="./css/services.css">
+    <link rel="stylesheet" href="./css/movil.css">
     <script src="{{ asset('/js/home.js') }}"></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
     <script src="{{ asset('/js/select-init.js') }}"></script>
@@ -249,15 +250,18 @@
         
         </section>
 
-        <section class="font-bold containerBenefits sHidden">
+        <section class="font-bold containerBenefits">
             <div class="secondsectionDiv1 wrapper text-center wrappermovil">
                 <h2 class="titleBenefits titleBenefitsMovil">What do we have?.</h2>
             </div>
             {{-- <hr class="hrBenefits hrBenefitsMovil"> --}}
-            <div class="secondsectionC">
+            <div class="secondsectionC sHidden">
                 <div class="secondsectionDiv2 wrapper gap-6 px-4">
                     @include('secondsection')
                 </div>
+            </div>
+            <div class="secondsectionC mdocult">
+                @include('movilsecondsection')
             </div>
         </section>
 

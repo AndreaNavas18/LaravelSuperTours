@@ -1,0 +1,46 @@
+  /* Estilos específicos para dispositivos móviles */
+  @media screen and (max-width: 768px) {
+    .sliderw {
+      position: relative;
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+  
+    .slidew {
+      display: flex; /* Mostrar los slides */
+      justify-content: center;
+      align-items: center;
+      width: 100%; /* Ajustar el ancho al 100% */
+      padding: 10px 45px 10px 45px; /* Añadir un espacio entre los slides */
+      box-sizing: border-box; /* Incluir el padding en el ancho total */
+    }
+
+    .imgmovil {
+        width: 50px;
+        height: 50px;
+        /* Centrar la imagen como se centra el texto con text-align: center */
+        margin: auto;
+
+    }
+
+    .h2movil {
+        font-size: 20px;
+        color: #2f2f2f;
+        text-align: center;
+
+    }
+
+    .pmovil {
+        margin-top: 10px;
+        font-size: 15px;
+        /* color: #002c7d; */
+        color: rgb(93, 93, 93);
+        text-align: center;
+
+    }
+  }
+  
