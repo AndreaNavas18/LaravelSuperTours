@@ -1225,7 +1225,7 @@ video {
 
 /* Medio query movil */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
 
   .sch {
     padding-top: 100px !important;
@@ -2330,6 +2330,7 @@ video {
 @media (min-width: 768px) {
   .wrapper-pass{
     margin-left: 210px;
+    padding-top: 6rem !important;
   }
 }
 
