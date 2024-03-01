@@ -8,6 +8,8 @@ use App\Models\Area;
 
 use App\Models\Route;
 
+use Illuminate\Support\Facades\Log;
+
 use DB;
 
 class HomeController extends Controller

@@ -103,8 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(function (error) {
             console.log(error);
         });
-
-        console.log(variableSesion);
     });
 
     destinationSelect.addEventListener('change', function destination(e) {
