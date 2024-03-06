@@ -112,6 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+// funcion para cambiar el body de la pagina
+function changeBody(button) {
+    var pressed = button.getAttribute('aria-pressed') === 'true';
+    button.setAttribute('aria-pressed', !pressed);
+}
+
 // Función para intercambiar los valores de origen y destino
 function exchangeLocations() {
     var originSelect = document.getElementById("origin");
