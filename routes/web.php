@@ -13,11 +13,11 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/home', HomeController::class)->name('home');
-// peticion a index de homeController
-Route::get('/areas', [HomeController::class, 'areas'])->name('areas');
-Route::get('/show-routes', [HomeController::class, 'showRoutes'])->name('showRoutes');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', '__invoke')->name('home');
+    Route::get('/areas', 'areas')->name('areas');
+    Route::get('/show-routes', 'showRoutes')->name('showRoutes');
+});
 Route::view('/services','services');
 Route::view('/destinations','destinations');
 Route::view('/aboutus','aboutus');

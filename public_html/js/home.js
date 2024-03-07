@@ -318,8 +318,6 @@ function cambiarColorYImagen(boton, color, nuevaImagen, colorTexto) {
 
 document.addEventListener("DOMContentLoaded", function() {
     let slideIndex = 0;
-    showSlides();
-  
     function showSlides() {
       let slides = document.getElementsByClassName("slidew");
       for (let i = 0; i < slides.length; i++) {
@@ -330,10 +328,12 @@ document.addEventListener("DOMContentLoaded", function() {
       slides[slideIndex-1].style.display = "block";  
       setTimeout(showSlides, 2000); // Cambia las imágenes cada 2 segundos (ajusta según sea necesario)
     }
-  });
+    
+    showSlides();
+});
 
   //Slider movil de servicios
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     let slideIndex = 0;
     showSlides();
 
