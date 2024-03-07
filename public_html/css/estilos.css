@@ -555,7 +555,7 @@ menu {
     padding: 10px 20px 15px 20px;
     background: var(--whiteColor);
     position: absolute;
-    gap: 1rem;
+    gap: 5px;
     justify-content: center;
     transform: translate(-50%);
     left: 50%;
