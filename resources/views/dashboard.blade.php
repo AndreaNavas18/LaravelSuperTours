@@ -8,8 +8,8 @@
             <ul>
                 @foreach($viajes as $viaje)
                     <li>
-                        <strong>Origen:</strong> {{ $viaje->origin->nombre }}<br>
-                        <strong>Destino:</strong> {{ $viaje->destination->nombre }}<br>
+                        <strong>Origen:</strong> {{ $viaje->origen }}<br>
+                        <strong>Destino:</strong> {{ $viaje->destino }}<br>
                         <strong>Fecha de Salida:</strong> {{ $viaje->departure_date }}<br>
                         @if($viaje->return_date)
                             <strong>Fecha de Regreso:</strong> {{ $viaje->return_date }}<br>

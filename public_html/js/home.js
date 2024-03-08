@@ -115,7 +115,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // funcion para cambiar el body de la pagina
 function changeBody(button) {
-    var pressed = button.getAttribute('aria-pressed') === 'true';
+    const pressed = button.getAttribute('aria-pressed') === 'true';
+    const vistas = ['tickets', 'multi', 'one'];
+    if (pressed) {
+        return;
+    } else {
+        vistas.forEach(function (vista) {
+            if (vista === button.getAttribute('data-vista')) {
+                document.getElementById(vista).className = '';
+                button.classList.add('activo');
+            } else {
+                document.getElementById(vista).className = 'hidden';
+                const otroBoton = button.parentNode.querySelector('#btn' + vista);
+                otroBoton.setAttribute('aria-pressed', false)
+                otroBoton.classList.remove('activo');
+            }
+        });
+    }
     button.setAttribute('aria-pressed', !pressed);
 }
 
@@ -198,9 +214,10 @@ function adjustPassengers(type, amount) {
 //   });
 
 $(function () {
-    $("#departureDate, #returnDate").datepicker({
+    const fechas = $("#departureDate, #returnDate").datepicker({
         numberOfMonths: 2,
         showButtonPanel: true,
+        dateFormat: "yy-mm-dd",
         onSelect: function (dateText, inst) {
             // Acciones cuando se selecciona una fecha
             if (inst.id === 'departureDate') {
@@ -212,19 +229,21 @@ $(function () {
             }
         }
     });
+    $(fechas).datepicker("setDate", new Date());
+    console.log(fechas);
 });
 
 function searchRoutes() {
     // Obtener los valores de los campos del formulario
-    var origin = document.getElementById('origin').value;
-    var destination = document.getElementById('destination').value;
-    var departureDate = document.getElementById('departureDate').value;
-    var returnDate = document.getElementById('returnDate').value;
-    var passengerCount = document.getElementById('passengerCount').innerText;  // Ajusta según la estructura real de tu contador de pasajeros
-    var tripType = document.querySelector('input[name="tripType"]:checked').value;
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
+    const departureDate = document.getElementById('departureDate').value;
+    const returnDate = document.getElementById('returnDate').value;
+    const passengerCount = document.getElementById('passengerCount').innerText;  // Ajusta según la estructura real de tu contador de pasajeros
+    const tripType = document.querySelector('input[name="tripType"]:checked').value;
 
     // Construir la URL con los datos
-    var url = '/show-routes?' +
+    const url = '/show-routes?' +
         'origin=' + encodeURIComponent(origin) +
         '&destination=' + encodeURIComponent(destination) +
         '&departureDate=' + encodeURIComponent(departureDate) +
@@ -232,8 +251,16 @@ function searchRoutes() {
         '&passengerCount=' + encodeURIComponent(passengerCount) +
         '&tripType=' + encodeURIComponent(tripType);
 
-    // Redirigir al controlador con los datos
-    window.location.href = url;
+    // traer las rutas disponibles con los parametros establecidos
+    axios.get(url)
+        .then(function (response) {
+            document.querySelector('#divHome').className = 'hidden';
+            document.querySelector('#tickets').innerHTML += response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    
 }
 
   //Funcion para el slider

@@ -60,18 +60,21 @@ class HomeController extends Controller
         $returnDate = $request->input('returnDate');
         $passengers = $request->input('passengers');
         $tripType = $request->input('tripType'); // Puedes añadir un campo para el tipo de viaje
-
+        Log::info($request->all());
         // // Obtener el ID de la zona a partir del nombre
         // $originId = Area::where('nombre', $origin)->value('id');
     
          // Realizar la consulta para obtener los viajes disponibles
         if ($tripType == 'oneWay') {
             // Solo ida, no se tiene en cuenta el returnDate
-            $viajesDisponibles = Route::where('trip_from', $origin)
+            $viajesDisponibles = Route::select('routes.*', 'af.nombre as origen', 'at.nombre as destino')
+                ->join('areas as at', 'routes.trip_to', '=', 'at.id')
+                ->join('areas as af', 'routes.trip_from', '=', 'af.id')
+                ->where('trip_from', $origin)
                 ->where('trip_to', $destination)
                 ->where('fecha_ini', '<=', $departureDate)
                 ->where('fecha_fin', '>=', $departureDate)
-                ->where('seats_remain', '>=', $passengers)
+                //->where('seats_remain', '>=', $passengers)
                 ->get();
         } elseif ($tripType == 'roundTrip') {
             // Ida y vuelta, mostrar primero los viajes del origin a destination
@@ -79,7 +82,7 @@ class HomeController extends Controller
                 ->where('trip_to', $destination)
                 ->where('fecha_ini', '<=', $departureDate)
                 ->where('fecha_fin', '>=', $departureDate)
-                ->where('seats_remain', '>=', $passengers)
+                //->where('seats_remain', '>=', $passengers)
                 ->get();
 
             // Luego, filtrar los viajes de destination a origin
@@ -87,7 +90,7 @@ class HomeController extends Controller
                 ->where('trip_to', $origin)
                 ->where('fecha_ini', '<=', $returnDate)
                 ->where('fecha_fin', '>=', $returnDate)
-                ->where('seats_remain', '>=', $passengers)
+                //->where('seats_remain', '>=', $passengers)
                 ->get();
 
             // Unir los resultados
@@ -95,6 +98,7 @@ class HomeController extends Controller
         } else {
             // Manejar otros tipos de viaje si es necesario
         }
+        Log::info($viajesDisponibles);
     
         // Puedes pasar $viajesDisponibles a la vista y mostrarlos
         return view('dashboard', ['viajes' => $viajesDisponibles]);

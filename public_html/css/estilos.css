@@ -430,6 +430,10 @@ menu {
   font-size: 11px;
 }
 
+.activo {
+  background-color: #055dff23;
+}	
+
 @media (min-width: 768px) {
   .contenedorAll {
     display: flex;
@@ -785,14 +789,12 @@ menu {
 .exchangeButtonDiv {
   display: flex;
   box-sizing: border-box;
-  margin-top: 6px;
   position: initial;
 }
 
 .flech {
   position: absolute;
-  left: 305px;
-  top: 56px;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -808,7 +810,6 @@ menu {
   .exchangePc {
     display: flex;
     box-sizing: border-box;
-    margin-top: 6px;
     position: initial;
   }
   
@@ -823,7 +824,6 @@ menu {
   }
 
   .btnIcontype{
-    background-color: #ffff;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
@@ -851,7 +851,7 @@ menu {
   
 }
 .flechasmn {
-  width: 18px;
+  width: 24px;
 }
 
 .calendar1 {
@@ -1254,7 +1254,7 @@ video {
     height: 20px;
   }
 
-  .MbtnIcontype { background-color: #ffff;
+  .MbtnIcontype {
     border-radius: 8px;
     display: flex;
     flex-direction: row;

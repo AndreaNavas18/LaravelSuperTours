@@ -3,15 +3,15 @@
         <div class="homeCard flex-col mhd:flex mqd homeCardPc">
             <div class="centrarX1 divbtns">
                 <div class="buttonround1 bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex1 buttonroundPc1">
-                    <button class="btnIcontype MbtnIcontype" id="btnTicket" aria-pressed="true" onclick="changeBody(this)">
+                    <button class="btnIcontype MbtnIcontype activo" id="btntickets" aria-pressed="true" data-vista="tickets" onclick="changeBody(this)">
                         <img src="./images/busticket(1).png" class="iconosType MiconosType">
                         <span class="titleNew MtitleNew">Bus Ticket</span>
                     </button>
-                    <button class="btnIcontype MbtnIcontype" id="btnMulti" aria-pressed="false" onclick="changeBody(this)">
+                    <button class="btnIcontype MbtnIcontype" id="btnmulti" aria-pressed="false" data-vista="multi" onclick="changeBody(this)">
                         <img src="./images/multi(1).png" class="iconosType MiconosType">
                         <span class="titleNew MtitleNew">Multi Day Tours</span>
                     </button>
-                    <button class="btnIcontype MbtnIcontype" id="btnOne" aria-pressed="false" onclick="changeBody(this)">
+                    <button class="btnIcontype MbtnIcontype" id="btnone" aria-pressed="false" data-vista="one" onclick="changeBody(this)">
                         <img src="./images/one(1).png" class="iconosType MiconosType">
                         <span class="titleNew MtitleNew">One Day Tours</span>
                     </button>
@@ -172,11 +172,11 @@
 <div id="tickets">
     @include('layouts.bustickets')
 </div>
-<div id="one">
-    @include('layouts.oneDay')
-</div>
-<div id="multi">
+<div id="multi" class="hidden">
     @include('layouts.multiDay')
+</div>
+<div id="one" class="hidden">
+    @include('layouts.oneDay')
 </div>
 
 </main>
