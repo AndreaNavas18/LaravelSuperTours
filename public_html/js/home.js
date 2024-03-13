@@ -230,7 +230,6 @@ $(function () {
         }
     });
     $(fechas).datepicker("setDate", new Date());
-    console.log(fechas);
 });
 
 function searchRoutes() {
@@ -254,8 +253,49 @@ function searchRoutes() {
     // traer las rutas disponibles con los parametros establecidos
     axios.get(url)
         .then(function (response) {
-            document.querySelector('#divHome').className = 'hidden';
-            document.querySelector('#tickets').innerHTML += response.data;
+            document.getElementById('divTable').classList.remove('hidden');
+            const table = $('#routesTable');
+            table.find('caption').html(function () {
+                const parts = response.data.viajes[0].fecha_ini.split('.');
+                const date = new Date(parts[0]);
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = date.toLocaleDateString('en-US', options);
+                return response.data.viajes[0].origen.toUpperCase() + ' TO '
+                    + response.data.viajes[0].destino.toUpperCase() + '<br>'
+                    + formattedDate;
+            });
+            // contrir la data table con las rutas disponibles
+            table.DataTable({
+                ordering: false,
+                searching: false,
+                paging: false,
+                info: false,
+                data: response.data.viajes,
+                columns: [
+                    { data: 'trip_departure' },
+                    { data: function (row) {
+                            // diferencia de horas entre la hora de salida y la hora de llegada
+                            const departureHour = parseInt(row.trip_departure.split(':')[0], 10);
+                            const arrivalHour = (departureHour <= row.trip_arrival.split(':')[0]) ?
+                                parseInt(row.trip_arrival.split(':')[0], 10) : parseInt(row.trip_arrival.split(':')[0], 10) + 24;
+                            const departureMinutes =parseInt(row.trip_departure.split(':')[1], 10);
+                            const arrivalMinutes = parseInt(row.trip_arrival.split(':')[1], 10);
+                            const departureTime =  (departureHour * 60) + departureMinutes;
+                            const arrivalTime = (arrivalHour * 60) + arrivalMinutes;
+                            const difference = (arrivalTime - departureTime);
+                            const hours = Math.trunc(difference / 60);
+                            const minutes = difference % 60;
+                            return hours + 'h ' + minutes + 'm';
+                        }
+                    },
+                    { data: 'trip_arrival' },
+                    { data: 'trip_no' },
+                    { data: function (row) { 
+                        return row.wfprc_adult + ' - ' + row.wfprc_child;
+                        }
+                    }
+                ]
+            });
         })
         .catch(function (error) {
             console.log(error);

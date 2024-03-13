@@ -1,6 +1,7 @@
 
 <div id="divHome">
-    <section class="wrapper text-center max-w-xl mx-auto schedulesSty sch">
+    @include('layouts.dashboard')
+    <section class="wrapper text-center max-w-xl mx-auto sch">
 
         <div class="flex-col md:flex-row mfd:flex gap-8 items-center schDiv2">
             <section class="mb-12 md:mb-0 schEach">

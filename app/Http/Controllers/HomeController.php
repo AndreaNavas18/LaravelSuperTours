@@ -98,10 +98,14 @@ class HomeController extends Controller
         } else {
             // Manejar otros tipos de viaje si es necesario
         }
-        Log::info($viajesDisponibles);
-    
+        $response = array(
+            'status' => 'success',
+            'msg' => 'Viajes disponibles',
+            'viajes' => $viajesDisponibles
+        );
+        
         // Puedes pasar $viajesDisponibles a la vista y mostrarlos
-        return view('dashboard', ['viajes' => $viajesDisponibles]);
+        return $response;
     }
 
     public function schedulesToday(){
