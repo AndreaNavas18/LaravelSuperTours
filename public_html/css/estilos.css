@@ -365,6 +365,16 @@ menu {
   padding: 0;
 }
 
+.cardRoute {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 40vw;
+  background-color: #055dff23;
+  border-radius: 10px;
+  padding: 10px;
+}
+
 .custom-ul {
   color: #ffffff !important;
   font-size: 22px;
@@ -394,6 +404,27 @@ menu {
 .custom-footer-sv {
   padding: 30px;
   margin-top: 300px;
+}
+
+#divTable {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.daySection {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 10px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}	
+
+.sectionOff {
+  opacity: 0.5;
 }
 
 .logoFooterMovil1 {

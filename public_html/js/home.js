@@ -253,6 +253,7 @@ function searchRoutes() {
     // traer las rutas disponibles con los parametros establecidos
     axios.get(url)
         .then(function (response) {
+            document.querySelectorAll('#divHome .bodySection').forEach((s) => s.classList.add('hidden'));
             document.getElementById('divTable').classList.remove('hidden');
             const initialDate = response.data.viajes[0].fecha_ini.split('.');
             const today = new Date(initialDate[0]);
@@ -267,8 +268,57 @@ function searchRoutes() {
             $('#today').text(today.toLocaleDateString('en-US', options));
             $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
             $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options));
+            // contruir las cards para cada ruta disponible
+            response.data.viajes.forEach(function (viaje) {
+                // crear el elemento card
+                let card = document.createElement('div');
+                card.style.width = 'fit-content';
+
+                // crear el elemento body
+                let cardBody = document.createElement('div');
+                cardBody.className = 'cardRoute';
+
+                // crear el elemento título
+                let title = document.createElement('h5');
+                title.className = 'card-title';
+                title.textContent = 'Trip ' + viaje.trip_no;
+                
+                const departureHour = parseInt(viaje.trip_departure.split(':')[0], 10);
+                const arrivalHour = (departureHour <= viaje.trip_arrival.split(':')[0]) ?
+                    parseInt(viaje.trip_arrival.split(':')[0], 10) : parseInt(viaje.trip_arrival.split(':')[0], 10) + 24;
+                const departureMinutes = parseInt(viaje.trip_departure.split(':')[1], 10);
+                const arrivalMinutes = parseInt(viaje.trip_arrival.split(':')[1], 10);
+                const departureTime =  (departureHour * 60) + departureMinutes;
+                const arrivalTime = (arrivalHour * 60) + arrivalMinutes;
+                const difference = (arrivalTime - departureTime);
+                const hours = Math.trunc(difference / 60);
+                const minutes = difference % 60;
+                const diferencia = hours + 'h ' + minutes + 'm';
+                // crear el elemento texto
+                let text = document.createElement('p');
+                text.className = 'card-text';
+                text.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
+                    ' - Llegada: ' + viaje.trip_arrival;
+
+                // crear el elemento enlace
+                let link = document.createElement('a');
+                link.href = '#';
+                link.className = 'btn btn-primary';
+                link.textContent = 'Comprar';
+
+                // agregar los elementos al body
+                cardBody.appendChild(title);
+                cardBody.appendChild(text);
+                cardBody.appendChild(link);
+
+                // agregar los elementos al card
+                card.appendChild(cardBody);
+
+                // agregar el card al contenedor de cards
+                document.getElementById('todaySection').appendChild(card);
+            });
+            // constrir la data table con las rutas disponibles
             const table = $('#routesTable');
-            // contrir la data table con las rutas disponibles
             table.DataTable({
                 ordering: false,
                 searching: false,

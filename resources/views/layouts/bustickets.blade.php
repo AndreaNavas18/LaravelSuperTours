@@ -1,7 +1,7 @@
 
 <div id="divHome">
     @include('layouts.dashboard')
-    <section class="wrapper text-center max-w-xl mx-auto sch">
+    <section class="wrapper text-center max-w-xl mx-auto sch bodySection">
 
         <div class="flex-col md:flex-row mfd:flex gap-8 items-center schDiv2">
             <section class="mb-12 md:mb-0 schEach">
@@ -40,7 +40,7 @@
 
     </section>
 
-    <section class="font-bold containerBenefits">
+    <section class="font-bold containerBenefits bodySection">
         <div class="secondsectionDiv1 wrapper text-center wrappermovil titleSliderMovil">
             <h2 class="titleBenefits titleBenefitsMovil">What do we have?.</h2>
         </div>
@@ -55,7 +55,7 @@
         </div>
     </section>
 
-    <div id="services2" class="homeSection2 ">
+    <div id="services2" class="homeSection2 bodySection">
         <div class="secondsectionDiv1 wrapper text-center wrappermovil titleSliderMovil">
             <h2 class="titleBenefits titleBenefitsMovil ">Our Services</h2>
         </div>
