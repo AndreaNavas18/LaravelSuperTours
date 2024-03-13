@@ -254,16 +254,20 @@ function searchRoutes() {
     axios.get(url)
         .then(function (response) {
             document.getElementById('divTable').classList.remove('hidden');
+            const initialDate = response.data.viajes[0].fecha_ini.split('.');
+            const today = new Date(initialDate[0]);
+            const fecha = initialDate[0].split('T');
+            let yesterday = fecha[0].split('-');
+            yesterday[2]--;
+            yesterday = new Date(yesterday.join('-') + "T" + fecha[1]);
+            let tomorrow = fecha[0].split('-');
+            tomorrow[2]++;
+            tomorrow = new Date(tomorrow.join('-') +  "T" + fecha[1]);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            $('#today').text(today.toLocaleDateString('en-US', options));
+            $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
+            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options));
             const table = $('#routesTable');
-            table.find('caption').html(function () {
-                const parts = response.data.viajes[0].fecha_ini.split('.');
-                const date = new Date(parts[0]);
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                const formattedDate = date.toLocaleDateString('en-US', options);
-                return response.data.viajes[0].origen.toUpperCase() + ' TO '
-                    + response.data.viajes[0].destino.toUpperCase() + '<br>'
-                    + formattedDate;
-            });
             // contrir la data table con las rutas disponibles
             table.DataTable({
                 ordering: false,
