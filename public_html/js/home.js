@@ -232,12 +232,37 @@ $(function () {
     $(fechas).datepicker("setDate", new Date());
 });
 
-function searchRoutes() {
+// Función para devolver las fechas de ayer y mañana
+function formatDate(date, d) {
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2); // Los meses en JavaScript comienzan desde 0
+    const day = ("0" + (date.getDate() + d)).slice(-2);
+    return `${year}-${month}-${day}`;
+}
+
+// Función para buscar rutas disponibles por los tres dias
+async function allDays() {
+    const departureDate = $('#departureDate').val();
+    const returnDate = $('#returnDate').val();
+    const tZone = "T00:00:00"
+    const departureYesterday = formatDate(new Date(departureDate + tZone), -1);
+    const returnYesterday = formatDate(new Date(returnDate + tZone), -1);
+    const departureTomorrow = formatDate(new Date(departureDate + tZone), 1);
+    const returnTomorrow = formatDate(new Date(returnDate + tZone), 1);
+    const data = [
+        { departureDate: departureDate, returnDate: returnDate, day: 'today', section: 'todaySection' },
+        { departureDate: departureYesterday, returnDate: returnYesterday, day: 'yesterday', section: 'yesterdaySection' },
+        { departureDate: departureTomorrow, returnDate: returnTomorrow, day: 'tomorrow', section: 'tomorrowSection' }
+    ];
+    Promise.all(data.map(d => searchRoutes(d))).then(() => console.log('All done!')).catch(e => console.error(e));
+}
+
+function searchRoutes(data) {
     // Obtener los valores de los campos del formulario
     const origin = document.getElementById('origin').value;
     const destination = document.getElementById('destination').value;
-    const departureDate = document.getElementById('departureDate').value;
-    const returnDate = document.getElementById('returnDate').value;
+    const departureDate = data.departureDate;
+    const returnDate = data.returnDate;
     const passengerCount = document.getElementById('passengerCount').innerText;  // Ajusta según la estructura real de tu contador de pasajeros
     const tripType = document.querySelector('input[name="tripType"]:checked').value;
 
@@ -253,8 +278,8 @@ function searchRoutes() {
     // traer las rutas disponibles con los parametros establecidos
     axios.get(url)
         .then(function (response) {
-            document.querySelectorAll('#divHome .bodySection').forEach((s) => s.classList.add('hidden'));
-            document.getElementById('divTable').classList.remove('hidden');
+            $('#divHome .bodySection').addClass('hidden');
+            $('#divRoutes').removeClass('hidden');
             const initialDate = response.data.viajes[0].fecha_ini.split('.');
             const today = new Date(initialDate[0]);
             const fecha = initialDate[0].split('T');
@@ -265,14 +290,13 @@ function searchRoutes() {
             tomorrow[2]++;
             tomorrow = new Date(tomorrow.join('-') +  "T" + fecha[1]);
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            $('#today').text(today.toLocaleDateString('en-US', options));
-            $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
-            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options));
+            $('#' + data.day).text(today.toLocaleDateString('en-US', options));
+            /* $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
+            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options)); */
             // contruir las cards para cada ruta disponible
             response.data.viajes.forEach(function (viaje) {
                 // crear el elemento card
                 let card = document.createElement('div');
-                card.style.width = 'fit-content';
 
                 // crear el elemento body
                 let cardBody = document.createElement('div');
@@ -315,10 +339,11 @@ function searchRoutes() {
                 card.appendChild(cardBody);
 
                 // agregar el card al contenedor de cards
-                document.getElementById('todaySection').appendChild(card);
+                document.getElementById(data.section).appendChild(card);
             });
+
             // constrir la data table con las rutas disponibles
-            const table = $('#routesTable');
+            /* const table = $('#routesTable');
             table.DataTable({
                 ordering: false,
                 searching: false,
@@ -349,7 +374,7 @@ function searchRoutes() {
                         }
                     }
                 ]
-            });
+            }); */
         })
         .catch(function (error) {
             console.log(error);

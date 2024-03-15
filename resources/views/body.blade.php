@@ -159,7 +159,7 @@
             </div>
             <div class="searchbtn">
                 <button
-                    onclick="searchRoutes()"
+                    onclick="allDays()"
                     class="btn"
                 >
                     Search
