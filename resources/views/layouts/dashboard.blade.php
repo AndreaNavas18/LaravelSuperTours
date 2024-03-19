@@ -1,26 +1,27 @@
 <main id="divRoutes" class="hidden sch flex-col mfd:mt-24">
-    <div class="w-full">
-        <div class="w-full flex bg-white-500" style="justify-content: center">
+        <div class="flex bg-white-500 divCards">
             <div id="yesterdaySection" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btntickets" aria-pressed="false" data-vista="tickets" onclick="">
+                <button class="btnIcontype MbtnIcontype activo" id="btnyesterday" aria-pressed="false" onclick="changeYesterday(this)">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="yesterday"></span>
                 </button>
+                <div id="yesterdayCards" class="daySection"></div>
             </div>
-            <div id="todaySection" class="daySection" style="border-right: 2px solid blue;border-left: 2px solid blue;background-color: white">
-                <button style="width: 40vw" class="btnIcontype MbtnIcontype activo" id="btnmulti" aria-pressed="true" data-vista="multi" onclick="">
+            <div id="todaySection" class="daySection sectionMain">
+                <button class="btnIcontype MbtnIcontype activo" id="btntoday" aria-pressed="true" onclick="">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="today"></span>
                 </button>
+                <div id="todayCards" class="daySection"></div>
             </div>
             <div id="tomorrowSection" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btnone" aria-pressed="false" data-vista="one" onclick="">
+                <button class="btnIcontype MbtnIcontype activo" id="btntomorrow" aria-pressed="false" onclick="changeTomorrow(this)">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="tomorrow"></span>
                 </button>
+                <div id="tomorrowCards" class="daySection"></div>
             </div>
         </div>
-    </div>
     <table id="routesTable" class="hidden">
         <caption></caption>
         <thead>

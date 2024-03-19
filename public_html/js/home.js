@@ -1,4 +1,13 @@
 const variableSesion = {};
+const sectionsDays = {
+    yesterdayCards: [],
+    todayCards: [],
+    tomorrowCards: [],
+    yesterday: '',
+    today: '',
+    tomorrow: ''
+};
+const tZone = "T00:00:00"
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
@@ -111,7 +120,68 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(variableSesion);
     });
 
+    
 });
+
+// evento para cambiar la section today a la section yesterday
+function changeYesterday (btn) {
+    console.log(sectionsDays);
+    $('#today').text(sectionsDays.yesterday);
+    $('#tomorrow').text(sectionsDays.today);
+    $('#yesterdayCards').html('');
+    $('#todayCards').html('');
+    $('#tomorrowCards').html('');
+    sectionsDays.tomorrowCards = [];
+    sectionsDays.tomorrow = sectionsDays.today;
+    sectionsDays.today = sectionsDays.yesterday;
+    $('#btntomorrow').val($('#btntoday').val());
+    $('#btntoday').val($('#btnyesterday').val());
+    sectionsDays.todayCards.forEach(function (viaje) {
+        createCard(viaje, 'tomorrowCards');
+        sectionsDays.tomorrowCards.push(viaje);
+    });
+    sectionsDays.todayCards = [];
+    sectionsDays.yesterdayCards.forEach(function (viaje) {
+        createCard(viaje, 'todayCards');
+        sectionsDays.todayCards.push(viaje);
+    });
+    searchRoutes({
+        departureDate: formatDate(new Date($(btn).val() + tZone), -1),
+        returnDate: formatDate(new Date($(btn).val() + tZone), -1),
+        day: 'yesterday',
+        section: 'yesterdayCards'
+    }); 
+};
+
+// evento para cambiar la section today a la section tomorrow
+function changeTomorrow (btn) {
+    console.log(sectionsDays);
+    $('#today').text(sectionsDays.tomorrow);
+    $('#yesterday').text(sectionsDays.today);
+    $('#yesterdayCards').html('');
+    $('#todayCards').html('');
+    $('#tomorrowCards').html('');
+    sectionsDays.yesterdayCards = [];
+    sectionsDays.yesterday = sectionsDays.today;
+    sectionsDays.today = sectionsDays.tomorrow;
+    $('#btnyesterday').val($('#btntoday').val());
+    $('#btntoday').val($('#btntomorrow').val());
+    sectionsDays.todayCards.forEach(function (viaje) {
+        createCard(viaje, 'yesterdayCards');
+        sectionsDays.yesterdayCards.push(viaje);
+    });
+    sectionsDays.todayCards = [];
+    sectionsDays.tomorrowCards.forEach(function (viaje) {
+        createCard(viaje, 'todayCards');
+        sectionsDays.todayCards.push(viaje);
+    });
+    searchRoutes({
+        departureDate: formatDate(new Date($(btn).val() + tZone), 1),
+        returnDate: formatDate(new Date($(btn).val() + tZone), 1),
+        day: 'tomorrow',
+        section: 'tomorrowCards'
+    });
+};
 
 // funcion para cambiar el body de la pagina
 function changeBody(button) {
@@ -234,25 +304,28 @@ $(function () {
 
 // Función para devolver las fechas de ayer y mañana
 function formatDate(date, d) {
+    date.setDate(date.getDate() + d);
     const year = date.getFullYear();
     const month = ("0" + (date.getMonth() + 1)).slice(-2); // Los meses en JavaScript comienzan desde 0
-    const day = ("0" + (date.getDate() + d)).slice(-2);
+    const day = ("0" + (date.getDate())).slice(-2);
     return `${year}-${month}-${day}`;
 }
 
 // Función para buscar rutas disponibles por los tres dias
-async function allDays() {
+function allDays() {
+    $('#yesterdayCards').html('');
+    $('#todayCards').html('');
+    $('#tomorrowCards').html('');
     const departureDate = $('#departureDate').val();
     const returnDate = $('#returnDate').val();
-    const tZone = "T00:00:00"
     const departureYesterday = formatDate(new Date(departureDate + tZone), -1);
     const returnYesterday = formatDate(new Date(returnDate + tZone), -1);
     const departureTomorrow = formatDate(new Date(departureDate + tZone), 1);
     const returnTomorrow = formatDate(new Date(returnDate + tZone), 1);
     const data = [
-        { departureDate: departureDate, returnDate: returnDate, day: 'today', section: 'todaySection' },
-        { departureDate: departureYesterday, returnDate: returnYesterday, day: 'yesterday', section: 'yesterdaySection' },
-        { departureDate: departureTomorrow, returnDate: returnTomorrow, day: 'tomorrow', section: 'tomorrowSection' }
+        { departureDate: departureDate, returnDate: returnDate, day: 'today', section: 'todayCards' },
+        { departureDate: departureYesterday, returnDate: returnYesterday, day: 'yesterday', section: 'yesterdayCards' },
+        { departureDate: departureTomorrow, returnDate: returnTomorrow, day: 'tomorrow', section: 'tomorrowCards' }
     ];
     Promise.all(data.map(d => searchRoutes(d))).then(() => console.log('All done!')).catch(e => console.error(e));
 }
@@ -280,66 +353,27 @@ function searchRoutes(data) {
         .then(function (response) {
             $('#divHome .bodySection').addClass('hidden');
             $('#divRoutes').removeClass('hidden');
+            sectionsDays[data.section] = [];
             const initialDate = response.data.viajes[0].fecha_ini.split('.');
             const today = new Date(initialDate[0]);
-            const fecha = initialDate[0].split('T');
+            /* const fecha = initialDate[0].split('T');
             let yesterday = fecha[0].split('-');
             yesterday[2]--;
             yesterday = new Date(yesterday.join('-') + "T" + fecha[1]);
             let tomorrow = fecha[0].split('-');
             tomorrow[2]++;
             tomorrow = new Date(tomorrow.join('-') +  "T" + fecha[1]);
+            $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
+            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options)); */
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             $('#' + data.day).text(today.toLocaleDateString('en-US', options));
-            /* $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
-            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options)); */
+            $('#btn' + data.day).val(departureDate.split('T')[0]);
+            sectionsDays[data.day] = today.toLocaleDateString('en-US', options);
             // contruir las cards para cada ruta disponible
             response.data.viajes.forEach(function (viaje) {
-                // crear el elemento card
-                let card = document.createElement('div');
-
-                // crear el elemento body
-                let cardBody = document.createElement('div');
-                cardBody.className = 'cardRoute';
-
-                // crear el elemento título
-                let title = document.createElement('h5');
-                title.className = 'card-title';
-                title.textContent = 'Trip ' + viaje.trip_no;
-                
-                const departureHour = parseInt(viaje.trip_departure.split(':')[0], 10);
-                const arrivalHour = (departureHour <= viaje.trip_arrival.split(':')[0]) ?
-                    parseInt(viaje.trip_arrival.split(':')[0], 10) : parseInt(viaje.trip_arrival.split(':')[0], 10) + 24;
-                const departureMinutes = parseInt(viaje.trip_departure.split(':')[1], 10);
-                const arrivalMinutes = parseInt(viaje.trip_arrival.split(':')[1], 10);
-                const departureTime =  (departureHour * 60) + departureMinutes;
-                const arrivalTime = (arrivalHour * 60) + arrivalMinutes;
-                const difference = (arrivalTime - departureTime);
-                const hours = Math.trunc(difference / 60);
-                const minutes = difference % 60;
-                const diferencia = hours + 'h ' + minutes + 'm';
-                // crear el elemento texto
-                let text = document.createElement('p');
-                text.className = 'card-text';
-                text.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
-                    ' - Llegada: ' + viaje.trip_arrival;
-
-                // crear el elemento enlace
-                let link = document.createElement('a');
-                link.href = '#';
-                link.className = 'btn btn-primary';
-                link.textContent = 'Comprar';
-
-                // agregar los elementos al body
-                cardBody.appendChild(title);
-                cardBody.appendChild(text);
-                cardBody.appendChild(link);
-
-                // agregar los elementos al card
-                card.appendChild(cardBody);
-
-                // agregar el card al contenedor de cards
-                document.getElementById(data.section).appendChild(card);
+                // agregar el evento click a la section
+                sectionsDays[data.section].push(viaje);
+                createCard(viaje, data.section);
             });
 
             // constrir la data table con las rutas disponibles
@@ -380,6 +414,55 @@ function searchRoutes(data) {
             console.log(error);
         });
     
+}
+
+function createCard(viaje, section) {
+     // crear el elemento card
+     let card = document.createElement('div');
+
+     // crear el elemento body
+     let cardBody = document.createElement('div');
+     cardBody.className = 'cardRoute';
+
+     // crear el elemento título
+     let title = document.createElement('h5');
+     title.className = 'card-title';
+     title.textContent = 'Trip ' + viaje.trip_no;
+     
+     const departureHour = parseInt(viaje.trip_departure.split(':')[0], 10);
+     const arrivalHour = (departureHour <= viaje.trip_arrival.split(':')[0]) ?
+         parseInt(viaje.trip_arrival.split(':')[0], 10) : parseInt(viaje.trip_arrival.split(':')[0], 10) + 24;
+     const departureMinutes = parseInt(viaje.trip_departure.split(':')[1], 10);
+     const arrivalMinutes = parseInt(viaje.trip_arrival.split(':')[1], 10);
+     const departureTime =  (departureHour * 60) + departureMinutes;
+     const arrivalTime = (arrivalHour * 60) + arrivalMinutes;
+     const difference = (arrivalTime - departureTime);
+     const hours = Math.trunc(difference / 60);
+     const minutes = difference % 60;
+     const diferencia = hours + 'h ' + minutes + 'm';
+     // crear el elemento texto
+     let text = document.createElement('p');
+     text.className = 'card-text';
+     text.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
+         ' - Llegada: ' + viaje.trip_arrival;
+
+     // crear el elemento enlace
+     let link = document.createElement('a');
+     link.href = '#';
+     link.className = 'btn btn-primary';
+     link.textContent = 'Comprar';
+
+     // agregar los elementos al body
+     cardBody.appendChild(title);
+     cardBody.appendChild(text);
+     cardBody.appendChild(link);
+
+     // agregar los elementos al card
+     card.appendChild(cardBody);
+
+     // agregar el card al contenedor de cards
+     document.getElementById(section).appendChild(card);
+
 }
 
   //Funcion para el slider

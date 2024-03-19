@@ -409,6 +409,7 @@ menu {
   margin-bottom: 10px;
   margin-left: 10px;
   margin-right: 10px;
+  max-width: 100%;
 }
 
 .daySection {
@@ -421,8 +422,6 @@ menu {
 
 .sectionOff {
   opacity: 0.5;
-  z-index: -1;
-  width: 220px;
 }
 
 .logoFooterMovil1 {
@@ -1252,17 +1251,31 @@ video {
   margin-left: 220px;
 }
 
+.sectionMain {
+  border-right: 2px solid blue;
+  border-left: 2px solid blue;
+  background-color: white;
+  width: -moz-available;
+}
+
+.divCards {
+    width: -moz-available;
+  }
+
 /* Medio query movil */
 
 @media (max-width: 767px) {
 
   .sch {
     padding-top: 100px !important;
-    width: 90%;
     height: fit-content;
     max-width: 90%;
     overflow: hidden;
-    margin-top: 400px;
+    margin-top: 450px;
+  }
+
+  .sectionOff {
+    display: none;
   }
 
   .sHidden {
