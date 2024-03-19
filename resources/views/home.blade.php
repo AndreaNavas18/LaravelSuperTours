@@ -27,16 +27,16 @@
 
     @include('header')
 
-    <figure class="absolute inset-0 overflow-hidden pointer-events-none">
+    <figure id="figure" class="absolute inset-0 overflow-hidden pointer-events-none">
         {{-- <img src="./images/black.png" class="absolute w-full -z-10 top-0 right-0 max-w-full custom-black"> --}}
 
 
         {{-- <img src="./images/bg-tablet-pattern.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview"> --}}
-        <video class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview mdcustom-video" autoplay muted loop>
+        <video id="videoHeader" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height ocult mdview mdcustom-video" autoplay muted loop>
             <source src="./videos/fondov.mp4" type="video/mp4">
             Tu navegador no soporta el tag de video.
         </video>
-        <img src="./images/orlandoimg.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdcustom-height mdocult">
+        <img id="imgHeader" src="./images/orlandoimg.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdocult">
 
     </figure>
 

@@ -1,5 +1,5 @@
 <main class="contenedorAll">
-    <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 wrapper-pass mjd wrappermovil">
+    <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 mjd wrappermovil">
         <div class="homeCard flex-col mhd:flex mqd homeCardPc">
             <div class="centrarX1 divbtns">
                 <div class="buttonround1 bg-white ml-auto flex-col md:flex md:ml-40 mkd:flex1 buttonroundPc1">
@@ -123,7 +123,7 @@
                         <button id="passengersButton" class="dropbtn" onclick="toggleDropdown('passengersDropdown')">
                             <span id="passengerCount">1 Adult</span>
                         </button>
-                        <div class="dropdown-content" id="passengersDropdown">
+                        <div class="dropdown-content" id="passengersDropdown" value=false>
                             <div class="flex centr adults">
                                 <label class="items-start passLabel">
                                     <span class="passTitle">Adults</span>

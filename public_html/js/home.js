@@ -238,10 +238,35 @@ function exchangeLocations() {
 //funcion para el menu desplegable 
 
 function toggleDropdown(dropdownId) {
-    var dropdown = document.getElementById(dropdownId);
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown.style.display === 'block') {
+        dropdown.style.display = 'none';
+        console.log('salio');
+        document.removeEventListener('click', eventDocument);
+    } else {
+        console.log('entroooooo');
+        dropdown.style.display = 'block';
+        setTimeout(() => {
+            document.addEventListener('click', eventDocument);
+        }, 1000);
+    }
 }
 
+function eventDocument(event) {
+    const dropdown = document.getElementById('passengersDropdown');
+    // Si el dropdown no está abierto, no hacer nada
+    if (dropdown.style.display === 'none') {
+        return;
+    }
+
+    const isClickInside = dropdown.contains(event.target);
+
+    // Si el clic fue fuera del dropdown, ocultarlo
+    if (!isClickInside) {
+        dropdown.style.display = 'none';
+        document.removeEventListener('click', eventDocument);
+    }
+}
 // Función para contar el número de pasajeros
 
 function adjustPassengers(type, amount) {
@@ -313,6 +338,10 @@ function formatDate(date, d) {
 
 // Función para buscar rutas disponibles por los tres dias
 function allDays() {
+    $('#videoHeader').addClass('searchActive');
+    $('#imgHeader').addClass('showImg');
+    $('#sectionHeader').addClass('searchActive');
+    $('#navHeader').addClass('searchActive');
     $('#yesterdayCards').html('');
     $('#todayCards').html('');
     $('#tomorrowCards').html('');
@@ -441,10 +470,23 @@ function createCard(viaje, section) {
      const minutes = difference % 60;
      const diferencia = hours + 'h ' + minutes + 'm';
      // crear el elemento texto
-     let text = document.createElement('p');
-     text.className = 'card-text';
-     text.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
-         ' - Llegada: ' + viaje.trip_arrival;
+     let horario = document.createElement('div');
+        horario.className = 'card-text';
+     let salida = document.createElement('div');
+        salida.textContent = viaje.trip_departure;
+     let llegada = document.createElement('div');
+        llegada.textContent = viaje.trip_arrival;
+     let tiempo = document.createElement('div');
+        tiempo.textContent = diferencia;
+        tiempo.className = (section == 'todayCards') ? 'card-main' : 'card-subs';
+     let medio = document.createElement('div');
+        medio.className = 'medio-div';
+        medio.appendChild(tiempo);
+    horario.appendChild(salida);
+    horario.appendChild(medio);
+    horario.appendChild(llegada); 
+    //horario.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
+      //   ' - Llegada: ' + viaje.trip_arrival;
 
      // crear el elemento enlace
      let link = document.createElement('a');
@@ -454,7 +496,7 @@ function createCard(viaje, section) {
 
      // agregar los elementos al body
      cardBody.appendChild(title);
-     cardBody.appendChild(text);
+     cardBody.appendChild(horario);
      cardBody.appendChild(link);
 
      // agregar los elementos al card
