@@ -8,6 +8,9 @@ const sectionsDays = {
     tomorrow: ''
 };
 const tZone = "T00:00:00"
+let pastDay = '';
+let variablePastDay = '';
+let totalPassengers = 1;
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
@@ -120,42 +123,51 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(variableSesion);
     });
 
-    
 });
 
 // evento para cambiar la section today a la section yesterday
 function changeYesterday (btn) {
-    console.log(sectionsDays);
-    $('#today').text(sectionsDays.yesterday);
-    $('#tomorrow').text(sectionsDays.today);
-    $('#yesterdayCards').html('');
-    $('#todayCards').html('');
-    $('#tomorrowCards').html('');
-    sectionsDays.tomorrowCards = [];
-    sectionsDays.tomorrow = sectionsDays.today;
-    sectionsDays.today = sectionsDays.yesterday;
-    $('#btntomorrow').val($('#btntoday').val());
-    $('#btntoday').val($('#btnyesterday').val());
-    sectionsDays.todayCards.forEach(function (viaje) {
-        createCard(viaje, 'tomorrowCards');
-        sectionsDays.tomorrowCards.push(viaje);
-    });
-    sectionsDays.todayCards = [];
-    sectionsDays.yesterdayCards.forEach(function (viaje) {
-        createCard(viaje, 'todayCards');
-        sectionsDays.todayCards.push(viaje);
-    });
-    searchRoutes({
-        departureDate: formatDate(new Date($(btn).val() + tZone), -1),
-        returnDate: formatDate(new Date($(btn).val() + tZone), -1),
-        day: 'yesterday',
-        section: 'yesterdayCards'
-    }); 
+    if (variablePastDay > pastDay) {
+        $('#todayCards').addClass('fade');
+            setTimeout(() => {
+                $('#todayCards').removeClass('fade');
+            }, 500);
+        $('#today').text(sectionsDays.yesterday);
+        $('#tomorrow').text(sectionsDays.today);
+        $('#yesterdayCards').html('');
+        $('#todayCards').html('');
+        $('#tomorrowCards').html('');
+        sectionsDays.tomorrowCards = [];
+        sectionsDays.tomorrow = sectionsDays.today;
+        sectionsDays.today = sectionsDays.yesterday;
+        $('#btntomorrow').val($('#btntoday').val());
+        $('#btntoday').val($('#btnyesterday').val());
+        sectionsDays.todayCards.forEach(function (viaje) {
+            createCard(viaje, 'tomorrowCards');
+            sectionsDays.tomorrowCards.push(viaje);
+        });
+        sectionsDays.todayCards = [];
+        sectionsDays.yesterdayCards.forEach(function (viaje) {
+            createCard(viaje, 'todayCards');
+            sectionsDays.todayCards.push(viaje);
+        });
+        searchRoutes({
+            departureDate: formatDate(new Date($(btn).val() + tZone), -1),
+            returnDate: formatDate(new Date($(btn).val() + tZone), -1),
+            day: 'yesterday',
+            section: 'yesterdayCards'
+        });
+    }
 };
 
 // evento para cambiar la section today a la section tomorrow
 function changeTomorrow (btn) {
     console.log(sectionsDays);
+    variablePastDay = new Date($("#btntoday").val());
+    $('#todayCards').addClass('fade');
+        setTimeout(() => {
+            $('#todayCards').removeClass('fade');
+        }, 500);
     $('#today').text(sectionsDays.tomorrow);
     $('#yesterday').text(sectionsDays.today);
     $('#yesterdayCards').html('');
@@ -289,7 +301,7 @@ function adjustPassengers(type, amount) {
     // Actualizar el texto del botón con la cantidad de adultos y niños
     var adultsCount = parseInt(document.getElementById('adultsCount').value);
     var childrenCount = parseInt(document.getElementById('childrenCount').value);
-    var totalPassengers = adultsCount + childrenCount;
+    totalPassengers = adultsCount + childrenCount;
 
     var adultsText = adultsCount > 0 ? adultsCount + ' Adult' + (adultsCount > 1 ? 's' : '') : '';
     var childrenText = childrenCount > 0 ? childrenCount + ' Child' + (childrenCount > 1 ? 'ren' : '') : '';
@@ -335,6 +347,16 @@ function formatDate(date, d) {
     const day = ("0" + (date.getDate())).slice(-2);
     return `${year}-${month}-${day}`;
 }
+
+// Funcion para devolver las horas de salida y llegada
+function formatHour(time) {
+    let [hours, minutes] = time.split(":");
+    let date = new Date();
+    date.setHours(+hours);
+    date.setMinutes(+minutes);
+    return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+}
+
 
 // Función para buscar rutas disponibles por los tres dias
 function allDays() {
@@ -382,6 +404,13 @@ function searchRoutes(data) {
         .then(function (response) {
             $('#divHome .bodySection').addClass('hidden');
             $('#divRoutes').removeClass('hidden');
+            pastDay = new Date(response.data.fecha_server);
+            pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día
+            if (data.day == 'yesterday') {
+                variablePastDay = new Date(data.departureDate); 
+                //variablePastDay = variablePastDay.setDate(variablePastDay.getDate() - 1) // Resta un día
+            }
+            //variablePastDay = `${variablePastDay.getFullYear()}-${("0" + (variablePastDay.getMonth() + 1)).slice(-2)}-${("0" + variablePastDay.getDate()).slice(-2)}`; 
             sectionsDays[data.section] = [];
             const initialDate = response.data.viajes[0].fecha_ini.split('.');
             const today = new Date(initialDate[0]);
@@ -395,6 +424,8 @@ function searchRoutes(data) {
             $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
             $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options)); */
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            console.log(today.toLocaleDateString('en-US', options));
+            console.log(departureDate.split('T')[0]);
             $('#' + data.day).text(today.toLocaleDateString('en-US', options));
             $('#btn' + data.day).val(departureDate.split('T')[0]);
             sectionsDays[data.day] = today.toLocaleDateString('en-US', options);
@@ -473,9 +504,9 @@ function createCard(viaje, section) {
      let horario = document.createElement('div');
         horario.className = 'card-text';
      let salida = document.createElement('div');
-        salida.textContent = viaje.trip_departure;
+        salida.textContent = formatHour(viaje.trip_departure);
      let llegada = document.createElement('div');
-        llegada.textContent = viaje.trip_arrival;
+        llegada.textContent = formatHour(viaje.trip_arrival);
      let tiempo = document.createElement('div');
         tiempo.textContent = diferencia;
         tiempo.className = (section == 'todayCards') ? 'card-main' : 'card-subs';
@@ -484,20 +515,40 @@ function createCard(viaje, section) {
         medio.appendChild(tiempo);
     horario.appendChild(salida);
     horario.appendChild(medio);
-    horario.appendChild(llegada); 
-    //horario.textContent = 'Salida: ' + viaje.trip_departure + ' - ' + diferencia +
-      //   ' - Llegada: ' + viaje.trip_arrival;
+    horario.appendChild(llegada);
 
      // crear el elemento enlace
-     let link = document.createElement('a');
-     link.href = '#';
-     link.className = 'btn btn-primary';
-     link.textContent = 'Comprar';
+     let price = document.createElement('div');
+        price.className = 'divButton';
+     let priceText = document.createElement('span');
+     priceText.innerHTML = `$${viaje.wfprc_adult} Adult<br>$${viaje.wfprc_child} Child`;
+        price.appendChild(priceText);
+
+    if (section == 'todayCards') {
+        // boton para seleccionar el viaje
+        let priceBtn = document.createElement('button');
+        if (viaje.tripAvilable && viaje.seats_remain >= (viaje.passengersOcuped + totalPassengers)) {
+            priceBtn.className = 'buttonCards';
+            priceBtn.dataset.trip_no = viaje.trip_no;
+            priceBtn.dataset.fecha = viaje.fecha_ini.split('T')[0];
+            priceBtn.dataset.departure = viaje.trip_departure;
+            priceBtn.textContent = 'Select';
+            priceBtn.addEventListener('click', function () {
+                console.log(this.dataset);
+            });
+            price.appendChild(priceBtn);
+        } else {
+            priceBtn.className = 'buttonCardsDisabled';
+            priceBtn.textContent = 'Sold Out';
+            price.appendChild(priceBtn);
+        }
+    }
+
 
      // agregar los elementos al body
      cardBody.appendChild(title);
      cardBody.appendChild(horario);
-     cardBody.appendChild(link);
+     cardBody.appendChild(price);
 
      // agregar los elementos al card
      card.appendChild(cardBody);

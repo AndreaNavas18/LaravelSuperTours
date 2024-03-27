@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Area;
-
+use App\Models\Programacion;
+use App\Models\Reserva;
+use App\Models\ReservasTripPuesto;
 use App\Models\Route;
 
 use Illuminate\Support\Facades\Log;
@@ -60,10 +62,19 @@ class HomeController extends Controller
         $returnDate = $request->input('returnDate');
         $passengers = $request->input('passengers');
         $tripType = $request->input('tripType'); // Puedes añadir un campo para el tipo de viaje
-        Log::info($request->all());
-        // // Obtener el ID de la zona a partir del nombre
-        // $originId = Area::where('nombre', $origin)->value('id');
-    
+        //Log::info($request->all());
+        $daysOfWeek = [
+            'Monday' => 'lunes',
+            'Tuesday' => 'martes',
+            'Wednesday' => 'miercoles',
+            'Thursday' => 'jueves',
+            'Friday' => 'viernes',
+            'Saturday' => 'sabado',
+            'Sunday' => 'domingo'
+        ];
+        $dayDeparture = date('l', strtotime($departureDate));
+        $dayReturn = date('l', strtotime($returnDate));
+        
          // Realizar la consulta para obtener los viajes disponibles
         if ($tripType == 'oneWay') {
             // Solo ida, no se tiene en cuenta el returnDate
@@ -76,6 +87,27 @@ class HomeController extends Controller
                 ->where('fecha_fin', '>=', $departureDate)
                 //->where('seats_remain', '>=', $passengers)
                 ->get();
+                $daySpanish = $daysOfWeek[$dayDeparture];
+                foreach ($viajesDisponibles as $viaje) {
+                    $tripAvilable = Programacion::select('programacion.estado', 't.'.$daySpanish)
+                        ->join('trips as t', 'programacion.trip_no', '=', 't.trip_no')
+                        ->where('programacion.trip_no', $viaje->trip_no)
+                        ->where('programacion.fecha', date('m-d-Y', strtotime($departureDate)))
+                        ->get();
+                    if (isset($tripAvilable[0]->estado) && isset($tripAvilable[0]->$daySpanish) 
+                        && $tripAvilable[0]->estado == 1 && $tripAvilable[0]->$daySpanish == 1) {
+                        $viaje->tripAvilable = true;
+                    } else {
+                        $viaje->tripAvilable = false;
+                    }
+                    $passengersAvailable = Reserva::where('trip_no', $viaje->trip_no)
+                        ->where('fecha_salida', $departureDate)
+                        ->sum('pax');
+                    $passengersUsing = ReservasTripPuesto::where('trip_to', $viaje->trip_no)
+                        ->where('fecha_trip', $departureDate)
+                        ->sum('cantidad');
+                    $viaje->passengersOcuped = $passengersUsing + $passengersAvailable;
+                }
         } elseif ($tripType == 'roundTrip') {
             // Ida y vuelta, mostrar primero los viajes del origin a destination
             $viajesIda = Route::where('trip_from', $origin)
@@ -101,7 +133,8 @@ class HomeController extends Controller
         $response = array(
             'status' => 'success',
             'msg' => 'Viajes disponibles',
-            'viajes' => $viajesDisponibles
+            'viajes' => $viajesDisponibles,
+            'fecha_server' => now()->format('Y-m-d'),
         );
         
         // Puedes pasar $viajesDisponibles a la vista y mostrarlos
