@@ -11,6 +11,8 @@ const tZone = "T00:00:00"
 let pastDay = '';
 let variablePastDay = '';
 let totalPassengers = 1;
+let adultsCount = 1;
+let childrenCount = 0;
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
@@ -299,8 +301,8 @@ function adjustPassengers(type, amount) {
     inputElement.value = newValue;
 
     // Actualizar el texto del botón con la cantidad de adultos y niños
-    var adultsCount = parseInt(document.getElementById('adultsCount').value);
-    var childrenCount = parseInt(document.getElementById('childrenCount').value);
+    adultsCount = parseInt(document.getElementById('adultsCount').value);
+    childrenCount = parseInt(document.getElementById('childrenCount').value);
     totalPassengers = adultsCount + childrenCount;
 
     var adultsText = adultsCount > 0 ? adultsCount + ' Adult' + (adultsCount > 1 ? 's' : '') : '';
@@ -532,9 +534,16 @@ function createCard(viaje, section) {
             priceBtn.dataset.trip_no = viaje.trip_no;
             priceBtn.dataset.fecha = viaje.fecha_ini.split('T')[0];
             priceBtn.dataset.departure = viaje.trip_departure;
+            priceBtn.dataset.arrival = viaje.trip_arrival;
+            priceBtn.dataset.capacity = viaje.seats_remain;
+            priceBtn.dataset.origen = viaje.origen;
+            priceBtn.dataset.destino = viaje.destino;
+            priceBtn.dataset.priceAdult = viaje.wfprc_adult;
+            priceBtn.dataset.priceChild = viaje.wfprc_child;
             priceBtn.textContent = 'Select';
             priceBtn.addEventListener('click', function () {
                 console.log(this.dataset);
+                selectTrip(this.dataset);
             });
             price.appendChild(priceBtn);
         } else {
@@ -556,6 +565,61 @@ function createCard(viaje, section) {
      // agregar el card al contenedor de cards
      document.getElementById(section).appendChild(card);
 
+}
+
+// Función para revisar los puestos disponibles y reservarlos
+function selectTrip(dataTrip) {
+    const tripNo = dataTrip.trip_no;
+    const fecha = dataTrip.fecha;
+    const departure = dataTrip.departure;
+    const arrival = dataTrip.arrival;
+    const capacity = dataTrip.capacity;
+    const adultPassenger = adultsCount;
+    const childPassenger = childrenCount;
+    const origin = dataTrip.origen;
+    const destination = dataTrip.destino;
+    const priceAdult = dataTrip.priceAdult;
+    const priceChild = dataTrip.priceChild;
+    const tripType = document.querySelector('input[name="tripType"]:checked').value;
+    const url = '/reserve-trip?' +
+        'tripNo=' + encodeURIComponent(tripNo) +
+        '&fecha=' + encodeURIComponent(fecha) +
+        '&capacity=' + encodeURIComponent(capacity) +
+        '&departure=' + encodeURIComponent(departure) +
+        '&adults=' + encodeURIComponent(adultPassenger) +
+        '&children=' + encodeURIComponent(childPassenger) +
+        '&origin=' + encodeURIComponent(origin) +
+        '&destination=' + encodeURIComponent(destination) +
+        '&tripType=' + encodeURIComponent(tripType);
+
+    axios.get(url)
+        .then(function (response) {
+            console.log(response.data);
+            if (response.data.status == 'success') {
+                console.log(response.data.message);
+                pickUpDropOff(tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild);
+            } else {
+                console.log(response.data.message);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+// funcion para pasar a la vista de pick up y drop off
+function pickUpDropOff( tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild) {
+    window.location.href = '/pickUp-dropOff' +
+        '?tripNo=' + tripNo +
+        '&fecha=' + fecha +
+        '&departure=' + departure +
+        '&arrival=' + arrival +
+        '&adults=' + adultPassenger +
+        '&children=' + childPassenger +
+        '&priceAdult=' + priceAdult +
+        '&priceChild=' + priceChild +
+        '&origin=' + origin +
+        '&destination=' + destination;
 }
 
   //Funcion para el slider

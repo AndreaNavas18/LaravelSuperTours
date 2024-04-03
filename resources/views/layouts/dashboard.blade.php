@@ -22,16 +22,4 @@
                 <div id="tomorrowCards" class="daySection"></div>
             </div>
         </div>
-    <table id="routesTable" class="hidden">
-        <caption></caption>
-        <thead>
-            <tr>
-                <th>Departure Time</th>
-                <th>Travel Time</th>
-                <th>Arrival Time</th>
-                <th>Services</th>
-                <th>Web Fare</th>
-            </tr>
-        </thead>
-    </table>
 </main>

@@ -141,6 +141,43 @@ class HomeController extends Controller
         return $response;
     }
 
+    public function reserveTrip (Request $request) {
+        $tripNo = $request->input('tripNo');
+        $departureDate = $request->input('fecha');
+        $capacity = $request->input('capacity');
+        $adults = $request->input('adults');
+        $children = $request->input('children');
+        $passengersAvailable = Reserva::where('trip_no', $tripNo)
+            ->where('fecha_salida', $departureDate)
+            ->sum('pax');
+        $passengersUsing = ReservasTripPuesto::where('trip_to', $tripNo)
+            ->where('fecha_trip', $departureDate)
+            ->sum('cantidad');
+        if (($passengersAvailable + $passengersUsing + $adults + $children) <= $capacity) {
+            $reserva = new ReservasTripPuesto();
+            $reserva->trip_to = $tripNo;
+            $reserva->tipo = 1;
+            $reserva->fecha_trip = $departureDate;
+            $reserva->cantidad = $adults + $children;
+            $reserva->fecha_usado = now()->format('Y-m-d H:i:s');
+            $reserva->usuario = 1;
+            $reserva->estado = 'USING';
+            $reserva->fecha_actividad = now()->format('Y-m-d H:i:s');
+            $reserva->tarifa = 3;
+            $reserva->save();
+            $response = array(
+                'status' => 'success',
+                'message' => 'Reserva realizada con éxito',
+            );
+        } else {
+            $response = array(
+                'status' => 'error',
+                'message' => 'No hay suficientes asientos disponibles',
+            );
+        }
+        return $response;
+    }
+
     public function schedulesToday(){
         $schedules = DB::table('routes')
         ->join('areas', 'routes.trip_from', '=', 'areas.id')
