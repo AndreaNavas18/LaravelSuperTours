@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Area;
+use App\Models\Extension;
+use App\Models\PickupDropoff;
 use App\Models\Programacion;
 use App\Models\Reserva;
 use App\Models\ReservasTripPuesto;
@@ -176,6 +178,44 @@ class HomeController extends Controller
             );
         }
         return $response;
+    }
+
+    public function pickupDropoff (Request $request) {
+        $tripNo = $request->input('tripNo');
+        $fecha = $request->input('fecha');
+        $departure = $request->input('departure');
+        $arrival = $request->input('arrival');
+        $adults = $request->input('adults');
+        $children = $request->input('children');
+        $priceAdult = $request->input('priceAdult');
+        $priceChild = $request->input('priceChild');
+        $origin = $request->input('idOrigen');
+        $destination = $request->input('idDestino');
+        $stopsDeparture = PickupDropoff::select('id', 'place', 'address')
+            ->where('id_area', $origin)
+            ->where('trip' . $tripNo, 1)
+            ->orderBy('posicion')
+            ->get();
+        $stopsArrival = PickupDropoff::select('id', 'place', 'address')
+            ->where('id_area', $destination)
+            ->where('trip' . $tripNo, 1)
+            ->orderBy('posicion')
+            ->get();
+        $extensionsDeparture = Extension::select('id', 'place', 'precio')
+            ->where('id_area', $origin)
+            ->where('precio_neto', '>' , 0)
+            ->get();
+        $extensionsArrival = Extension::select('id', 'place', 'precio')
+            ->where('id_area', $destination)
+            ->where('precio_neto', '>' , 0)
+            ->get();
+
+        return view('pickUp-dropOff')->with([
+            'stopsDeparture' => $stopsDeparture,
+            'stopsArrival' => $stopsArrival,
+            'extensionsDeparture' => $extensionsDeparture,
+            'extensionsArrival' => $extensionsArrival
+        ]);
     }
 
     public function schedulesToday(){

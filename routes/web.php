@@ -18,8 +18,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/areas', 'areas')->name('areas');
     Route::get('/show-routes', 'showRoutes')->name('showRoutes');
     Route::get('/reserve-trip', 'reserveTrip')->name('reserveTrip');
+    Route::get('/pickUp-dropOff', 'pickupDropoff')->name('pickupDropoff');
 });
-Route::view('/pickUp-dropOff', 'pickUp-dropOff');
 Route::view('/services','services');
 Route::view('/destinations','destinations');
 Route::view('/aboutus','aboutus');

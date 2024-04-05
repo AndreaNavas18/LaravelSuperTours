@@ -1,3 +1,7 @@
+@php
+    //$trip = request('tripNo');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +24,7 @@
             <div id="outboundTitle" class="outboundTitle"></div>
             <div id="outboundContent" class="outboundContent">
                 <div id="outboundInfo" class="outboundInfo flex">
-                    <div id="outboundDate" class="outboundDate"></div>
+                    <div id="outboundDate" class="outboundDate flex"></div>
                     <div id="outboundData" class="outboundData">
                         <h2 id="dT">Trip: </h2>
                         <h2 id="dD">Departure: </h2>
@@ -30,9 +34,31 @@
                 </div>
                 <div id="outboundLocations" class="outboundLocations">
                     <h2>Departure Location</h2>
-                    <select name="departureOutbound" id="departureOutbound"></select>
+                    <select name="departureOutbound" id="departureOutbound">
+                        @foreach ($stopsDeparture as $stop)
+                            <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                        @endforeach
+                        @if ($extensionsDeparture->count() > 0)
+                            <optgroup label="Extensions">
+                                @foreach ($extensionsDeparture as $ext)
+                                <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                @endforeach
+                            </optgroup>
+                        @endif
+                    </select>
                     <h2>Arrival Location</h2>
-                    <select name="arrivalOutbound" id="arrivalOutbound"></select>
+                    <select name="arrivalOutbound" id="arrivalOutbound">
+                        @foreach ($stopsArrival as $stop)
+                            <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                        @endforeach
+                        @if ($extensionsArrival->count() > 0)
+                            <optgroup label="Extensions">
+                                @foreach ($extensionsArrival as $ext)
+                                <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                @endforeach
+                            </optgroup>
+                        @endif
+                    </select>
                 </div>
             </div>
         </div>

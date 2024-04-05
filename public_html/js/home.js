@@ -540,9 +540,10 @@ function createCard(viaje, section) {
             priceBtn.dataset.destino = viaje.destino;
             priceBtn.dataset.priceAdult = viaje.wfprc_adult;
             priceBtn.dataset.priceChild = viaje.wfprc_child;
+            priceBtn.dataset.idOrigen = viaje.trip_from;
+            priceBtn.dataset.idDestino = viaje.trip_to;
             priceBtn.textContent = 'Select';
             priceBtn.addEventListener('click', function () {
-                console.log(this.dataset);
                 selectTrip(this.dataset);
             });
             price.appendChild(priceBtn);
@@ -580,6 +581,8 @@ function selectTrip(dataTrip) {
     const destination = dataTrip.destino;
     const priceAdult = dataTrip.priceAdult;
     const priceChild = dataTrip.priceChild;
+    const idOrigen = dataTrip.idOrigen;
+    const idDestino = dataTrip.idDestino;
     const tripType = document.querySelector('input[name="tripType"]:checked').value;
     const url = '/reserve-trip?' +
         'tripNo=' + encodeURIComponent(tripNo) +
@@ -594,10 +597,9 @@ function selectTrip(dataTrip) {
 
     axios.get(url)
         .then(function (response) {
-            console.log(response.data);
             if (response.data.status == 'success') {
                 console.log(response.data.message);
-                pickUpDropOff(tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild);
+                pickUpDropOff(tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild, idOrigen, idDestino);
             } else {
                 console.log(response.data.message);
             }
@@ -608,8 +610,8 @@ function selectTrip(dataTrip) {
 }
 
 // funcion para pasar a la vista de pick up y drop off
-function pickUpDropOff( tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild) {
-    window.location.href = '/pickUp-dropOff' +
+function pickUpDropOff( tripNo, fecha, departure, arrival, adultPassenger, childPassenger, origin, destination, priceAdult, priceChild, idOrigen, idDestino) {
+    const url = '/pickUp-dropOff' +
         '?tripNo=' + tripNo +
         '&fecha=' + fecha +
         '&departure=' + departure +
@@ -619,7 +621,11 @@ function pickUpDropOff( tripNo, fecha, departure, arrival, adultPassenger, child
         '&priceAdult=' + priceAdult +
         '&priceChild=' + priceChild +
         '&origin=' + origin +
-        '&destination=' + destination;
+        '&destination=' + destination +
+        '&idOrigen=' + idOrigen +
+        '&idDestino=' + idDestino;
+
+    window.location.href = url;
 }
 
   //Funcion para el slider
