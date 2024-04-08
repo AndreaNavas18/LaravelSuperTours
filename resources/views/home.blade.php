@@ -37,7 +37,9 @@
 
     </figure>
 
-    @include('body')
+    <div class="contentBody">
+        @include('body')
+    </div>
 
     <div>
         @include('footer')

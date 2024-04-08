@@ -22,46 +22,50 @@
     <div id="divCentral" class="divMain">
         <div id="outboundCard" class="outboundCard">
             <div id="outboundTitle" class="outboundTitle"></div>
-            <div id="outboundContent" class="outboundContent">
-                <div id="outboundInfo" class="outboundInfo flex">
-                    <div id="outboundDate" class="outboundDate flex"></div>
-                    <div id="outboundData" class="outboundData">
-                        <h2 id="dT">Trip: </h2>
-                        <h2 id="dD">Departure: </h2>
-                        <h2 id="dA">Arrival: </h2>
-                        <h2 id="dP">Price: </h2>
+            <div class="background-imag">
+                <div id="outboundContent" class="outboundContent">
+                    <div id="outboundInfo" class="outboundInfo flex">
+                        <div id="outboundDate" class="outboundDate flex"></div>
+                        <img src="./images/autoazul.png" alt="bus" class="imgbus">
+                        <div id="outboundData" class="outboundData">
+                            <h2 id="dT">Trip: </h2>
+                            <h2 id="dD">Departure: </h2>
+                            <h2 id="dA">Arrival: </h2>
+                            <h2 id="dP">Price: </h2>
+                        </div>
                     </div>
-                </div>
-                <div id="outboundLocations" class="outboundLocations">
-                    <h2>Departure Location</h2>
-                    <select name="departureOutbound" id="departureOutbound">
-                        @foreach ($stopsDeparture as $stop)
-                            <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
-                        @endforeach
-                        @if ($extensionsDeparture->count() > 0)
-                            <optgroup label="Extensions">
-                                @foreach ($extensionsDeparture as $ext)
-                                <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
-                                @endforeach
-                            </optgroup>
-                        @endif
-                    </select>
-                    <h2>Arrival Location</h2>
-                    <select name="arrivalOutbound" id="arrivalOutbound">
-                        @foreach ($stopsArrival as $stop)
-                            <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
-                        @endforeach
-                        @if ($extensionsArrival->count() > 0)
-                            <optgroup label="Extensions">
-                                @foreach ($extensionsArrival as $ext)
-                                <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
-                                @endforeach
-                            </optgroup>
-                        @endif
-                    </select>
+                    <div id="outboundLocations" class="outboundLocations">
+                        <h2 class="titleLocation">Departure Location</h2>
+                        <select name="departureOutbound" id="departureOutbound" class="departureOutbound">
+                            @foreach ($stopsDeparture as $stop)
+                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                            @endforeach
+                            @if ($extensionsDeparture->count() > 0)
+                                <optgroup label="Extensions">
+                                    @foreach ($extensionsDeparture as $ext)
+                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
+                        </select>
+                        <h2 class="titleLocation">Arrival Location</h2>
+                        <select name="arrivalOutbound" id="arrivalOutbound" class="arrivalOutbound">
+                            @foreach ($stopsArrival as $stop)
+                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                            @endforeach
+                            @if ($extensionsArrival->count() > 0)
+                                <optgroup label="Extensions">
+                                    @foreach ($extensionsArrival as $ext)
+                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endif
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div id="returnTrip"></div>
     </div>
     <div>

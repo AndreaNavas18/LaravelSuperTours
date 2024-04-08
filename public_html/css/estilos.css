@@ -511,6 +511,10 @@ menu {
     flex-direction: column;
   }
 
+  .contentBody {
+    margin-top: 100px;
+  }
+
   .custom-footerr {
     margin-left: 50px;
     display: flex;
@@ -651,21 +655,24 @@ menu {
   .adults {
     padding-left: 10.1px;
     padding-right: 10.1px;
-    width: 370px;
+    width: 320px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
   }
 
   .children {
     padding-left: 10.1px;
     padding-right: 10px;
-    width: 370px;
+    width: 320px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+
   }
 
   .passTitle {
@@ -2392,7 +2399,7 @@ video {
 
   .buttonroundPc1 {
     text-align: left !important;
-    border-radius: 40px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     background-color: white;

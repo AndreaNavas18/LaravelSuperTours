@@ -63,7 +63,7 @@
                 <div class="encap1">
                     <label for="destination" class="labels lb2">To</label>
                     <span class="o2"> 
-                        <img src="./images/frbus.png" class="bticon ocult">   
+                        <img src="./images/busto.png" class="bticon ocult">   
                     </span>
                 </div>
                     <select name="destination" 
@@ -101,7 +101,7 @@
                 <div class="encap1">
                     <label for="dateDestination" class="labels">Return</label>
                     <span class="o2"> 
-                        <img src="./images/calend.png" class="bticon ocult">   
+                        <img src="./images/calenre.png" class="bticon ocult">   
                     </span>
                 </div>
                     <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">

@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let formattedDate = date.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
     let arrayDate = formattedDate.split(' ');
 
-    $('#outboundTitle').html(`<h2>${origin} To ${destination}</h2>`);
-    $('#outboundDate').html(`<h1>Departuring </h1> ${arrayDate[0]}  <h1 class="numDate">${arrayDate[1]}</h1> ${arrayDate[2]}`);
+    $('#outboundTitle').html(`<h2>${origin} to ${destination}</h2>`);
+    $('#outboundDate').html(`<h1>Departing </h1> ${arrayDate[0]}  <h1 class="numDate">${arrayDate[1]}</h1> ${arrayDate[2]}`);
     $('#dT').html(`Trip: <strong>${pick}</strong>`);
     $('#dD').html(`Departure: <strong>${formatHour(departure)}</strong>`);
     $('#dA').html(`Arrival: <strong>${formatHour(arrival)}</strong>`);
