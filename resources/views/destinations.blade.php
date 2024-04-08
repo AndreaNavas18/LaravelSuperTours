@@ -23,25 +23,26 @@
 <body>
     @include('header2')
       <div class="containerD McontainerD">
+        {{-- Miga de pag - breadcrumbs --}}
         <div class="menuHD MmenuHD">
             <ul class="listaH MlistaH">
                 <li class="sli Msli">
                     <a href="/home">Home</a>
                 </li>
-                <li class="sli Msli">
-                    <img src="./images/flechanav2.png" style="width: 20px">
+                <li class="sli4 Msli">
+                    <img src="./images/proximo.png" style="width: 17px">
                 </li>
                 <li class="sli Msli">
                     <a href="/destinations">Destinations</a>
                 </li>
                 <li class="sli4 Msli4">
-                  <img src="./images/flechanav2.png" style="width: 20px">
+                  <img src="./images/proximo.png" style="width: 17px">
                 </li>
                 <li class="sli5 Msli5">
                     <a href="/destinations">Cities</a>
                 </li>
-                <li class="sli2 Msli2" style="display: none">
-                  <img src="./images/flechanav2.png" style="width: 20px">
+                <li class="sli4 Msli2" style="display: none">
+                  <img src="./images/proximo.png" style="width: 17px">
                 </li>
                 <li class="sli3 Msli3" style="display: none">
                     <a href="/destinations">Parks</a>

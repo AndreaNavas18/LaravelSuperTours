@@ -376,7 +376,12 @@ menu {
 
 .custom-ul {
   color: #ffffff;
-  font-size: 22px;
+  font-size: 20px;
+}
+
+.custom-ul2 {
+  color: #1e336c;
+  font-size: 20px;
 }
 
 .custom-article {
@@ -475,6 +480,14 @@ menu {
 
 .footer1DivMovil2 {
   margin-bottom: 10px;
+}
+
+.backgroundimag {
+  background-image: url(../images/playero9.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
 }
 
 .titlesFooterMovil {
@@ -850,6 +863,15 @@ menu {
       justify-content: center;
       align-items: center;
       
+    }
+
+    .backgroundimag2 {
+      background-image: url(../images/playero12.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      height: 200px;
+    
     }
 }
  
@@ -2374,6 +2396,11 @@ video {
   .showImg {
     display: block;
     height: 200px;
+  }
+
+  .logope {
+    width: 120px;
+    height: auto;
   }
 }
 

@@ -2,7 +2,7 @@
 
     <nav class="wrapper flex items-center justify-between wrappermovil">
 
-        <a href="/home" class="w-1/3 max-w-[180px]">
+        <a href="/" class="w-1/3 max-w-[180px]">
             <img src="./images/logo.png" class="w-full ocult mdview">
         </a>
 

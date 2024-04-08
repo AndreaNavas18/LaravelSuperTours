@@ -1,10 +1,47 @@
 @media (min-width: 768px) {
+
+    .fffx {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menuHD {
+        margin-left: 10px;
+        margin-top: 20px;
+    }
+    
+    .listaH{
+        list-style-type: none;
+    }
+    
+    .sli {
+        float: left;
+        margin-right: 3px;
+        padding: 0 2px;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        color: rgb(70, 70, 70);
+    
+    }
+    
+    .sli4 {
+        float: left;
+        margin-right: 3px;
+        padding: 0 2px;
+        font-size: 15px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        color: rgb(70, 70, 70);
+        margin-top: 4px;
+    }
+    
     
 .containerFAQ {
     display: flex;
     flex-direction: column;
+    margin-left: 70px;
     max-width: 1200px;
-    margin: 0 auto;
 }
 
 .faq-section {

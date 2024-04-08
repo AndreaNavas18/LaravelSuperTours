@@ -19,8 +19,8 @@
                 <li class="sli Msli">
                     <a href="/home">Home</a>
                 </li>
-                <li class="sli Msli">
-                    <img src="./images/flechanav2.png" style="width: 20px">
+                <li class="sli4 Msli">
+                    <img src="./images/proximo.png" style="width: 17px">
                 </li>
                 <li class="sli Msli">
                     <a href="/aboutus">About Us</a>
