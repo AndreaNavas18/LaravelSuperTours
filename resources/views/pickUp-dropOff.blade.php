@@ -43,7 +43,7 @@
                             @if ($extensionsDeparture->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsDeparture as $ext)
-                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -56,7 +56,7 @@
                             @if ($extensionsArrival->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsArrival as $ext)
-                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -88,7 +88,7 @@
                             @if ($extensionsArrival->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsArrival as $ext)
-                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                        <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -101,7 +101,7 @@
                             @if ($extensionsDeparture->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsDeparture as $ext)
-                                    <option value="{{ $ext->id }}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                        <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif

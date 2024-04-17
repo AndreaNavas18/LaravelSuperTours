@@ -42,6 +42,18 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#returnCard').addClass('hidden');
 
     }
+
+    $('#departureOutbound, #arrivalOutbound').on('change', function () {
+        const optionSelected = this.options[this.selectedIndex];
+        const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
+        $('#dP').html(`Price: <strong>${newPrice}</strong>`);
+    });
+
+    $('#departureReturn, #arrivalReturn').on('change', function () {
+        const optionSelected = this.options[this.selectedIndex];
+        const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
+        $('#rP').html(`Price: <strong>${newPrice}</strong>`);
+    });
 });
 
 // Funcion para devolver las horas de salida y llegada

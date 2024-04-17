@@ -86,6 +86,7 @@ class HomeController extends Controller
             ->where('trip_to', $destination)
             ->where('fecha_ini', '<=', $departureDate)
             ->where('fecha_fin', '>=', $departureDate)
+            ->orderBy('routes.trip_departure', 'asc')
             ->get();
         $daySpanish = $daysOfWeek[$dayDeparture];
         foreach ($viajesIda as $viaje) {
@@ -136,6 +137,7 @@ class HomeController extends Controller
         $capacity = $request->input('capacity');
         $adults = $request->input('adults');
         $children = $request->input('children');
+        $tripType = $request->input('tripType');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
             ->sum('pax');
@@ -145,7 +147,7 @@ class HomeController extends Controller
         if (($passengersAvailable + $passengersUsing + $adults + $children) <= $capacity) {
             $reserva = new ReservasTripPuesto();
             $reserva->trip_to = $tripNo;
-            $reserva->tipo = 1;
+            $reserva->tipo = ($tripType == 'departure') ? 1 : 2;
             $reserva->fecha_trip = $departureDate;
             $reserva->cantidad = $adults + $children;
             $reserva->fecha_usado = now()->format('Y-m-d H:i:s');
@@ -188,7 +190,7 @@ class HomeController extends Controller
             ->where('trip' . $tripNo, 1)
             ->orderBy('posicion')
             ->get();
-        $extensionsDeparture = Extension::select('id', 'place', 'precio')
+        $extensionsDeparture = Extension::select('id', 'place', 'precio', 'precio_neto')
             ->where('id_area', $origin)
             ->where('precio_neto', '>' , 0)
             ->get();

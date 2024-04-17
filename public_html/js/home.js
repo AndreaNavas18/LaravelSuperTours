@@ -400,18 +400,7 @@ function adjustPassengers(type, amount) {
 $(function () {
     const fechas = $("#departureDate, #returnDate").datepicker({
         numberOfMonths: 2,
-        showButtonPanel: true,
-        dateFormat: "yy-mm-dd",
-        onSelect: function (dateText, inst) {
-            // Acciones cuando se selecciona una fecha
-            if (inst.id === 'departureDate') {
-                variableSesion.departureDate = dateText;
-                console.log("Departure Date selected: " + dateText);
-            } else if (inst.id === 'returnDate') {
-                variableSesion.returnDate = dateText;
-                console.log("Return Date selected: " + dateText);
-            }
-        }
+        dateFormat: "yy-mm-dd"
     });
     $(fechas).datepicker("setDate", new Date());
 });
@@ -679,7 +668,7 @@ function selectTrip(dataTrip) {
         '&children=' + encodeURIComponent(dataTrip.childPassenger) +
         '&origin=' + encodeURIComponent(dataTrip.origen) +
         '&destination=' + encodeURIComponent(dataTrip.destino) +
-        '&tripType=' + encodeURIComponent(dataTrip.tripType);
+        '&tripType=' + encodeURIComponent(dataTrip.trip);
 
     axios.get(url)
         .then(function (response) {
