@@ -34,7 +34,7 @@
             <source src="./videos/fondov.mp4" type="video/mp4">
             Tu navegador no soporta el tag de video.
         </video>
-        <img id="imgHeader" src="./images/orlandoimg.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdocult">
+        <img id="imgHeader" src="./images/playero12.jpg" class="absolute w-10 -z-10 top-0 right-0 max-w-full custom-height mdocult">
 
     </figure>
 
