@@ -19,6 +19,7 @@
 </head>
 <body>
     @include('header2')
+    <div id="timer" class="timer"></div>
     <div id="divCentral" class="divMain">
         <div id="outboundCard" class="outboundCard">
             <div id="outboundTitle" class="outboundTitle"></div>

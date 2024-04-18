@@ -51,4 +51,5 @@
                 <div id="tomorrowCardsReturn" class="daySection"></div>
             </div>
         </div>
+        <button id="btnContinue" class="buttonContinue hidden">CONTINUE</button>
 </main>

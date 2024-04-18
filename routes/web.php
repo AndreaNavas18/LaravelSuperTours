@@ -18,6 +18,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/areas', 'areas')->name('areas');
     Route::get('/show-routes', 'showRoutes')->name('showRoutes');
     Route::get('/reserve-trip', 'reserveTrip')->name('reserveTrip');
+    Route::get('/cancel-reserve', 'cancelReserve')->name('cancelReserve');
     Route::get('/pickUp-dropOff', 'pickupDropoff')->name('pickupDropoff');
 });
 Route::view('/services','services');

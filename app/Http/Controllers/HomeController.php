@@ -151,12 +151,15 @@ class HomeController extends Controller
             $reserva->fecha_trip = $departureDate;
             $reserva->cantidad = $adults + $children;
             $reserva->fecha_usado = now()->format('Y-m-d H:i:s');
-            $reserva->usuario = 1;
+            $reserva->usuario = rand(1000, 9999);
             $reserva->estado = 'USING';
             $reserva->fecha_actividad = now()->format('Y-m-d H:i:s');
             $reserva->tarifa = 3;
             $reserva->save();
+            // Obtener el ID del registro que se acaba de crear
+            $idReserva = ReservasTripPuesto::latest('id')->first()->id;
             $response = array(
+                'idReserva' => $idReserva,
                 'status' => 'success',
                 'message' => 'Reserva realizada con éxito',
             );
@@ -167,6 +170,25 @@ class HomeController extends Controller
             );
         }
         return $response;
+    }
+
+    function cancelReserve(Request $request) {
+        Log::info($request->all());
+       try {
+           $idReserva = $request->input('idReserva');
+           ReservasTripPuesto::whereIn('id', explode(",", $idReserva))->update([
+               'estado' => 'CANCELLED',
+               'fecha_actividad' => now()->format('Y-m-d H:i:s')
+           ]);
+           $response = array(
+               'status' => 'success',
+               'message' => 'Reserva cancelada con éxito',
+           );
+           return $response;
+
+        } catch (\Throwable $th) {
+            Log::info($th);
+        }
     }
 
     public function pickupDropoff (Request $request) {
@@ -194,7 +216,7 @@ class HomeController extends Controller
             ->where('id_area', $origin)
             ->where('precio_neto', '>' , 0)
             ->get();
-        $extensionsArrival = Extension::select('id', 'place', 'precio')
+        $extensionsArrival = Extension::select('id', 'place', 'precio', 'precio_neto')
             ->where('id_area', $destination)
             ->where('precio_neto', '>' , 0)
             ->get();

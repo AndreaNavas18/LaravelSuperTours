@@ -24,6 +24,7 @@ let variablePastDayReturn = '';
 let totalPassengers = 1;
 let adultsCount = 1;
 let childrenCount = 0;
+
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
     const originSelect = document.getElementById('origin');
@@ -674,6 +675,7 @@ function selectTrip(dataTrip) {
         .then(function (response) {
             if (response.data.status == 'success') {
                 console.log(response.data.message);
+                dataTrip.idReserva = response.data.idReserva;
                 if (dataTrip.tripType == 'oneWay') {
                     pickUpDropOff(dataTrip);
                 } else if (dataTrip.tripType == 'roundTrip') {
@@ -707,7 +709,7 @@ function verficarSeleccion(dataTrip) {
     console.log(tripsSelected);
     // Si ambos viajes están seleccionados, mostrar la vista de pick up y drop off
     if (Object.keys(tripsSelected.departure).length > 0 && Object.keys(tripsSelected.return).length > 0) {
-       pickUpDropOff(tripsSelected.departure);
+       showContinue(tripsSelected.departure);
     }
 }    
 
@@ -718,6 +720,17 @@ function deselectTrip(dataTrip) {
     tripsSelected[tripDirection] = {};
     $('#divSelected' + tripDirection).find("#" + tripSelected).remove();
     $('#divCards' + tripDirection).removeClass('hidden');
+    $('#btnContinue').addClass('hidden');
+    $('#btnContinue').off();
+    // peticion para cancelar la reserva
+    const url = '/cancel-reserve?' +
+        'idReserva=' + dataTrip.idReserva;
+    axios.get(url).then(function (response) {
+        console.log(response.data.message);
+    }).catch(function (error) {
+        console.log(error);
+    });
+
 }
 
 function cleanRoutes() {
@@ -725,7 +738,18 @@ function cleanRoutes() {
     $('#divSelectedreturn').find('div').remove();
     $('#divCardsdeparture').removeClass('hidden');
     $('#divCardsreturn').removeClass('hidden');
+    $('#btnContinue').addClass('hidden');
+    $('#btnContinue').off();
 }
+
+function showContinue(dataTrip) {
+    $('#btnContinue').removeClass('hidden');
+    $('#btnContinue').on('click', function () {
+        pickUpDropOff(dataTrip);
+    });
+}
+
+
 // funcion para pasar a la vista de pick up y drop off
 function pickUpDropOff(dataTrip) {
     let url = '/pickUp-dropOff' +
@@ -740,7 +764,8 @@ function pickUpDropOff(dataTrip) {
         '&origin=' + dataTrip.origen +
         '&destination=' + dataTrip.destino +
         '&idOrigen=' + dataTrip.idOrigen +
-        '&idDestino=' + dataTrip.idDestino;
+        '&idDestino=' + dataTrip.idDestino +
+        '&idReserva=' + dataTrip.idReserva;
 
         if (dataTrip.tripType == 'oneWay') {
             window.location.href = url;
