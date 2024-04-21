@@ -140,8 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // evento para cambiar la section today a la section yesterday
-function changeYesterday (btn) {
-    if (variablePastDay > pastDay) {
+function changeYesterday () {
+    if (variablePastDay >= pastDay) {
         $('#todayCards').addClass('fade');
             setTimeout(() => {
                 $('#todayCards').removeClass('fade');
@@ -166,7 +166,7 @@ function changeYesterday (btn) {
             sectionsDays.todayCards.push(viaje);
         });
         searchRoutes({
-            departureDate: formatDate(new Date($(btn).val() + tZone), -1),
+            departureDate: formatDate(new Date($('#btnyesterday').val() + tZone), -1),
             day: 'yesterday',
             section: 'yesterdayCards'
         });
@@ -174,8 +174,8 @@ function changeYesterday (btn) {
 };
 
 // evento para cambiar la section todayReturn a la section yesterdayReturn
-function changeYesterdayReturn (btn) {
-    if (variablePastDayReturn > pastDay) {
+function changeYesterdayReturn () {
+    if (variablePastDayReturn >= pastDay) {
         $('#todayCardsReturn').addClass('fade');
             setTimeout(() => {
                 $('#todayCardsReturn').removeClass('fade');
@@ -200,7 +200,7 @@ function changeYesterdayReturn (btn) {
             sectionsDays.todayCardsReturn.push(viaje);
         });
         searchRoutes({
-            departureDate: formatDate(new Date($(btn).val() + tZone), -1),
+            departureDate: formatDate(new Date($('#btnyesterdayReturn').val() + tZone), -1),
             day: 'yesterdayReturn',
             section: 'yesterdayCardsReturn'
         });
@@ -208,7 +208,7 @@ function changeYesterdayReturn (btn) {
 };
 
 // evento para cambiar la section today a la section tomorrow
-function changeTomorrow (btn) {
+function changeTomorrow () {
     variablePastDay = new Date($("#btntoday").val());
     $('#todayCards').addClass('fade');
         setTimeout(() => {
@@ -234,14 +234,14 @@ function changeTomorrow (btn) {
         sectionsDays.todayCards.push(viaje);
     });
     searchRoutes({
-        departureDate: formatDate(new Date($(btn).val() + tZone), 1),
+        departureDate: formatDate(new Date($('#btntomorrow').val() + tZone), 1),
         day: 'tomorrow',
         section: 'tomorrowCards'
     });
 };
 
 // evento para cambiar la section todayReturn a la section tomorrowReturn
-function changeTomorrowReturn (btn) {
+function changeTomorrowReturn () {
     variablePastDayReturn = new Date($("#btntodayReturn").val());
     $('#todayCardsReturn').addClass('fade');
         setTimeout(() => {
@@ -267,7 +267,7 @@ function changeTomorrowReturn (btn) {
         sectionsDays.todayCardsReturn.push(viaje);
     });
     searchRoutes({
-        departureDate: formatDate(new Date($(btn).val() + tZone), 1),
+        departureDate: formatDate(new Date($('#btntomorrowReturn').val() + tZone), 1),
         day: 'tomorrowReturn',
         section: 'tomorrowCardsReturn'
     });
@@ -399,11 +399,21 @@ function adjustPassengers(type, amount) {
 //   });
 
 $(function () {
-    const fechas = $("#departureDate, #returnDate").datepicker({
+    const departureDate = $("#departureDate").datepicker({
         numberOfMonths: 2,
-        dateFormat: "yy-mm-dd"
+        dateFormat: "yy-mm-dd",
+        minDate: 0
     });
-    $(fechas).datepicker("setDate", new Date());
+    const returnDate = $("#returnDate").datepicker({
+        numberOfMonths: 2,
+        dateFormat: "yy-mm-dd",
+        minDate: 0
+    });
+    $(departureDate).datepicker("setDate", new Date());
+    $(returnDate).datepicker("setDate", new Date());
+    $(departureDate).on("change", function () {
+        $(returnDate).datepicker("option", "minDate", $(this).datepicker("getDate"));
+    });
 });
 
 // Función para devolver las fechas de ayer y mañana
@@ -483,7 +493,7 @@ function searchRoutes(data) {
         '&destination=' + encodeURIComponent(destination) +
         '&departureDate=' + encodeURIComponent(departureDate) +
         '&returnDate=' + encodeURIComponent(departureDate) +
-        '&passengerCount=' + encodeURIComponent(passengerCount) +
+        '&passengers=' + encodeURIComponent(totalPassengers) +
         '&tripType=' + encodeURIComponent(tripType);
 
     // traer las rutas disponibles con los parametros establecidos
@@ -608,14 +618,15 @@ function createCard(viaje, section) {
      let price = document.createElement('div');
         price.className = 'divButton';
      let priceText = document.createElement('span');
-     priceText.innerHTML = `$${viaje.wfprc_adult} Adult<br>$${viaje.wfprc_child} Child`;
+     priceText.innerHTML = `$${parseFloat(viaje.wfprc_adult).toFixed(2)} Adult<br>$${parseFloat(viaje.wfprc_child).toFixed(2)} Child`;
         price.appendChild(priceText);
 
     if (section == 'todayCards' || section == 'todayCardsReturn') {
         // boton para seleccionar el viaje
          card.id = 'card' + viaje.trip_no;
         let priceBtn = document.createElement('button');
-        if (viaje.tripAvilable && viaje.seats_remain >= (viaje.passengersOcuped + totalPassengers)) {
+        if (viaje.tripAvilable && viaje.passengersAvailable >= 0) {
+            
             priceBtn.className = (section == 'todayCards') ? 'buttonCards' : 'buttonCards buttonCardsReturn';
             priceBtn.dataset.trip = (section == 'todayCards') ? 'departure' : 'return';
             priceBtn.dataset.trip_no = viaje.trip_no;
@@ -635,6 +646,13 @@ function createCard(viaje, section) {
             });
             price.appendChild(priceBtn);
         } else {
+            if ((viaje.seats_remain - viaje.passengersToReserve) == -1) {
+                const textSeats = (viaje.passengersToReserve - 1) == 1 ? 'seat available.' : 'seats availables.'
+                let alertOneAvailable = document.createElement('div');
+                alertOneAvailable.className = 'alertOneAvailable';
+                alertOneAvailable.textContent = `Only ${viaje.passengersToReserve - 1} ${textSeats}`;
+                price.appendChild(alertOneAvailable);
+            }
             priceBtn.className = 'buttonCardsDisabled';
             priceBtn.textContent = 'Sold Out';
             price.appendChild(priceBtn);

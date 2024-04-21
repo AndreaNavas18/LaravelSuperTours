@@ -66,7 +66,7 @@
         margin: 0 auto;
     }
     .departureOutbound, .arrivalOutbound {
-        width: 400px;
+        width: 100%;
         white-space: normal;
         padding: 10px; /* Ajusta el relleno según sea necesario */
         border: 1px solid #055dff6c; /* Añade un borde */
@@ -81,6 +81,17 @@
         font-size: 17px;
         font-weight: bold;
         margin-bottom: 3px;
+    }
+
+    .hotelInput {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #055dff6c;
+        border-radius: 5px;
+        background-color: #ffffffe3;
+        font-size: 15px;
+        color: #333;
+        appearance: none;
     }
 
 }
