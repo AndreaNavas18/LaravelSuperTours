@@ -12,7 +12,7 @@
 <body>
     @include('header2')
     <div class="contenedor">
-        <form action="{{ url('register')}}" method="POST">      
+        <form action="{{ route('register')}}" method="POST">      
             @csrf
             <div class="cardLogin">
                 <h1 class="titleLogin" >Create your Account</h1>
@@ -62,7 +62,7 @@
                 <div class="divLabel">
                     <div class="divEmail">
                         <h3 class="label" >Email</h3>
-                        <input class="input" type="text" placeholder="Email@example.com" name="username">
+                        <input class="input" type="email" placeholder="email@example.com" name="email">
                     </div>
                     <div class="divEmail">
                         <h3 class="label" >Password</h3>

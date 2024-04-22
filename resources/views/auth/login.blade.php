@@ -12,7 +12,7 @@
 <body>
     @include('header2')
     <div class="contenedor">
-        <form action="#" method="POST">      
+        <form action="{{ route('login')}}" method="POST">      
             @csrf
             <div class="cardLogin">
                 <h1 class="titleLogin" >Sign in to your account</h1>

@@ -13,6 +13,7 @@ use App\Models\ReservasTripPuesto;
 use App\Models\Route;
 use App\Models\Clientes;
 use App\Http\Requests\RegisterRequest;
+use App\Models\UsersClients;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -268,51 +269,47 @@ class HomeController extends Controller
             }         
     }
 
-    public function showRegister(){
-        return view('auth.register');
-    }
+  
 
-    public function showLogin() {
-        return view('auth.login');
-    }
+    
 
-    public function register(Request $request){
-        // Validación de datos
-        $request->validate([
-            'username' => ['required', 'email', 'unique:clientes'],
-            'password' => ['required', 'min:6'],
-        ]);
+    // public function register(Request $request){
+    //     // Validación de datos
+    //     $request->validate([
+    //         'email' => ['required', 'email', 'unique:users_clients'],
+    //         'password' => ['required', 'min:6'],
+    //     ]);
 
-        $cliente = new Clientes();
-        $cliente->firstname = $request->input('firstname');
-        $cliente->lastname = $request->input('lastname');
-        $cliente->address = $request->input('address');
-        $cliente->city = $request->input('city');
-        $cliente->state = $request->input('state');
-        $cliente->country = $request->input('country');
-        $cliente->zip = $request->input('zipcode');
-        $cliente->celphone = $request->input('celphone');
-        $cliente->username = $request->input('username');
-        $cliente->password = bcrypt($request->input('password'));
+    //     $cliente = new UsersClients();
+    //     $cliente->firstname = $request->input('firstname');
+    //     $cliente->lastname = $request->input('lastname');
+    //     $cliente->address = $request->input('address');
+    //     $cliente->city = $request->input('city');
+    //     $cliente->state = $request->input('state');
+    //     $cliente->country = $request->input('country');
+    //     $cliente->zip = $request->input('zipcode');
+    //     $cliente->celphone = $request->input('celphone');
+    //     $cliente->email = $request->input('email');
+    //     $cliente->password = bcrypt($request->input('password'));
        
-        // Guardar el nuevo cliente en la base de datos
-        $cliente->save();
+    //     // Guardar el nuevo cliente en la base de datos
+    //     $cliente->save();
 
-        return redirect()->route('login')->with('success', 'Usuario registrado con éxito');
-    }
+    //     return redirect()->route('login')->with('success', 'Usuario registrado con éxito');
+    // }
 
-    public function login(Request $request){
 
-        if (Auth::attempt([
-            'username'   => $request->input('username'),
-            'password' => $request->input('password'),
-        ])) {
-            return redirect()->route('home')->with('success', 'Bienvenido ' . Auth::user()->firstname);
+    // public function login(Request $request){
 
-        }else {
-            return redirect()->route('login')->with('error', 'Usuario o contraseña incorrectos');
-            Log::info("No estan correctas las credentials");
-        }
+    //     if (Auth::attempt([
+    //         'username'   => $request->input('username'),
+    //         'password' => $request->input('password'),
+    //     ])) {
+    //         return redirect()->route('home')->with('success', 'Bienvenido ' . Auth::user()->firstname);
 
-    }
+    //     }else {
+    //         Log::info("No estan correctas las credentials");
+    //     }
+
+    // }
 }

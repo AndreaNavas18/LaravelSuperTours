@@ -9,12 +9,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class UsersClients
  * 
  * @property int $id
- * @property string|null $username
+ * @property string|null $email
  * @property string|null $firstname
  * @property string|null $lastname
  * @property string $password
@@ -37,6 +38,7 @@ use Illuminate\Notifications\Notifiable;
 class UsersClients extends Authenticatable 
 {
 	use Notifiable;
+    use HasFactory;
 
 	protected $table = 'users_clients';
 	public $incrementing = false;
@@ -56,7 +58,7 @@ class UsersClients extends Authenticatable
 
 	protected $fillable = [
 		'id',
-		'username',
+		'email',
 		'firstname',
 		'lastname',
 		'password',
