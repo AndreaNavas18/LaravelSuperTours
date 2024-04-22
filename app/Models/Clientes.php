@@ -7,9 +7,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
- * Class Cliente
+ * Class Clientes
  * 
  * @property int $id
  * @property string|null $username
@@ -32,8 +34,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Cliente extends Model
+class Clientes extends Authenticatable 
 {
+	use Notifiable;
+
 	protected $table = 'clientes';
 	public $incrementing = false;
 	public $timestamps = false;
@@ -70,4 +74,9 @@ class Cliente extends Model
 		'left_points',
 		'paid_points'
 	];
+
+	// public function setPasswordAttribute($value)
+	// {
+	// 	$this->attributes['password'] = bcrypt($value);
+	// }
 }

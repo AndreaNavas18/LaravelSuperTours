@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  ccontent: [
+  content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
 ],
@@ -30,6 +30,8 @@ module.exports = {
       
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
 

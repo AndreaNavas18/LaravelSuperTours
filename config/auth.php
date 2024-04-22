@@ -58,11 +58,11 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+//Karen, modifique el modelo que usa para autenticar
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Clientes::class,
         ],
 
         // 'users' => [

@@ -43,11 +43,19 @@
             </ul>
 
         </div>
-
+        @guest
         <div class="divLogins">
-            <a href="#" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Login</a>
-            <a href="#" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Sign Up</a>
+            <a href="{{ url('login') }}" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Login</a>
+            <a href="{{ url('register') }}" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Sign Up</a>
         </div>
+        @else 
+        <div class="divLogins">
+            <button class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">
+                {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+            </button>
+            <a href="{{ url('logout') }}" class="hidden lg:block" style="color: white; font-weight:700; font-size:22px">Logout</a>
+        </div>
+        @endguest
     </nav>
 
     <section id="sectionHeader" class="wrapper containerr grid gap-8 justify-items-center items-center pb-4 md:grid-cols-1 wrappermovil">
