@@ -437,6 +437,7 @@ menu {
 
 .sectionOff {
   opacity: 0.5;
+  cursor: pointer;
 }
 
 .sectionMain {

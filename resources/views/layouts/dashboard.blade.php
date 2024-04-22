@@ -3,8 +3,8 @@
             <h1 id="titleSelecteddeparture" class="outboundTitle"></h1>
         </div>
         <div class="flex bg-white-500 divCards" id="divCardsdeparture">
-            <div id="yesterdaySection" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btnyesterday" aria-pressed="false" onclick="changeYesterday(this)">
+            <div id="yesterdaySection" class="daySection sectionOff" onclick="changeYesterday(this)">
+                <button class="btnIcontype MbtnIcontype activo" id="btnyesterday" aria-pressed="false" >
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="yesterday"></span>
                 </button>
@@ -17,8 +17,8 @@
                 </button>
                 <div id="todayCards" class="daySection"></div>
             </div>
-            <div id="tomorrowSection" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btntomorrow" aria-pressed="false" onclick="changeTomorrow(this)">
+            <div id="tomorrowSection" class="daySection sectionOff" onclick="changeTomorrow(this)">
+                <button class="btnIcontype MbtnIcontype activo" id="btntomorrow" aria-pressed="false" >
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="tomorrow"></span>
                 </button>
@@ -29,8 +29,8 @@
             <h1 id="titleSelectedreturn" class="returnTitle"></h1>
         </div>
         <div class="flex bg-white-500 divCardsReturn hidden" id="divCardsreturn">
-            <div id="yesterdaySectionReturn" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btnyesterdayReturn" aria-pressed="false" onclick="changeYesterdayReturn(this)">
+            <div id="yesterdaySectionReturn" class="daySection sectionOff"  onclick="changeYesterdayReturn(this)">
+                <button class="btnIcontype MbtnIcontype activo" id="btnyesterdayReturn" aria-pressed="false">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="yesterdayReturn"></span>
                 </button>
@@ -43,8 +43,8 @@
                 </button>
                 <div id="todayCardsReturn" class="daySection"></div>
             </div>
-            <div id="tomorrowSectionReturn" class="daySection sectionOff">
-                <button class="btnIcontype MbtnIcontype activo" id="btntomorrowReturn" aria-pressed="false" onclick="changeTomorrowReturn(this)">
+            <div id="tomorrowSectionReturn" class="daySection sectionOff" onclick="changeTomorrowReturn(this)">
+                <button class="btnIcontype MbtnIcontype activo" id="btntomorrowReturn" aria-pressed="false">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="tomorrowReturn"></span>
                 </button>

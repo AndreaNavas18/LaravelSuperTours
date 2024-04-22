@@ -104,13 +104,14 @@ class HomeController extends Controller
             } else {
                 $viaje->tripAvilable = false;
             }
-            $passengersAvailable = Reserva::where('trip_no', $viaje->trip_no)
+            $passengersOcuped = Reserva::where('trip_no', $viaje->trip_no)
                 ->where('fecha_salida', $departureDate)
                 ->sum('pax');
             $passengersUsing = ReservasTripPuesto::where('trip_to', $viaje->trip_no)
                 ->where('fecha_trip', $departureDate)
                 ->sum('cantidad');
-            $viaje->passengersOcuped = $passengersUsing + $passengersAvailable;
+            $viaje->passengersAvailable = $viaje->seats_remain - ($passengersUsing + $passengersOcuped + $passengers);
+            $viaje->passengersToReserve = $passengers;
         }
         if ($tripType == 'roundTrip') {
             // Luego, filtrar los viajes de destination a origin

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#dT').html(`Trip: <strong>${pick}</strong>`);
     $('#dD').html(`Departure: <strong>${formatHour(departure)}</strong>`);
     $('#dA').html(`Arrival: <strong>${formatHour(arrival)}</strong>`);
-    $('#dP').html(`Price: <strong>${totalPrice}</strong>`);
+    $('#dP').html(`Price: <strong>${parseFloat(totalPrice).toFixed(2)}</strong>`);
     window.addEventListener('beforeunload', function () {
         cancelReserva(idsReserves);
     });
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#rT').html(`Trip: <strong>${returnData.trip_no}</strong>`);
         $('#rD').html(`Departure: <strong>${formatHour(returnData.departure)}</strong>`);
         $('#rA').html(`Arrival: <strong>${formatHour(returnData.arrival)}</strong>`);
-        $('#rP').html(`Price: <strong>${returnPrice}</strong>`);
+        $('#rP').html(`Price: <strong>${parseFloat(returnPrice).toFixed(2)}</strong>`);
     } else {
         $('#returnCard').addClass('hidden');
 
@@ -52,13 +52,23 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#departureOutbound, #arrivalOutbound').on('change', function () {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
-        $('#dP').html(`Price: <strong>${newPrice}</strong>`);
+        $('#dP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
+        if (optionSelected.dataset.precio) {
+            $('#hotel' + this.id).removeClass('hidden');
+        } else {
+            $('#hotel' + this.id).addClass('hidden');
+        }
     });
 
     $('#departureReturn, #arrivalReturn').on('change', function () {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
-        $('#rP').html(`Price: <strong>${newPrice}</strong>`);
+        $('#rP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
+        if (optionSelected.dataset.precio) {
+            $('#hotel' + this.id).removeClass('hidden');
+        } else {
+            $('#hotel' + this.id).addClass('hidden');
+        }
     });
 });
 

@@ -49,6 +49,7 @@
                                 </optgroup>
                             @endif
                         </select>
+                        <input type="text" class="hidden hotelInput" name="hoteldepartureOutbound" id="hoteldepartureOutbound" placeholder="Indicate Hotel Name">
                         <h2 class="titleLocation">Arrival Location</h2>
                         <select name="arrivalOutbound" id="arrivalOutbound" class="arrivalOutbound">
                             @foreach ($stopsArrival as $stop)
@@ -62,6 +63,7 @@
                                 </optgroup>
                             @endif
                         </select>
+                        <input type="text" class="hidden hotelInput" name="hotelarrivalOutbound" id="hotelarrivalOutbound" placeholder="Indicate Hotel Name">
                     </div>
                 </div>
             </div>
@@ -94,6 +96,7 @@
                                 </optgroup>
                             @endif
                         </select>
+                        <input type="text" class="hidden hotelInput" name="hoteldepartureReturn" id="hoteldepartureReturn" placeholder="Indicate Hotel Name">
                         <h2 class="titleLocation">Arrival Location</h2>
                         <select name="arrivalReturn" id="arrivalReturn" class="arrivalOutbound">
                             @foreach ($stopsDeparture as $stop)
@@ -107,6 +110,8 @@
                                 </optgroup>
                             @endif
                         </select>
+                        <input type="text" class="hidden hotelInput" name="hotelarrivalReturn" id="hotelarrivalReturn" placeholder="Indicate Hotel Name">
+                
                     </div>
                 </div>
             </div>
