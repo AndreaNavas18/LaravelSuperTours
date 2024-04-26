@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 
 
 /*
@@ -32,10 +31,16 @@ Route::view('/contact','contact');
 
 // Auth::routes();
 
-Route::get('/register', [RegisterController::class, 'showRegister'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
-Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
+// Route::get('/register', [RegisterrController::class, 'showRegister'])->name('register');
+// Route::post('/register', [RegisterrController::class, 'register']);
+// Route::get('/login', [LoginnController::class, 'showLogin'])->name('login');
+// Route::post('/login', [LoginnController::class, 'login']);
+
+
+
+Auth::routes();
+
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

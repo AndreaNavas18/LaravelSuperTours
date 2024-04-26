@@ -9,7 +9,7 @@ class DestinationsController extends Controller
     //funcion para cargar la pagina 
     public function destinations()
     {
-        return view('destinarions');
+        return view('destinations');
     }
 
 }

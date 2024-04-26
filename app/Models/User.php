@@ -1,46 +1,54 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-/**
- * Class User
- * 
- * @property int $id
- * @property string $name
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- *
- * @package App\Models
- */
-class User extends Model
+class User extends Authenticatable 
 {
-	protected $table = 'users';
+	use Notifiable, HasFactory;
 
-	protected $casts = [
-		'email_verified_at' => 'datetime'
+	public $table = 'users';
+
+	protected $fillable = [
+		'id',
+		'email',
+		'firstname',
+		'lastname',
+		'password',
+		'phone',
+		'celphone',
+		'city',
+		'state',
+		'country',
+		'address',
+		'zip',
+		'tipo_client',
+		'birthday',
+		'fecha_r',
+		'points',
+		'email_verified_at',
+		'remember_token',
+		'left_points',
+		'paid_points',
+		'role',
 	];
 
 	protected $hidden = [
 		'password',
-		'remember_token'
+		'remember_token',
 	];
 
-	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
+	protected $casts = [
+		'email_verified_at' => 'datetime',
 	];
+
+	public function setRole($role){
+		$this->role = $role;
+		$this->save();
+	}
+
+	
 }

@@ -13,7 +13,7 @@ use App\Models\ReservasTripPuesto;
 use App\Models\Route;
 use App\Models\Clientes;
 use App\Http\Requests\RegisterRequest;
-use App\Models\UsersClients;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -276,11 +276,11 @@ class HomeController extends Controller
     // public function register(Request $request){
     //     // Validación de datos
     //     $request->validate([
-    //         'email' => ['required', 'email', 'unique:users_clients'],
+    //         'email' => ['required', 'email', 'unique:User'],
     //         'password' => ['required', 'min:6'],
     //     ]);
 
-    //     $cliente = new UsersClients();
+    //     $cliente = new User();
     //     $cliente->firstname = $request->input('firstname');
     //     $cliente->lastname = $request->input('lastname');
     //     $cliente->address = $request->input('address');
