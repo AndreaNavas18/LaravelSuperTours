@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const idsReserves = [];
     idsReserves.push(urlParams.get('idReserva'));
     const totalPrice = (children * priceChild) + (adults * priceAdult);
+    let returnPrice = 0;
     let date = new Date(fecha);
     let formattedDate = date.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
     let arrayDate = formattedDate.split(' ');
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         $('#returnCard').removeClass('hidden');
         const returnData = JSON.parse(returnTrip);
         idsReserves.push(returnData.idReserva);
-        const returnPrice = (returnData.childPassenger * returnData.priceChild) + (returnData.adultPassenger * returnData.priceAdult);
+        returnPrice = (returnData.childPassenger * returnData.priceChild) + (returnData.adultPassenger * returnData.priceAdult);
         let dateReturn = new Date(returnData.fecha);
         let formattedDateReturn = dateReturn.toLocaleString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
         let arrayDateReturn = formattedDateReturn.split(' ');
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $('#departureReturn, #arrivalReturn').on('change', function () {
         const optionSelected = this.options[this.selectedIndex];
-        const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
+        const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + returnPrice : returnPrice;
         $('#rP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
         if (optionSelected.dataset.precio) {
             $('#hotel' + this.id).removeClass('hidden');

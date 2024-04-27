@@ -91,6 +91,7 @@
                     </span>
                 </div>
                     <input type="text" id="departureDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                    <input type="hidden" id="hiddenDepartureDate" name="hiddenDepartureDate">
                     {{-- <span class="spancard3"> 
                         <img src="./images/calendario.png" class="calendar1 mdocult">
                     </span> --}}
@@ -105,6 +106,7 @@
                     </span>
                 </div>
                     <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
+                    <input type="hidden" id="hiddenReturnDate" name="hiddenReturnDate">
                     {{-- <span class="spancard4"> 
                         <img src="./images/calendario.png" class="calendar2 mdocult">
                     </span> --}}

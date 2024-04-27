@@ -401,12 +401,16 @@ function adjustPassengers(type, amount) {
 $(function () {
     const departureDate = $("#departureDate").datepicker({
         numberOfMonths: 2,
-        dateFormat: "yy-mm-dd",
+        dateFormat: "mm-dd-yy",
+        altField: "#hiddenDepartureDate",
+        altFormat: "yy-mm-dd",
         minDate: 0
     });
     const returnDate = $("#returnDate").datepicker({
         numberOfMonths: 2,
-        dateFormat: "yy-mm-dd",
+        dateFormat: "mm-dd-yy",
+        altField: "#hiddenReturnDate",
+        altFormat: "yy-mm-dd",
         minDate: 0
     });
     $(departureDate).datepicker("setDate", new Date());
@@ -449,8 +453,8 @@ function allDays() {
     $('#todayCardsReturn').html('');
     $('#tomorrowCardsReturn').html('');
     const tripType = document.querySelector('input[name="tripType"]:checked').value;
-    const departureDate = $('#departureDate').val();
-    const returnDate = $('#returnDate').val();
+    const departureDate = $('#hiddenDepartureDate').val();
+    const returnDate = $('#hiddenReturnDate').val();
     const departureYesterday = formatDate(new Date(departureDate + tZone), -1);
     const returnYesterday = formatDate(new Date(returnDate + tZone), -1);
     const departureTomorrow = formatDate(new Date(departureDate + tZone), 1);
@@ -504,10 +508,20 @@ function searchRoutes(data) {
             pastDay = new Date(response.data.fecha_server);
             pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día
             if (data.day == 'yesterday') {
-                variablePastDay = new Date(data.departureDate); 
+                variablePastDay = new Date(data.departureDate);
+            }
+            if (variablePastDay < pastDay) {
+                $('#yesterdaySection').addClass('sectionDisabled');
+            } else {
+                $('#yesterdaySection').removeClass('sectionDisabled');
             }
             if (data.day == 'yesterdayReturn') {
                 variablePastDayReturn = new Date(data.departureDate);
+            }
+            if (variablePastDayReturn < pastDay) {
+                $('#yesterdaySectionReturn').addClass('sectionDisabled');
+            } else {
+                $('#yesterdaySectionReturn').removeClass('sectionDisabled');
             }
             //variablePastDay = `${variablePastDay.getFullYear()}-${("0" + (variablePastDay.getMonth() + 1)).slice(-2)}-${("0" + variablePastDay.getDate()).slice(-2)}`; 
             sectionsDays[data.section] = [];
@@ -622,10 +636,38 @@ function createCard(viaje, section) {
         price.appendChild(priceText);
 
     if (section == 'todayCards' || section == 'todayCardsReturn') {
-        // boton para seleccionar el viaje
+         // boton para seleccionar el viaje
          card.id = 'card' + viaje.trip_no;
         let priceBtn = document.createElement('button');
+        // radio buttons para seleccionar el precio
+        const typesPrice = {
+            wfprc: { prc: [viaje.wfprc_adult, viaje.wfprc_child], disabled: false, name: 'Web Fare', select: true },
+            spprc: { prc: [viaje.spprc_adult, viaje.spprc_child], disabled: false, name: 'Super Promo', select: false },
+            sdprc: { prc: [viaje.sdprc_adult, viaje.sdprc_child], disabled: false, name: 'Super Discount', select: false },
+            sflexprc: { prc: [viaje.sflexprc_adult, viaje.sflexprc_child], disabled: false, name: 'Super Flex', select: false }
+        };
+        
         if (viaje.tripAvilable && viaje.passengersAvailable >= 0) {
+            Object.entries(typesPrice).forEach(function ([nombre, type]) {
+                let divPrice = document.createElement('div');
+                let titlePrice = document.createElement('h2');
+                titlePrice.textContent = type.name;
+                divPrice.appendChild(titlePrice);
+                let radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'price' + viaje.trip_no;
+                radio.id = nombre;
+                radio.value = type.prc;
+                radio.disabled = (type.disabled) ? true : false;
+                radio.checked = (type.select) ? true : false;
+                radio.addEventListener('change', function () {
+                    priceText.innerHTML = `$${parseFloat(type.prc[0]).toFixed(2)} Adult<br>$${parseFloat(type.prc[1]).toFixed(2)} Child`;
+                    priceBtn.dataset.priceAdult = type.prc[0];
+                    priceBtn.dataset.priceChild = type.prc[1];
+                });
+                divPrice.appendChild(radio);
+                price.appendChild(divPrice);
+            });
             
             priceBtn.className = (section == 'todayCards') ? 'buttonCards' : 'buttonCards buttonCardsReturn';
             priceBtn.dataset.trip = (section == 'todayCards') ? 'departure' : 'return';
@@ -633,7 +675,7 @@ function createCard(viaje, section) {
             priceBtn.dataset.fecha = viaje.fecha_ini.split('T')[0];
             priceBtn.dataset.departure = viaje.trip_departure;
             priceBtn.dataset.arrival = viaje.trip_arrival;
-            priceBtn.dataset.capacity = viaje.seats_remain;
+            priceBtn.dataset.capacity = viaje.wfseats;
             priceBtn.dataset.origen = viaje.origen;
             priceBtn.dataset.destino = viaje.destino;
             priceBtn.dataset.priceAdult = viaje.wfprc_adult;
@@ -646,7 +688,7 @@ function createCard(viaje, section) {
             });
             price.appendChild(priceBtn);
         } else {
-            if ((viaje.seats_remain - viaje.passengersToReserve) == -1) {
+            if ((viaje.wfseats - viaje.passengersToReserve) == -1) {
                 const textSeats = (viaje.passengersToReserve - 1) == 1 ? 'seat available.' : 'seats availables.'
                 let alertOneAvailable = document.createElement('div');
                 alertOneAvailable.className = 'alertOneAvailable';
@@ -695,7 +737,19 @@ function selectTrip(dataTrip) {
                 console.log(response.data.message);
                 dataTrip.idReserva = response.data.idReserva;
                 if (dataTrip.tripType == 'oneWay') {
-                    pickUpDropOff(dataTrip);
+                    Swal.fire({
+                        title: 'Select Trip?',
+                        text: 'Do you want to select this trip?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            pickUpDropOff(dataTrip);
+                        }
+                    });
                 } else if (dataTrip.tripType == 'roundTrip') {
                     verficarSeleccion(dataTrip);
                 }
