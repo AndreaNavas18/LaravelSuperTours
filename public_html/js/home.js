@@ -24,6 +24,13 @@ let variablePastDayReturn = '';
 let totalPassengers = 1;
 let adultsCount = 1;
 let childrenCount = 0;
+let globalTripType = '';
+let globalOrigin = '';
+let globalDestination = '';
+let globalDepartureDate = '';
+let globalReturnDate = '';
+let globalAdults = '';
+let globalChildren = '';
 
 //Función para cargar el contenido de la página dependiendo del tipo de viaje
 document.addEventListener("DOMContentLoaded", function () {
@@ -78,8 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
         .then(function (response) {
-            console.log("Áreas de origen y destino");
-            console.log(response.data);
             // crear las nuevas opciones del select de destino
             destinationSelect.innerHTML = '';
             response.data.forEach(function (area) {
@@ -93,38 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 // agregar el option al select de destino
                 destinationSelect.appendChild(destinationOption);
             });
-
-            // recorrer el arreglo de áreas
-           /*  response.data.forEach(function (area) {
-                // crear el elemento option para el origen
-                let originOption = document.createElement('option');
-                // asignar el valor del área al option
-                originOption.value = area.id;
-                // asignar el nombre del área al option
-                originOption.text = area.nombre;
-
-                // agregar el option al select de origen
-                originSelect.appendChild(originOption);
-
-                // crear el elemento option para el destino
-                let destinationOption = document.createElement('option');
-                // asignar el valor del área al option
-                destinationOption.value = area.id;
-                // asignar el nombre del área al option
-                destinationOption.text = area.nombre;
-
-                // agregar el option al select de destino
-                destinationSelect.appendChild(destinationOption);
-
-                // Deshabilitar "Orlando" en el destino
-                if (area.nombre === 'Orlando') {
-                    destinationOption.disabled = true;
-                }
-
-            });
-
-            // Al cargar la página, establece la opción predeterminada del destino
-            destinationSelect.value = "3"; // Asigna el valor correspondiente */
         })
         .catch(function (error) {
             console.log(error);
@@ -141,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // evento para cambiar la section today a la section yesterday
 function changeYesterday () {
-    if (variablePastDay >= pastDay) {
+    if (variablePastDay > pastDay) {
         $('#todayCards').addClass('fade');
             setTimeout(() => {
                 $('#todayCards').removeClass('fade');
@@ -168,14 +141,15 @@ function changeYesterday () {
         searchRoutes({
             departureDate: formatDate(new Date($('#btnyesterday').val() + tZone), -1),
             day: 'yesterday',
-            section: 'yesterdayCards'
+            section: 'yesterdayCards',
+            direction: 'departure'
         });
     }
 };
 
 // evento para cambiar la section todayReturn a la section yesterdayReturn
 function changeYesterdayReturn () {
-    if (variablePastDayReturn >= pastDay) {
+    if (variablePastDayReturn > pastDay) {
         $('#todayCardsReturn').addClass('fade');
             setTimeout(() => {
                 $('#todayCardsReturn').removeClass('fade');
@@ -202,18 +176,19 @@ function changeYesterdayReturn () {
         searchRoutes({
             departureDate: formatDate(new Date($('#btnyesterdayReturn').val() + tZone), -1),
             day: 'yesterdayReturn',
-            section: 'yesterdayCardsReturn'
+            section: 'yesterdayCardsReturn',
+            direction: 'return'
         });
     }
 };
 
 // evento para cambiar la section today a la section tomorrow
 function changeTomorrow () {
-    variablePastDay = new Date($("#btntoday").val());
+    variablePastDay = new Date($("#btntoday").val() + tZone);
     $('#todayCards').addClass('fade');
-        setTimeout(() => {
-            $('#todayCards').removeClass('fade');
-        }, 500);
+    setTimeout(() => {
+        $('#todayCards').removeClass('fade');
+    }, 500);
     $('#today').text(sectionsDays.tomorrow);
     $('#yesterday').text(sectionsDays.today);
     $('#yesterdayCards').html('');
@@ -236,13 +211,14 @@ function changeTomorrow () {
     searchRoutes({
         departureDate: formatDate(new Date($('#btntomorrow').val() + tZone), 1),
         day: 'tomorrow',
-        section: 'tomorrowCards'
+        section: 'tomorrowCards',
+        direction: 'departure'
     });
 };
 
 // evento para cambiar la section todayReturn a la section tomorrowReturn
 function changeTomorrowReturn () {
-    variablePastDayReturn = new Date($("#btntodayReturn").val());
+    variablePastDayReturn = new Date($("#btntodayReturn").val() + tZone);
     $('#todayCardsReturn').addClass('fade');
         setTimeout(() => {
             $('#todayCardsReturn').removeClass('fade');
@@ -269,7 +245,8 @@ function changeTomorrowReturn () {
     searchRoutes({
         departureDate: formatDate(new Date($('#btntomorrowReturn').val() + tZone), 1),
         day: 'tomorrowReturn',
-        section: 'tomorrowCardsReturn'
+        section: 'tomorrowCardsReturn',
+        direction: 'return'
     });
 };
 
@@ -311,19 +288,6 @@ function exchangeLocations() {
     originSelect.dispatchEvent(event);
     destinationSelect.dispatchEvent(event);
 }
-// Función para ajustar el número de pasajeros
-/* function adjustPassengers(type, amount) {
-    var inputElement = document.getElementById(type + 'Count');
-    var currentValue = parseInt(inputElement.value);
-    var newValue = currentValue + amount;
-
-    // Evitar valores negativos
-    if (newValue < 0) {
-        newValue = 0;
-    }
-
-    inputElement.value = newValue;
-} */
 
 //funcion para el menu desplegable 
 
@@ -452,22 +416,34 @@ function allDays() {
     $('#yesterdayCardsReturn').html('');
     $('#todayCardsReturn').html('');
     $('#tomorrowCardsReturn').html('');
-    const tripType = document.querySelector('input[name="tripType"]:checked').value;
-    const departureDate = $('#hiddenDepartureDate').val();
-    const returnDate = $('#hiddenReturnDate').val();
-    const departureYesterday = formatDate(new Date(departureDate + tZone), -1);
-    const returnYesterday = formatDate(new Date(returnDate + tZone), -1);
-    const departureTomorrow = formatDate(new Date(departureDate + tZone), 1);
-    const returnTomorrow = formatDate(new Date(returnDate + tZone), 1);
+    globalTripType = document.querySelector('input[name="tripType"]:checked').value;
+    globalOrigin = document.getElementById('origin').value;
+    globalDestination = document.getElementById('destination').value;
+    globalDepartureDate = $('#hiddenDepartureDate').val();
+    globalReturnDate = $('#hiddenReturnDate').val();
+    globalAdults = adultsCount;
+    globalChildren = childrenCount;
+    ['departure', 'return'].forEach(function (direction) {
+        // poner los titulos en los divs de las cards
+        const selectOrigin = document.getElementById('origin');
+        const selectDestination = document.getElementById('destination');
+        const textOrigin = (direction == 'departure') ? selectOrigin.options[selectOrigin.selectedIndex].text : selectDestination.options[selectDestination.selectedIndex].text;
+        const textDestination = (direction == 'departure') ? selectDestination.options[selectDestination.selectedIndex].text : selectOrigin.options[selectOrigin.selectedIndex].text;
+        $('#titleSelected' + direction).text(textOrigin.toUpperCase() + '  TO  ' + textDestination.toUpperCase());
+    });
+    const departureYesterday = formatDate(new Date(globalDepartureDate + tZone), -1);
+    const returnYesterday = formatDate(new Date(globalReturnDate + tZone), -1);
+    const departureTomorrow = formatDate(new Date(globalDepartureDate + tZone), 1);
+    const returnTomorrow = formatDate(new Date(globalReturnDate + tZone), 1);
     const data = [
-        { departureDate: departureDate, day: 'today', section: 'todayCards', direction: 'departure'},
+        { departureDate: globalDepartureDate, day: 'today', section: 'todayCards', direction: 'departure'},
         { departureDate: departureYesterday, day: 'yesterday', section: 'yesterdayCards', direction: 'departure' },
         { departureDate: departureTomorrow, day: 'tomorrow', section: 'tomorrowCards', direction: 'departure' }
     ];
-    if (tripType == 'roundTrip') {
+    if (globalTripType == 'roundTrip') {
         $('#divCardsreturn').removeClass('hidden');
         $('#divSelectedreturn').removeClass('hidden');
-        data.push({ departureDate: returnDate, day: 'todayReturn', section: 'todayCardsReturn', direction: 'return'});
+        data.push({ departureDate: globalReturnDate, day: 'todayReturn', section: 'todayCardsReturn', direction: 'return'});
         data.push({ departureDate: returnYesterday, day: 'yesterdayReturn', section: 'yesterdayCardsReturn', direction: 'return' });
         data.push({ departureDate: returnTomorrow, day: 'tomorrowReturn', section: 'tomorrowCardsReturn', direction: 'return' });
     } else {
@@ -479,18 +455,14 @@ function allDays() {
 
 function searchRoutes(data) {
     // Obtener los valores de los campos del formulario
-    const selectOrigin = document.getElementById('origin');
-    const selectDestination = document.getElementById('destination');
-    const origin = (data.direction == 'departure') ? selectOrigin.value : selectDestination.value;
-    const destination = (data.direction == 'departure') ? selectDestination.value : selectOrigin.value;
+    console.log(data);
+    const selectOrigin = globalOrigin;
+    const selectDestination = globalDestination;
+    const origin = (data.direction == 'departure') ? selectOrigin : selectDestination;
+    const destination = (data.direction == 'departure') ? selectDestination : selectOrigin;
     const departureDate = data.departureDate;
-    const passengerCount = document.getElementById('passengerCount').innerText;  // Ajusta según la estructura real de tu contador de pasajeros
-    const tripType = document.querySelector('input[name="tripType"]:checked').value;
-    // poner los titulos en los divs de las cards
-    const textOrigin = (data.direction == 'departure') ? selectOrigin.options[selectOrigin.selectedIndex].text : selectDestination.options[selectDestination.selectedIndex].text;
-    const textDestination = (data.direction == 'departure') ? selectDestination.options[selectDestination.selectedIndex].text : selectOrigin.options[selectOrigin.selectedIndex].text;
-    $('#titleSelected' + data.direction).text(textOrigin.toUpperCase() + '  TO  ' + textDestination.toUpperCase());
-
+    const tripType = globalTripType;
+    
     // Construir la URL con los datos
     const url = '/show-routes?' +
         'origin=' + encodeURIComponent(origin) +
@@ -505,81 +477,39 @@ function searchRoutes(data) {
         .then(function (response) {
             $('#divHome .bodySection').addClass('hidden');
             $('#divRoutes').removeClass('hidden');
-            pastDay = new Date(response.data.fecha_server);
+            pastDay = new Date(response.data.fecha_server + tZone);
             pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día
+            console.log(pastDay);
             if (data.day == 'yesterday') {
-                variablePastDay = new Date(data.departureDate);
+                variablePastDay = new Date(data.departureDate + tZone);
+                console.log(variablePastDay);
             }
-            if (variablePastDay < pastDay) {
+            if (variablePastDay <= pastDay) {
                 $('#yesterdaySection').addClass('sectionDisabled');
             } else {
                 $('#yesterdaySection').removeClass('sectionDisabled');
             }
             if (data.day == 'yesterdayReturn') {
-                variablePastDayReturn = new Date(data.departureDate);
+                variablePastDayReturn = new Date(data.departureDate + tZone);
+                console.log(variablePastDayReturn);
             }
-            if (variablePastDayReturn < pastDay) {
+            if (variablePastDayReturn <= pastDay) {
                 $('#yesterdaySectionReturn').addClass('sectionDisabled');
             } else {
                 $('#yesterdaySectionReturn').removeClass('sectionDisabled');
             }
-            //variablePastDay = `${variablePastDay.getFullYear()}-${("0" + (variablePastDay.getMonth() + 1)).slice(-2)}-${("0" + variablePastDay.getDate()).slice(-2)}`; 
             sectionsDays[data.section] = [];
             const initialDate = response.data.viajes[0].fecha_ini.split('.');
             const today = new Date(initialDate[0]);
-            /* const fecha = initialDate[0].split('T');
-            let yesterday = fecha[0].split('-');
-            yesterday[2]--;
-            yesterday = new Date(yesterday.join('-') + "T" + fecha[1]);
-            let tomorrow = fecha[0].split('-');
-            tomorrow[2]++;
-            tomorrow = new Date(tomorrow.join('-') +  "T" + fecha[1]);
-            $('#yesterday').text(yesterday.toLocaleDateString('en-US', options));
-            $('#tomorrow').text(tomorrow.toLocaleDateString('en-US', options)); */
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             $('#' + data.day).text(today.toLocaleDateString('en-US', options));
             $('#btn' + data.day).val(departureDate.split('T')[0]);
             sectionsDays[data.day] = today.toLocaleDateString('en-US', options);
             // contruir las cards para cada ruta disponible
             response.data.viajes.forEach(function (viaje) {
-                // agregar el evento click a la section
                 sectionsDays[data.section].push(viaje);
                 createCard(viaje, data.section);
             });
-
-            // constrir la data table con las rutas disponibles
-            /* const table = $('#routesTable');
-            table.DataTable({
-                ordering: false,
-                searching: false,
-                paging: false,
-                info: false,
-                data: response.data.viajes,
-                columns: [
-                    { data: 'trip_departure' },
-                    { data: function (row) {
-                            // diferencia de horas entre la hora de salida y la hora de llegada
-                            const departureHour = parseInt(row.trip_departure.split(':')[0], 10);
-                            const arrivalHour = (departureHour <= row.trip_arrival.split(':')[0]) ?
-                                parseInt(row.trip_arrival.split(':')[0], 10) : parseInt(row.trip_arrival.split(':')[0], 10) + 24;
-                            const departureMinutes =parseInt(row.trip_departure.split(':')[1], 10);
-                            const arrivalMinutes = parseInt(row.trip_arrival.split(':')[1], 10);
-                            const departureTime =  (departureHour * 60) + departureMinutes;
-                            const arrivalTime = (arrivalHour * 60) + arrivalMinutes;
-                            const difference = (arrivalTime - departureTime);
-                            const hours = Math.trunc(difference / 60);
-                            const minutes = difference % 60;
-                            return hours + 'h ' + minutes + 'm';
-                        }
-                    },
-                    { data: 'trip_arrival' },
-                    { data: 'trip_no' },
-                    { data: function (row) { 
-                        return row.wfprc_adult + ' - ' + row.wfprc_child;
-                        }
-                    }
-                ]
-            }); */
         })
         .catch(function (error) {
             console.log(error);
@@ -641,29 +571,31 @@ function createCard(viaje, section) {
         let priceBtn = document.createElement('button');
         // radio buttons para seleccionar el precio
         const typesPrice = {
-            wfprc: { prc: [viaje.wfprc_adult, viaje.wfprc_child], disabled: false, name: 'Web Fare', select: true },
-            spprc: { prc: [viaje.spprc_adult, viaje.spprc_child], disabled: false, name: 'Super Promo', select: false },
-            sdprc: { prc: [viaje.sdprc_adult, viaje.sdprc_child], disabled: false, name: 'Super Discount', select: false },
-            sflexprc: { prc: [viaje.sflexprc_adult, viaje.sflexprc_child], disabled: false, name: 'Super Flex', select: false }
+            wf: { prc: [viaje.wfprc_adult, viaje.wfprc_child], name: 'Web Fare', select: true },
+            sp: { prc: [viaje.spprc_adult, viaje.spprc_child], name: 'Super Promo', select: false },
+            sd: { prc: [viaje.sdprc_adult, viaje.sdprc_child], name: 'Super Discount', select: false },
+            sflex: { prc: [viaje.sflexprc_adult, viaje.sflexprc_child], name: 'Super Flex', select: false }
         };
         
-        if (viaje.tripAvilable && viaje.passengersAvailable >= 0) {
+        if (viaje.tripAvilable && viaje.passengersAvailable > 0) {
             Object.entries(typesPrice).forEach(function ([nombre, type]) {
                 let divPrice = document.createElement('div');
                 let titlePrice = document.createElement('h2');
+                divPrice.id = 'divRadio';
                 titlePrice.textContent = type.name;
                 divPrice.appendChild(titlePrice);
                 let radio = document.createElement('input');
                 radio.type = 'radio';
                 radio.name = 'price' + viaje.trip_no;
-                radio.id = nombre;
+                radio.id = nombre + viaje.trip_no;
                 radio.value = type.prc;
-                radio.disabled = (type.disabled) ? true : false;
-                radio.checked = (type.select) ? true : false;
+                radio.disabled = (viaje[nombre + 'seats'] > 0) ? false : true;
+                radio.checked = (type.select && viaje[nombre + 'seats'] > 0) ? true : false;
                 radio.addEventListener('change', function () {
                     priceText.innerHTML = `$${parseFloat(type.prc[0]).toFixed(2)} Adult<br>$${parseFloat(type.prc[1]).toFixed(2)} Child`;
                     priceBtn.dataset.priceAdult = type.prc[0];
                     priceBtn.dataset.priceChild = type.prc[1];
+                    priceBtn.dataset.capacity = viaje[nombre + 'seats'];
                 });
                 divPrice.appendChild(radio);
                 price.appendChild(divPrice);
@@ -700,26 +632,21 @@ function createCard(viaje, section) {
             price.appendChild(priceBtn);
         }
     }
-
-
      // agregar los elementos al body
      cardBody.appendChild(title);
      cardBody.appendChild(horario);
      cardBody.appendChild(price);
-
      // agregar los elementos al card
      card.appendChild(cardBody);
-
      // agregar el card al contenedor de cards
      document.getElementById(section).appendChild(card);
-
 }
 
 // Función para revisar los puestos disponibles y reservarlos
 function selectTrip(dataTrip) {
-    dataTrip.adultPassenger = adultsCount;
-    dataTrip.childPassenger = childrenCount;
-    dataTrip.tripType = document.querySelector('input[name="tripType"]:checked').value;
+    dataTrip.adultPassenger = globalAdults;
+    dataTrip.childPassenger = globalChildren;
+    dataTrip.tripType = globalTripType;
     const url = '/reserve-trip?' +
         'tripNo=' + encodeURIComponent(dataTrip.trip_no) +
         '&fecha=' + encodeURIComponent(dataTrip.fecha) +
@@ -730,36 +657,58 @@ function selectTrip(dataTrip) {
         '&origin=' + encodeURIComponent(dataTrip.origen) +
         '&destination=' + encodeURIComponent(dataTrip.destino) +
         '&tripType=' + encodeURIComponent(dataTrip.trip);
-
-    axios.get(url)
+    if (dataTrip.tripType == 'oneWay') {
+        Swal.fire({
+            title: 'Select Trip?',
+            text: 'Do you want to select this trip?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Continue'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.get(url)
+                .then(function (response) {
+                    if (response.data.status == 'success') {
+                        console.log(response.data.message);
+                        dataTrip.idReserva = response.data.idReserva;
+                        pickUpDropOff(dataTrip);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: response.data.message
+                        });
+                        console.log(response.data.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        });
+    } else if (dataTrip.tripType == 'roundTrip') {
+        axios.get(url)
         .then(function (response) {
             if (response.data.status == 'success') {
                 console.log(response.data.message);
                 dataTrip.idReserva = response.data.idReserva;
-                if (dataTrip.tripType == 'oneWay') {
-                    Swal.fire({
-                        title: 'Select Trip?',
-                        text: 'Do you want to select this trip?',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Continue'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            pickUpDropOff(dataTrip);
-                        }
-                    });
-                } else if (dataTrip.tripType == 'roundTrip') {
-                    verficarSeleccion(dataTrip);
-                }
+                verficarSeleccion(dataTrip);
             } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.data.message
+                });
                 console.log(response.data.message);
             }
         })
         .catch(function (error) {
             console.log(error);
         });
+    }
+    
 }
 
 // funcion para verificar si ya esta seleccionado el viaje de ida y vuelta
@@ -769,8 +718,12 @@ function verficarSeleccion(dataTrip) {
     tripsSelected[tripDirection] = dataTrip;
     const tripCardClone = document.getElementById(tripSelected).cloneNode(true);
     tripCardClone.classList.add('selected');
+    tripCardClone.querySelectorAll('#divRadio').forEach(function (radio) {
+        radio.remove();
+    });
     const btnSelect = tripCardClone.querySelector('button');
     btnSelect.textContent = 'Deselect';
+    btnSelect.id = 'btnDeselect';
     btnSelect.style.backgroundColor = 'gray';
     btnSelect.addEventListener('click', function () {
         deselectTrip(dataTrip);
@@ -795,14 +748,7 @@ function deselectTrip(dataTrip) {
     $('#btnContinue').addClass('hidden');
     $('#btnContinue').off();
     // peticion para cancelar la reserva
-    const url = '/cancel-reserve?' +
-        'idReserva=' + dataTrip.idReserva;
-    axios.get(url).then(function (response) {
-        console.log(response.data.message);
-    }).catch(function (error) {
-        console.log(error);
-    });
-
+    cancelReserva(dataTrip.idReserva);
 }
 
 function cleanRoutes() {
@@ -824,8 +770,7 @@ function showContinue(dataTrip) {
 
 // funcion para pasar a la vista de pick up y drop off
 function pickUpDropOff(dataTrip) {
-    let url = '/pickUp-dropOff' +
-        '?tripNo=' + dataTrip.trip_no +
+        const params = '?tripNo=' + dataTrip.trip_no +
         '&fecha=' + dataTrip.fecha +
         '&departure=' + dataTrip.departure +
         '&arrival=' + dataTrip.arrival +
@@ -838,12 +783,31 @@ function pickUpDropOff(dataTrip) {
         '&idOrigen=' + dataTrip.idOrigen +
         '&idDestino=' + dataTrip.idDestino +
         '&idReserva=' + dataTrip.idReserva;
-
+        let url = '/pickUp-dropOff' + params;
+        
         if (dataTrip.tripType == 'oneWay') {
-            window.location.href = url;
+            axios.get(url).then(function (response) {
+                $('#contenedorAll').addClass('hidden');
+                $('#contenedorPickDrop').removeClass('hidden');
+                $('#contenedorPickDrop').html(response.data);
+            }).then(function () {
+                // llamar la funcion starPickDrop de pickDrop.js
+                startPickDrop(params);
+            }).catch(function (error) {
+                console.log(error);
+            });
         } else if (dataTrip.tripType == 'roundTrip') {
             url += '&returnTrip=' + JSON.stringify(tripsSelected.return);
-            window.location.href = url;
+            axios.get(url).then(function (response) {
+                $('#contenedorAll').addClass('hidden');
+                $('#contenedorPickDrop').removeClass('hidden');
+                $('#contenedorPickDrop').html(response.data);
+            }).then(function () {
+                // llamar la funcion starPickDrop de pickDrop.js
+                startPickDrop(params + '&returnTrip=' + JSON.stringify(tripsSelected.return));
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
 }
 

@@ -111,8 +111,16 @@ class HomeController extends Controller
                 ->sum('pax');
             $passengersUsing = ReservasTripPuesto::where('trip_to', $viaje->trip_no)
                 ->where('fecha_trip', $departureDate)
+                ->whereIn('estado', ['USING', 'RENEWED'])
+                ->where('tarifa', 3)
                 ->sum('cantidad');
-            $viaje->passengersAvailable = $viaje->wfseats - ($passengersUsing + $passengersOcuped + $passengers);
+            $totalCapacity = $viaje->capacity + $viaje->capacity2 + $viaje->capacity3 + $viaje->capacity4 + $viaje->capacity5;
+            if ($totalCapacity > 0 && ($viaje->wfseats > 0 || $viaje->spseats > 0 || $viaje->sdseats > 0 || $viaje->sflexseats > 0)) {
+                $totalSeats = $viaje->wfseats + $viaje->spseats + $viaje->sdseats + $viaje->sflexseats;
+            } else {
+                $totalSeats = 0;
+            }
+            $viaje->passengersAvailable = $totalSeats - ($passengersUsing + $passengersOcuped + $passengers);
             $viaje->passengersToReserve = $passengers;
         }
         if ($tripType == 'roundTrip') {
@@ -146,9 +154,12 @@ class HomeController extends Controller
         $tripType = $request->input('tripType');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
+            ->where('canal', 'WEBSALE')
             ->sum('pax');
         $passengersUsing = ReservasTripPuesto::where('trip_to', $tripNo)
             ->where('fecha_trip', $departureDate)
+            ->whereIn('estado', ['USING', 'RENEWED'])
+            ->where('tarifa', 3)
             ->sum('cantidad');
         if (($passengersAvailable + $passengersUsing + $adults + $children) <= $capacity) {
             $reserva = new ReservasTripPuesto();
@@ -172,7 +183,7 @@ class HomeController extends Controller
         } else {
             $response = array(
                 'status' => 'error',
-                'message' => 'No hay suficientes asientos disponibles',
+                'message' => 'Don\'t have enough seats available',
             );
         }
         return $response;
@@ -182,8 +193,9 @@ class HomeController extends Controller
         Log::info($request->all());
        try {
            $idReserva = $request->input('idReserva');
+           $state = $request->input('state');
            ReservasTripPuesto::whereIn('id', explode(",", $idReserva))->update([
-               'estado' => 'CANCELLED',
+               'estado' => $state,
                'fecha_actividad' => now()->format('Y-m-d H:i:s')
            ]);
            $response = array(

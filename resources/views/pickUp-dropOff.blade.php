@@ -2,23 +2,7 @@
     //$trip = request('tripNo');
 @endphp
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./css/estilos.css">
-    <link rel="stylesheet" href="./css/pickDrop.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{{ asset('/js/pickDrop.js') }}" defer></script>
 
-    <title>Pick up - Drop off</title>
-</head>
-<body>
-    @include('header2')
     <div id="timer" class="timer"></div>
     <div id="divCentral" class="divMain">
         <div id="outboundCard" class="outboundCard">
@@ -73,7 +57,7 @@
             <div class="background-imag">
                 <div id="returnContent" class="outboundContent">
                     <div id="returnInfo" class="outboundInfo flex">
-                        <div id="returnDate" class="outboundDate flex"></div>
+                        <div id="returndate" class="outboundDate flex"></div>
                         <img src="./images/autorojo.png" alt="bus" class="imgbus">
                         <div id="returnData" class="outboundData">
                             <h2 id="rT">Trip: </h2>
@@ -117,9 +101,7 @@
             </div>
         </div>
     </div>
-    <div>
-        @include('footer')
-    </div>
-    
-</body>
-</html>
+    <nav class="flex navButtons">
+        <button id="btnReserve" class="buttonReserve">CONTINUE</button>
+        <button id="btnClose" class="buttonClose">CANCEL</button>
+    </nav>

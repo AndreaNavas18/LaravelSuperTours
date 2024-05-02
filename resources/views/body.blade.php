@@ -1,4 +1,4 @@
-<main class="contenedorAll">
+<main class="contenedorAll" id="contenedorAll">
     <section class="wrapper text-center grid gap-12 md:grid-cols-5 md:text-center custom-py md:py-24 mjd wrappermovil">
         <div class="homeCard flex-col mhd:flex mqd homeCardPc">
             <div class="centrarX1 divbtns">
@@ -181,4 +181,6 @@
     @include('layouts.oneDay')
 </div>
 
+</main>
+<main id="contenedorPickDrop" class="contenedorAll hidden">
 </main>

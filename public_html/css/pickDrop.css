@@ -94,4 +94,28 @@
         appearance: none;
     }
 
+    .buttonReserve {
+        width: 100px;
+        padding: 10px;
+        border: 1px solid #055dff6c;
+        border-radius: 5px;
+        background-color: #055dff;
+        font-size: 15px;
+        color: #ffffff;
+        appearance: none;
+        cursor: pointer;
+    }
+
+    .buttonClose {
+        width: 100px;
+        padding: 10px;
+        border: 1px solid #055dff6c;
+        border-radius: 5px;
+        background-color: #ff0000;
+        font-size: 15px;
+        color: #ffffff;
+        appearance: none;
+        cursor: pointer;
+    }	
+
 }

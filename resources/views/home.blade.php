@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./css/estilos.css">
     <link rel="stylesheet" href="./css/services.css">
     <link rel="stylesheet" href="./css/movil.css">
+    <script src="{{ asset('/js/pickDrop.js') }}"></script>
     <script src="{{ asset('/js/home.js') }}"></script>
     <script src="{{ asset('/js/modal.js') }}" defer></script>
     <script src="{{ asset('/js/select-init.js') }}"></script>
