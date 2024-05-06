@@ -22,6 +22,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/reserve-trip', 'reserveTrip')->name('reserveTrip');
     Route::get('/cancel-reserve', 'cancelReserve')->name('cancelReserve');
     Route::get('/pickUp-dropOff', 'pickupDropoff')->name('pickupDropoff');
+    Route::post('/savePickDrop', 'savePickDrop')->name('savePickDrop');
 });
 Route::view('/services','services');
 Route::view('/destinations','destinations');

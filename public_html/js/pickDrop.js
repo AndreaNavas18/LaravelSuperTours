@@ -1,5 +1,6 @@
 let idsReserves = [];
 let intervalId = 0;
+let dataReserve = {};
 function startPickDrop(data) {
     console.log('PickDrop');
     // obtener los parametros de la URL
@@ -29,9 +30,27 @@ function startPickDrop(data) {
     $('#dD').html(`Departure: <strong>${formatHour(departure)}</strong>`);
     $('#dA').html(`Arrival: <strong>${formatHour(arrival)}</strong>`);
     $('#dP').html(`Price: <strong>${parseFloat(totalPrice).toFixed(2)}</strong>`);
-    window.addEventListener('beforeunload', function () {
-        cancelReserva(idsReserves);
-    });
+    // objeto que guarda los datos de la reserva
+    dataReserve = {};
+    dataReserve[urlParams.get('idReserva')] = {
+        tripNo: pick,
+        fecha: fecha,
+        departure: departure,
+        arrival: arrival,
+        adults: adults,
+        children: children,
+        priceAdult: priceAdult,
+        priceChild: priceChild,
+        origin: origin,
+        destination: destination,
+        departureOutbound: $('#departureOutbound').val(),
+        arrivalOutbound: $('#arrivalOutbound').val(),
+        departureOutboundPrice: 0,
+        arrivalOutboundPrice: 0,
+        hoteldepartureOutbound: '',
+        hotelarrivalOutbound: ''
+    };
+    
     
     if (returnTrip) {
         $('#returnCard').removeClass('hidden');
@@ -48,19 +67,41 @@ function startPickDrop(data) {
         $('#rD').html(`Departure: <strong>${formatHour(returnData.departure)}</strong>`);
         $('#rA').html(`Arrival: <strong>${formatHour(returnData.arrival)}</strong>`);
         $('#rP').html(`Price: <strong>${parseFloat(returnPrice).toFixed(2)}</strong>`);
+
+        // objeto que guarda los datos de la reserva de retorno
+        dataReserve[returnData.idReserva] = {
+            tripNo: returnData.trip_no,
+            fecha: returnData.fecha,
+            departure: returnData.departure,
+            arrival: returnData.arrival,
+            adults: returnData.adultPassenger,
+            children: returnData.childPassenger,
+            priceAdult: returnData.priceAdult,
+            priceChild: returnData.priceChild,
+            origin: returnData.origen,
+            destination: returnData.destino,
+            departureReturn: $('#departureReturn').val(),
+            arrivalReturn: $('#arrivalReturn').val(),
+            departureReturnPrice: 0,
+            arrivalReturnPrice: 0,
+            hoteldepartureReturn: '',
+            hotelarrivalReturn: ''
+        };
     } else {
         $('#returnCard').addClass('hidden');
-
     }
 
     $('#departureOutbound, #arrivalOutbound').on('change', function () {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
         $('#dP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
+        dataReserve[idsReserves[0]][this.id] = this.value;
         if (optionSelected.dataset.precio) {
             $('#hotel' + this.id).removeClass('hidden');
+            dataReserve[idsReserves[0]][this.id + 'Price'] = optionSelected.dataset.precio;
         } else {
             $('#hotel' + this.id).addClass('hidden');
+            dataReserve[idsReserves[0]][this.id + 'Price'] = 0;
         }
     });
 
@@ -68,33 +109,32 @@ function startPickDrop(data) {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + returnPrice : returnPrice;
         $('#rP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
+        dataReserve[idsReserves[1]][this.id] = this.value;
         if (optionSelected.dataset.precio) {
             $('#hotel' + this.id).removeClass('hidden');
+            dataReserve[idsReserves[1]][this.id + 'Price'] = optionSelected.dataset.precio;
         } else {
             $('#hotel' + this.id).addClass('hidden');
+            dataReserve[idsReserves[1]][this.id + 'Price'] = 0;
         }
     });
 
+    $('#hoteldepartureOutbound, #hotelarrivalOutbound').on('change', function () {
+        dataReserve[idsReserves[0]][this.id] = this.value;
+    });
+
+    $('#hoteldepartureReturn, #hotelarrivalReturn').on('change', function () {
+        dataReserve[idsReserves[1]][this.id] = this.value;
+    });
+
     $('#btnReserve').on('click', function () {
-        const data = JSON.stringify({
-            tripNo: pick,
-            fecha: fecha,
-            departure: departure,
-            arrival: arrival,
-            adults: adults,
-            children: children,
-            priceAdult: priceAdult,
-            priceChild: priceChild,
-            origin: origin,
-            destination: destination,
-            returnTrip: returnTrip,
-            idReservas: idsReserves
-        });
-        window.location.href = '/login';
-        /* axios.post('/login', data).then(function (response) {
+        const data = dataReserve;
+        // window.location.href = '/login';
+        axios.post('/savePickDrop', data).then(function (response) {
+            console.log(response.data);
         }).catch(function (error) {
             console.log(error);
-        }); */
+        });
     });
 
     $('#btnClose').on('click', function () {
@@ -122,6 +162,7 @@ function startTimer(duration, display) {
         if (--timer == 0) {
             // actualizar la reserva a SUSPENDED
             cancelReserva(idsReserves, "SUSPENDED");
+            clearInterval(intervalId); // Detiene el intervalo
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -139,7 +180,6 @@ function startTimer(duration, display) {
                     $('#btnClose').trigger('click');
                 }
             });
-            clearInterval(intervalId); // Detiene el intervalo
         }
     }, 1000);
 }
@@ -155,3 +195,9 @@ function cancelReserva(dataTrip, state = "CANCELLED") {
         console.log(error);
     });
 }
+
+
+// Evento para cancelar la reserva
+window.addEventListener('beforeunload', function () {
+    cancelReserva(idsReserves);
+});

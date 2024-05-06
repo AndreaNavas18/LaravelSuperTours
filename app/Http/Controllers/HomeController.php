@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 use DB;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -60,6 +61,7 @@ class HomeController extends Controller
     }
 
     public function showRoutes (Request $request){
+        session()->flush();
 
         // Obtener los datos del formulario
         $origin = $request->input('origin');
@@ -68,7 +70,6 @@ class HomeController extends Controller
         $returnDate = $request->input('returnDate');
         $passengers = $request->input('passengers');
         $tripType = $request->input('tripType'); // Puedes añadir un campo para el tipo de viaje
-        //Log::info($request->all());
         $daysOfWeek = [
             'Monday' => 'lunes',
             'Tuesday' => 'martes',
@@ -152,6 +153,7 @@ class HomeController extends Controller
         $adults = $request->input('adults');
         $children = $request->input('children');
         $tripType = $request->input('tripType');
+        $type = $request->input('type');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
             ->where('canal', 'WEBSALE')
@@ -175,6 +177,14 @@ class HomeController extends Controller
             $reserva->save();
             // Obtener el ID del registro que se acaba de crear
             $idReserva = ReservasTripPuesto::latest('id')->first()->id;
+            // Guardar los datos de la reserva en la session
+            $reservas = session()->get('reservas', []);
+            $reservas[$idReserva] = [
+                'tripType' => $type,
+                'reservaTripPuesto' => ReservasTripPuesto::find($idReserva)->toArray()
+            ];
+            session()->put('reservas', $reservas);
+            Log::info(session()->get('reservas', []));
             $response = array(
                 'idReserva' => $idReserva,
                 'status' => 'success',
@@ -190,14 +200,25 @@ class HomeController extends Controller
     }
 
     function cancelReserve(Request $request) {
-        Log::info($request->all());
        try {
+           //session()->flush();
            $idReserva = $request->input('idReserva');
            $state = $request->input('state');
-           ReservasTripPuesto::whereIn('id', explode(",", $idReserva))->update([
+           $arrayReservas = explode(",", $idReserva);
+           ReservasTripPuesto::whereIn('id', $arrayReservas)->update([
                'estado' => $state,
                'fecha_actividad' => now()->format('Y-m-d H:i:s')
            ]);
+           Log::info($idReserva);
+           if ($state == 'CANCELLED') {
+               // Eliminar los datos de la reserva de la session
+               $reservas = session()->get('reservas', []);
+               foreach ($arrayReservas as $id) {
+                   unset($reservas[$id]);
+                }
+                session()->put('reservas', $reservas);
+            }
+           Log::info(session()->get('reservas', []));
            $response = array(
                'status' => 'success',
                'message' => 'Reserva cancelada con éxito',
@@ -210,6 +231,14 @@ class HomeController extends Controller
     }
 
     public function pickupDropoff (Request $request) {
+        try {
+            Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
+                $message->from('karennavas22@hotmail.com', 'SuperTours');
+                $message->to('karennavas333@gmail.com');
+            });
+        } catch (\Throwable $th) {
+            Log::info($th);
+        }
         $tripNo = $request->input('tripNo');
         $fecha = $request->input('fecha');
         $departure = $request->input('departure');
@@ -272,7 +301,6 @@ class HomeController extends Controller
                 ->groupBy('areas.nombre', 'areas.id')
                 ->orderBy('areas.orden')
                 ->get();
-                Log::info("Si estoy trayendo los destinos");
             //$areas = Area::all();
             return ($areas);
             } catch (\Exception $e) {
@@ -281,10 +309,27 @@ class HomeController extends Controller
                 dd($e->getMessage());
             }         
     }
-
-  
-
     
+    // funcion para enviar los datos del pick up y drop off al correo mediante una peticion post
+    public function savePickDrop(Request $request){
+        try {
+            $data = $request->all();
+            Log::info($data);
+            $reservas = session()->get('reservas', []);
+            foreach ($data as $key => $value) {
+                $reservas[$key]['pickDrop'] = $value;
+                session()->put('reservas', $reservas);
+            }
+            Log::info(session()->get('reservas', []));
+            Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
+                $message->from('karennavas22@hotmail.com', 'SuperTours');
+                $message->to('karennavas333@gmail.com');
+            });
+        }
+        catch (\Throwable $th) {
+            Log::info($th);
+        }
+    }  
 
     // public function register(Request $request){
     //     // Validación de datos

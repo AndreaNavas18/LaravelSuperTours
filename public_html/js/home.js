@@ -656,7 +656,8 @@ function selectTrip(dataTrip) {
         '&children=' + encodeURIComponent(dataTrip.childPassenger) +
         '&origin=' + encodeURIComponent(dataTrip.origen) +
         '&destination=' + encodeURIComponent(dataTrip.destino) +
-        '&tripType=' + encodeURIComponent(dataTrip.trip);
+        '&tripType=' + encodeURIComponent(dataTrip.trip) +
+        '&type=' + encodeURIComponent(dataTrip.tripType);
     if (dataTrip.tripType == 'oneWay') {
         Swal.fire({
             title: 'Select Trip?',
