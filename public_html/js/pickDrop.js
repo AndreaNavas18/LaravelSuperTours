@@ -43,8 +43,8 @@ function startPickDrop(data) {
         priceChild: priceChild,
         origin: origin,
         destination: destination,
-        departureOutbound: $('#departureOutbound').val(),
-        arrivalOutbound: $('#arrivalOutbound').val(),
+        departureOutbound: $('#departureOutbound option:selected').text(),
+        arrivalOutbound: $('#arrivalOutbound option:selected').text(),
         departureOutboundPrice: 0,
         arrivalOutboundPrice: 0,
         hoteldepartureOutbound: '',
@@ -80,8 +80,8 @@ function startPickDrop(data) {
             priceChild: returnData.priceChild,
             origin: returnData.origen,
             destination: returnData.destino,
-            departureReturn: $('#departureReturn').val(),
-            arrivalReturn: $('#arrivalReturn').val(),
+            departureReturn: $('#departureReturn option:selected').text(),
+            arrivalReturn: $('#arrivalReturn option:selected').text(),
             departureReturnPrice: 0,
             arrivalReturnPrice: 0,
             hoteldepartureReturn: '',
@@ -95,7 +95,7 @@ function startPickDrop(data) {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + totalPrice : totalPrice;
         $('#dP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
-        dataReserve[idsReserves[0]][this.id] = this.value;
+        dataReserve[idsReserves[0]][this.id] = this.options[this.selectedIndex].textContent;
         if (optionSelected.dataset.precio) {
             $('#hotel' + this.id).removeClass('hidden');
             dataReserve[idsReserves[0]][this.id + 'Price'] = optionSelected.dataset.precio;
@@ -109,7 +109,7 @@ function startPickDrop(data) {
         const optionSelected = this.options[this.selectedIndex];
         const newPrice = (optionSelected.dataset.precio) ? ((optionSelected.dataset.precio * children) + (optionSelected.dataset.precio * adults)) + returnPrice : returnPrice;
         $('#rP').html(`Price: <strong>${parseFloat(newPrice).toFixed(2)}</strong>`);
-        dataReserve[idsReserves[1]][this.id] = this.value;
+        dataReserve[idsReserves[1]][this.id] = this.options[this.selectedIndex].textContent;
         if (optionSelected.dataset.precio) {
             $('#hotel' + this.id).removeClass('hidden');
             dataReserve[idsReserves[1]][this.id + 'Price'] = optionSelected.dataset.precio;

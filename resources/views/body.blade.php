@@ -47,9 +47,6 @@
                             @endforeach
                         @endisset
                     </select>
-                    {{-- <span class="spancard"> 
-                        <img src="./images/busticket.png" class="flechasmn mdocult"> 
-                    </span> --}}
                 </div>
                 <div class="exchangeButtonDiv exchangePc">
                     <button type="button" onclick="exchangeLocations()" class="flech flechPc">
@@ -75,9 +72,6 @@
                             @endforeach
                         @endisset
                     </select>
-                    {{-- <span class="spancard2"> 
-                        <img src="./images/entrega.png" class="flechasmn mdocult">
-                    </span> --}}
                 </div>
                 <div
                     class="originDate divscards mdivscards"
@@ -92,9 +86,6 @@
                 </div>
                     <input type="text" id="departureDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
                     <input type="hidden" id="hiddenDepartureDate" name="hiddenDepartureDate">
-                    {{-- <span class="spancard3"> 
-                        <img src="./images/calendario.png" class="calendar1 mdocult">
-                    </span> --}}
                 </div>
                 <div
                     class="destinationDate divscards ocult"
@@ -107,9 +98,6 @@
                 </div>
                     <input type="text" id="returnDate" class="w-full datepicker inputscards" placeholder="DD/MM/AAAA">
                     <input type="hidden" id="hiddenReturnDate" name="hiddenReturnDate">
-                    {{-- <span class="spancard4"> 
-                        <img src="./images/calendario.png" class="calendar2 mdocult">
-                    </span> --}}
                 
                 </div>
                 <div
@@ -126,32 +114,68 @@
                             <span id="passengerCount">1 Adult</span>
                         </button>
                         <div class="dropdown-content" id="passengersDropdown" value=false>
-                            <div class="flex centr adults">
-                                <label class="items-start passLabel">
-                                    <span class="passTitle">Adults</span>
-                                </label>
-                                <div class="centr">
-                                    <button class="btnPss" onclick="adjustPassengers('adults', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
-                                    </button>
-                                    <input type="text" id="adultsCount" inputmode="numeric" value="1" class="text-center" />
-                                    <button class="btnPss" onclick="adjustPassengers('adults', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspss">   
-                                    </button>
+                            <div class="">
+                                <div>
+                                    Passengers Departure
+                                    <div class="flex centr adults">
+                                        <label class="items-start passLabel">
+                                            <span class="passTitle">Adults</span>
+                                        </label>
+                                        <div class="centr">
+                                            <button class="btnPss" onclick="adjustPassengers('adults', -1)">
+                                                <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                            </button>
+                                            <input type="text" id="adultsCount" inputmode="numeric" value="1" class="text-center" />
+                                            <button class="btnPss" onclick="adjustPassengers('adults', 1)">
+                                                <img src="./images/mas.png" class="flechasmn flechaspss">   
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex centr children">
+                                        <label class="items-start passLabel">
+                                            <span class="passTitle">Children</span>
+                                        </label>
+                                        <div class="centr">
+                                            <button class="btnPss" onclick="adjustPassengers('children', -1)">
+                                                <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                            </button>
+                                            <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
+                                            <button class="btnPss" onclick="adjustPassengers('children', 1)">
+                                                <img src="./images/mas.png" class="flechasmn flechaspss">   
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex centr children">
-                                <label class="items-start passLabel">
-                                    <span class="passTitle">Children</span>
-                                </label>
-                                <div class="centr">
-                                    <button class="btnPss" onclick="adjustPassengers('children', -1)">
-                                        <img src="./images/menos.png" class="flechasmn flechaspss">     
-                                    </button>
-                                    <input type="text" id="childrenCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
-                                    <button class="btnPss" onclick="adjustPassengers('children', 1)">
-                                        <img src="./images/mas.png" class="flechasmn flechaspss">   
-                                    </button>
+                                <div id="divPassengersReturn" class="ocult">
+                                    Passengers Return
+                                    <div class="flex centr adults">
+                                        <label class="items-start passLabel">
+                                            <span class="passTitle">Adults</span>
+                                        </label>
+                                        <div class="centr">
+                                            <button class="btnPss" onclick="adjustPassengers('adultsReturn', -1)">
+                                                <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                            </button>
+                                            <input type="text" id="adultsReturnCount" inputmode="numeric" value="1" class="text-center" />
+                                            <button class="btnPss" onclick="adjustPassengers('adultsReturn', 1)">
+                                                <img src="./images/mas.png" class="flechasmn flechaspss">   
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex centr children">
+                                        <label class="items-start passLabel">
+                                            <span class="passTitle">Children</span>
+                                        </label>
+                                        <div class="centr">
+                                            <button class="btnPss" onclick="adjustPassengers('childrenReturn', -1)">
+                                                <img src="./images/menos.png" class="flechasmn flechaspss">     
+                                            </button>
+                                            <input type="text" id="childrenReturnCount" pattern="\d*" inputmode="numeric" value="0" class="text-center"/>
+                                            <button class="btnPss" onclick="adjustPassengers('childrenReturn', 1)">
+                                                <img src="./images/mas.png" class="flechasmn flechaspss">   
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

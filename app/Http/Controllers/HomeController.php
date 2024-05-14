@@ -152,6 +152,8 @@ class HomeController extends Controller
         $capacity = $request->input('capacity');
         $adults = $request->input('adults');
         $children = $request->input('children');
+        $priceAdult = $request->input('priceAdult');
+        $priceChild = $request->input('priceChild');
         $tripType = $request->input('tripType');
         $type = $request->input('type');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
@@ -181,10 +183,24 @@ class HomeController extends Controller
             $reservas = session()->get('reservas', []);
             $reservas[$idReserva] = [
                 'tripType' => $type,
+                'tripNo' => $tripNo,
+                'fecha' => $departureDate,
+                'adults' => $adults,
+                'children' => $children,
+                'priceAdult' => ($priceAdult * $adults),
+                'priceChild' => ($priceChild * $children),
                 'reservaTripPuesto' => ReservasTripPuesto::find($idReserva)->toArray()
             ];
             session()->put('reservas', $reservas);
             Log::info(session()->get('reservas', []));
+            try {
+                Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
+                    $message->from('karennavas22@hotmail.com', 'SuperTours');
+                    $message->to('karennavas333@gmail.com');
+                });
+            } catch (\Throwable $th) {
+                Log::info($th);
+            }
             $response = array(
                 'idReserva' => $idReserva,
                 'status' => 'success',

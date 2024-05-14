@@ -825,8 +825,8 @@ menu {
   .adults {
     padding-left: 10.1px;
     padding-right: 10.1px;
-    width: 320px;
-    height: 80px;
+    width: 250px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -836,8 +836,8 @@ menu {
   .children {
     padding-left: 10.1px;
     padding-right: 10px;
-    width: 320px;
-    height: 80px;
+    width: 250px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -847,7 +847,6 @@ menu {
 
   .passTitle {
     color: #002c7d;
-    font-size: 20px;
   }
 
   .passLabel {
@@ -1103,7 +1102,6 @@ menu {
   .btnPss {
     background-color: #dde9ff;
     border-radius: 99px;
-    padding: 8px;
   }
   
 }
@@ -2729,12 +2727,15 @@ video {
   width: 100%;
 }
 
+.sendToBottom {
+  z-index: -1;
+}
+
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: white;
-  width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
