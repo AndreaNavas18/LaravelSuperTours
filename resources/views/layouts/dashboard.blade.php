@@ -11,7 +11,7 @@
                 <div id="yesterdayCards" class="daySection"></div>
             </div>
             <div id="todaySection" class="daySection sectionMain">
-                <button class="btnIcontype MbtnIcontype activo" id="btntoday" aria-pressed="true" onclick="">
+                <button class="btnIcontype MbtnIcontype activo initialCard" id="btntoday" aria-pressed="true" onclick="">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="today"></span>
                 </button>
@@ -37,7 +37,7 @@
                 <div id="yesterdayCardsReturn" class="daySection"></div>
             </div>
             <div id="todaySectionReturn" class="daySection sectionMainReturn">
-                <button class="btnIcontype MbtnIcontype activo" id="btntodayReturn" aria-pressed="true" onclick="">
+                <button class="btnIcontype MbtnIcontype activo initialCard" id="btntodayReturn" aria-pressed="true" onclick="">
                     <img src="./images/busticket(1).png" class="iconosType MiconosType">
                     <span class="titleNew MtitleNew" id="todayReturn"></span>
                 </button>

@@ -13,6 +13,7 @@ use App\Models\ReservasTripPuesto;
 use App\Models\Route;
 use App\Models\Clientes;
 use App\Http\Requests\RegisterRequest;
+use App\Jobs\SendEmailJob;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Log;
@@ -192,12 +193,9 @@ class HomeController extends Controller
                 'reservaTripPuesto' => ReservasTripPuesto::find($idReserva)->toArray()
             ];
             session()->put('reservas', $reservas);
-            Log::info(session()->get('reservas', []));
+            //Log::info(session()->get('reservas', []));
             try {
-                Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
-                    $message->from('karennavas22@hotmail.com', 'SuperTours');
-                    $message->to('karennavas333@gmail.com');
-                });
+                dispatch(new SendEmailJob(session()->get('reservas', [])));
             } catch (\Throwable $th) {
                 Log::info($th);
             }
@@ -248,10 +246,7 @@ class HomeController extends Controller
 
     public function pickupDropoff (Request $request) {
         try {
-            Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
-                $message->from('karennavas22@hotmail.com', 'SuperTours');
-                $message->to('karennavas333@gmail.com');
-            });
+            dispatch(new SendEmailJob(session()->get('reservas', [])));
         } catch (\Throwable $th) {
             Log::info($th);
         }
@@ -336,11 +331,7 @@ class HomeController extends Controller
                 $reservas[$key]['pickDrop'] = $value;
                 session()->put('reservas', $reservas);
             }
-            Log::info(session()->get('reservas', []));
-            Mail::send('emails.trip', ['trip' => session()->all()], function ($message) {
-                $message->from('karennavas22@hotmail.com', 'SuperTours');
-                $message->to('karennavas333@gmail.com');
-            });
+            dispatch(new SendEmailJob(session()->get('reservas', [])));
         }
         catch (\Throwable $th) {
             Log::info($th);

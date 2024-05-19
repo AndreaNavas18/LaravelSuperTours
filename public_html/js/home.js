@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const returnPassengers = document.querySelector('#divPassengersReturn');
 
             if (selectedTripType == 'roundTrip') {
-                returnDateInput.style.display = 'block';
+                returnDateInput.style.display = 'flex';
                 returnPassengers.style.display = 'block';
                 adjustPassengers('adultsReturn', 0);
             } else {
@@ -379,8 +379,8 @@ function adjustPassengers(type, amount) {
         let adultsReturnText = adultReturnCount > 0 ? adultReturnCount + ' Adult' + (adultReturnCount > 1 ? 's' : '') : '';
         let childrenReturnText = childReturnCount > 0 ? childReturnCount + ' Child' + (childReturnCount > 1 ? 'ren' : '') : '';
         console.log('RETURN');
-        totalCountText += '<br>' + [adultsReturnText, childrenReturnText].filter(Boolean).join(', ');
-        altText += '<br>1 Adult';
+        totalCountText += "<br><span style='color:red'>" + [adultsReturnText, childrenReturnText].filter(Boolean).join(', ') + "</span>";
+        altText += "<br><span style='color:red'>1 Adult</span>";
     }
 
 
@@ -517,10 +517,8 @@ function searchRoutes(data) {
             $('#divRoutes').removeClass('hidden');
             pastDay = new Date(response.data.fecha_server + tZone);
             pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día
-            console.log(pastDay);
             if (data.day == 'yesterday') {
                 variablePastDay = new Date(data.departureDate + tZone);
-                console.log(variablePastDay);
             }
             if (variablePastDay <= pastDay) {
                 $('#yesterdaySection').addClass('sectionDisabled');
@@ -529,7 +527,6 @@ function searchRoutes(data) {
             }
             if (data.day == 'yesterdayReturn') {
                 variablePastDayReturn = new Date(data.departureDate + tZone);
-                console.log(variablePastDayReturn);
             }
             if (variablePastDayReturn <= pastDay) {
                 $('#yesterdaySectionReturn').addClass('sectionDisabled');
@@ -558,6 +555,7 @@ function searchRoutes(data) {
 function createCard(viaje, section) {
      // crear el elemento card
      let card = document.createElement('div');
+        card.className = (section == 'todayCards' || section == 'todayCardsReturn') ? 'initialCard' : '';
      // crear el elemento body
      let cardBody = document.createElement('div');
      cardBody.className = 'cardRoute';
@@ -600,8 +598,8 @@ function createCard(viaje, section) {
      let price = document.createElement('div');
         price.className = 'divButton';
      let priceText = document.createElement('span');
-     priceText.innerHTML = `$${parseFloat(viaje.wfprc_adult).toFixed(2)} Adult<br>$${parseFloat(viaje.wfprc_child).toFixed(2)} Child`;
-        price.appendChild(priceText);
+     priceText.innerHTML = `$${parseFloat(viaje.wfprc_adult).toFixed(2)} Adult - $${parseFloat(viaje.wfprc_child).toFixed(2)} Child`;
+     (section == 'todayCards' || section == 'todayCardsReturn') ? title.appendChild(priceText) : price.appendChild(priceText);
 
     if (section == 'todayCards' || section == 'todayCardsReturn') {
          // boton para seleccionar el viaje
