@@ -43,7 +43,8 @@
                 </div>
                 <div class="divButtons">
                     <button type="submit" class="btn1" >Sign in</button>
-                    <button class="btn2">Guest</button>
+                    <a href="{{ route('login.guest') }}" class="btn2">Guest</a>
+                    {{-- <button class="btn2">Guest</button> --}}
                 </div>
                 <div class="lastCard">
                     <h3 class="label2">Don't you have an account yet? 

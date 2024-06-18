@@ -3,7 +3,7 @@
     <nav class="wrapper flex items-center justify-between wrappermovil">
 
         <a href="/" class="w-1/3 max-w-[180px]">
-            <img src="./images/logo.png" class="w-full ocult mdview">
+            <img src="{{ asset('images/logo.png') }}" class="w-full mdocult">
         </a>
 
         <input type="checkbox" id="menu" class="peer hidden">
@@ -63,11 +63,11 @@
         <article class="text-center space-y-6 md:text-center md:space-y-8 custom-article">
 
             {{-- <h1 class="tmextos md:text-5xl mdocult">SUPER TOURS --}}
-            <img src="./images/logo.png" class="mdocult logp">
+            <img src="{{ asset('images/logo.png') }}" class="mdocult logp">
 
             </h1>
 
-            <h1 class="text-4xl font-bold tgextos md:text-5xl ocult mdview">Plan Your Trip With <br> Travel Super Tours
+            <h1 class="text-4xl font-bold tgextos md:text-5xl ocult mdview">Plan Your Trip With <br> Super Tours
             </h1>
 
             {{-- <p class="text-blue-950 ocult mdview">Travel to your favorite city with respectful of the <br> enviroment!

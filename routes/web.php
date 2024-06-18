@@ -30,18 +30,17 @@ Route::view('/aboutus','aboutus');
 Route::view('/faq','faq');
 Route::view('/contact','contact');
 
-// Auth::routes();
-
 // Route::get('/register', [RegisterrController::class, 'showRegister'])->name('register');
 // Route::post('/register', [RegisterrController::class, 'register']);
 // Route::get('/login', [LoginnController::class, 'showLogin'])->name('login');
 // Route::post('/login', [LoginnController::class, 'login']);
 
-
-
 Auth::routes();
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::post('/login', [LoginController::class, 'login'])->name('login');
+// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login/guest', [HomeController::class, 'ingresoInvitado'])->name('login.guest');
+
+Route::post('/login/guest', [HomeController::class, 'creacionInvitado'])->name('login.guest.store');
+

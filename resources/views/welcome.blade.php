@@ -36,7 +36,7 @@
                     <div class="text-center">
 
                         <h1 class="mt-2 text-gray-600 dark:text-gray-400 text-xl">
-                            Plan Your Trip With Travel Super Tours
+                            Plan Your Trip With Super Tours
                         </h1>
 
                         <div class="mt-6">

@@ -377,4 +377,13 @@ class HomeController extends Controller
     //     }
 
     // }
+
+    public function ingresoInvitado(){
+        return view('guest');
+
+    }
+
+    public function creacionInvitado(){
+
+    }
 }

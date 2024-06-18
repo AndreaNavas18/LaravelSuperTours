@@ -32,7 +32,7 @@
                 <h1 class="faqtitle Mfaqtitle">FAQ</h1>
                     <div class="div-faq Mdiv-faq">
                         <div class="dropdown-trigger Mdropdown-trigger">
-                            <h2 class="qtrigger Mqtrigger">Where does Super Tours Travel?</h2>
+                            <h2 class="qtrigger Mqtrigger">Where does Super Tours?</h2>
                             <button class="btntrigger Mbtntrigger">
                                 +
                             </button>

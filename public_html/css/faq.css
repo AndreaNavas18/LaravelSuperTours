@@ -40,13 +40,14 @@
 .containerFAQ {
     display: flex;
     flex-direction: column;
-    margin-left: 70px;
+    margin: 0 auto;
     max-width: 1200px;
 }
 
 .faq-section {
     display: flex;
     flex-direction: column;
+    width: 1200px;
 }
 
 
