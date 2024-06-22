@@ -1,0 +1,142 @@
+/* Estilos para movil y tablet  */
+@media (max-width: 900px) {
+
+}
+
+@media( min-width: 768px){
+
+.contenedor {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.cardLogin {
+    background-color: white;
+    width: 86%;
+    height: auto;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    border-radius: 10px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.titleLogin {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e336c;
+    padding-top: 50px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.cardGuest {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.divEmail {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 80%;
+}
+.divEmail2 {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 80%;
+}
+.label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1e336c;
+}
+.input {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #c3c3c3;
+    padding-left: 10px;
+
+}
+.divButtons {
+    display: flex;
+    justify-content: center;
+
+}
+.btn1 {
+    background-color: #1e336c;
+    color: white;
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.btn2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #18933f;
+    color: white;
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 20px;
+}
+
+.btn1:hover {
+    background-color: #ffffff;
+    color: #1e336c;
+    border-radius: 5px;
+    border: 1px solid #1e336c;
+    font-weight: bold;
+}
+
+.btn2:hover {
+    background-color: #ffffff;
+    color: #18933f;
+    border-radius: 5px;
+    border: 1px solid #18933f;
+    font-weight: bold;
+
+}
+
+.lastCard {
+    display: flex;
+    margin-top: 20px;
+    width: 100%;
+}
+.label2 {
+    width: 60%;
+    font-size: 17px;
+    color: rgba(70, 70, 70);
+    margin-left: 10px;
+}
+.span {
+    color: #1e336c;
+    font-weight: bold;
+    cursor: pointer;
+}
+.label3 {
+    width: 40%;
+    font-size: 17px;
+    color: #1e336c;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+}

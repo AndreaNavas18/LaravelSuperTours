@@ -383,7 +383,28 @@ class HomeController extends Controller
 
     }
 
-    public function creacionInvitado(){
+    public function creacionInvitado(Request $request){
+        try {
+            $request->validate([
+                'celphone' => ['required', 'unique:users,celphone'],
+                'firstname' => ['required', 'string', 'max:255'],
+                'lastname' => ['required', 'string', 'max:255'],
+                'email' => ['nullable', 'email', 'max:255'], 
+            ]);
+            
+           $guest = new User();
+           $guest->firstname = $request->input('firstname');
+           $guest->lastname = $request->input('lastname');
+           $guest->email = $request->input('email');
+           $guest->celphone = $request->input('celphone');
 
+           $guest->save();
+           \Log::info("si funciono el guest");
+           return redirect()->route('home');
+        } catch (\Throwable $th) {
+            //throw $th;
+            \Log::info($th);
+
+        }
     }
 }
