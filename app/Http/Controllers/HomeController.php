@@ -70,7 +70,7 @@ class HomeController extends Controller
         $departureDate = $request->input('departureDate');
         $returnDate = $request->input('returnDate');
         $passengers = $request->input('passengers');
-        $tripType = $request->input('tripType'); // Puedes añadir un campo para el tipo de viaje
+        $tripType = $request->input('tripType');
         $daysOfWeek = [
             'Monday' => 'lunes',
             'Tuesday' => 'martes',
@@ -109,12 +109,19 @@ class HomeController extends Controller
             }
             $passengersOcuped = Reserva::where('trip_no', $viaje->trip_no)
                 ->where('fecha_salida', $departureDate)
-                ->where('canal', 'WEBSALE')
                 ->sum('pax');
+            $passengersOcuped2 = Reserva::where('trip_no', $viaje->trip_no)
+                ->where('fecha_salida', $departureDate)
+                ->sum('pax2');
+            $passengersOcuped3 = Reserva::where('trip_no2', $viaje->trip_no)
+                ->where('fecha_retorno', $departureDate)
+                ->sum('pax_r');
+            $passengersOcuped4 = Reserva::where('trip_no2', $viaje->trip_no)
+                ->where('fecha_retorno', $departureDate)
+                ->sum('pax2_r');
             $passengersUsing = ReservasTripPuesto::where('trip_to', $viaje->trip_no)
                 ->where('fecha_trip', $departureDate)
                 ->whereIn('estado', ['USING', 'RENEWED'])
-                ->where('tarifa', 3)
                 ->sum('cantidad');
             $totalCapacity = $viaje->capacity + $viaje->capacity2 + $viaje->capacity3 + $viaje->capacity4 + $viaje->capacity5;
             if ($totalCapacity > 0 && ($viaje->wfseats > 0 || $viaje->spseats > 0 || $viaje->sdseats > 0 || $viaje->sflexseats > 0)) {
@@ -122,19 +129,8 @@ class HomeController extends Controller
             } else {
                 $totalSeats = 0;
             }
-            $viaje->passengersAvailable = $totalSeats - ($passengersUsing + $passengersOcuped + $passengers);
+            $viaje->passengersAvailable = $totalSeats - ($passengersUsing + $passengersOcuped + $passengersOcuped2 + $passengersOcuped3 + $passengersOcuped4 + $passengers);
             $viaje->passengersToReserve = $passengers;
-        }
-        if ($tripType == 'roundTrip') {
-            // Luego, filtrar los viajes de destination a origin
-            $viajesVuelta = Route::where('trip_from', $destination)
-                ->where('trip_to', $origin)
-                ->where('fecha_ini', '<=', $returnDate)
-                ->where('fecha_fin', '>=', $returnDate)
-                //->where('seats_remain', '>=', $passengers)
-                ->get();
-        } else {
-            // Manejar otros tipos de viaje si es necesario
         }
         $response = array(
             'status' => 'success',
@@ -163,6 +159,12 @@ class HomeController extends Controller
         $passengersAvailable2 = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
             ->sum('pax2');
+        $passengersAvailable3 = Reserva::where('trip_no2', $tripNo)
+            ->where('fecha_retorno', $departureDate)
+            ->sum('pax_r');
+        $passengersAvailable4 = Reserva::where('trip_no2', $tripNo)
+            ->where('fecha_retorno', $departureDate)
+            ->sum('pax2_r');
         $passengersUsing = ReservasTripPuesto::where('trip_to', $tripNo)
             ->where('fecha_trip', $departureDate)
             ->whereIn('estado', ['USING', 'RENEWED'])
