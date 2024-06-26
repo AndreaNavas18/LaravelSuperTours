@@ -169,7 +169,7 @@ class HomeController extends Controller
             ->where('fecha_trip', $departureDate)
             ->whereIn('estado', ['USING', 'RENEWED'])
             ->sum('cantidad');
-        if (($passengersAvailable + $passengersAvailable2 + $passengersUsing + $adults + $children) <= $capacity) {
+        if (($passengersAvailable + $passengersAvailable2 + $passengersAvailable3 + $passengersAvailable4 + $passengersUsing + $adults + $children) <= $capacity) {
             $reserva = new ReservasTripPuesto();
             $reserva->trip_to = $tripNo;
             $reserva->tipo = ($tripType == 'departure') ? 1 : 2;

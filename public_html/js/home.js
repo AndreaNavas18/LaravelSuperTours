@@ -497,7 +497,7 @@ function searchRoutes(data) {
     const destination = (data.direction == 'departure') ? selectDestination : selectOrigin;
     const tripPassengers = (data.direction == 'departure') ? totalPassengers : totalPassengersReturn;
     const departureDate = data.departureDate;
-    const tripType = data.direction;
+    const tripType = globalTripType;
     
     // Construir la URL con los datos
     const url = '/show-routes?' +
