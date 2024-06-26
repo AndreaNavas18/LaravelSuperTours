@@ -159,14 +159,15 @@ class HomeController extends Controller
         $type = $request->input('type');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
-            ->where('canal', 'WEBSALE')
             ->sum('pax');
+        $passengersAvailable2 = Reserva::where('trip_no', $tripNo)
+            ->where('fecha_salida', $departureDate)
+            ->sum('pax2');
         $passengersUsing = ReservasTripPuesto::where('trip_to', $tripNo)
             ->where('fecha_trip', $departureDate)
             ->whereIn('estado', ['USING', 'RENEWED'])
-            ->where('tarifa', 3)
             ->sum('cantidad');
-        if (($passengersAvailable + $passengersUsing + $adults + $children) <= $capacity) {
+        if (($passengersAvailable + $passengersAvailable2 + $passengersUsing + $adults + $children) <= $capacity) {
             $reserva = new ReservasTripPuesto();
             $reserva->trip_to = $tripNo;
             $reserva->tipo = ($tripType == 'departure') ? 1 : 2;
@@ -377,34 +378,4 @@ class HomeController extends Controller
     //     }
 
     // }
-
-    public function ingresoInvitado(){
-        return view('guest');
-
-    }
-
-    public function creacionInvitado(Request $request){
-        try {
-            $request->validate([
-                'celphone' => ['required', 'unique:users,celphone'],
-                'firstname' => ['required', 'string', 'max:255'],
-                'lastname' => ['required', 'string', 'max:255'],
-                'email' => ['nullable', 'email', 'max:255'], 
-            ]);
-            
-           $guest = new User();
-           $guest->firstname = $request->input('firstname');
-           $guest->lastname = $request->input('lastname');
-           $guest->email = $request->input('email');
-           $guest->celphone = $request->input('celphone');
-
-           $guest->save();
-           \Log::info("si funciono el guest");
-           return redirect()->route('home');
-        } catch (\Throwable $th) {
-            //throw $th;
-            \Log::info($th);
-
-        }
-    }
 }
