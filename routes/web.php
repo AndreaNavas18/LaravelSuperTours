@@ -38,7 +38,7 @@ Route::view('/contact','contact');
 Auth::routes();
 
 // Route::post('/login', [LoginController::class, 'login'])->name('login');
-// Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/login/guest', [HomeController::class, 'ingresoInvitado'])->name('login.guest');
 

@@ -1,7 +1,3 @@
-@php
-    //$trip = request('tripNo');
-@endphp
-
 
     <div id="timer" class="timer"></div>
     <div id="divCentral" class="divMain">

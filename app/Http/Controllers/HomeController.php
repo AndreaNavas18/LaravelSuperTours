@@ -109,14 +109,11 @@ class HomeController extends Controller
             }
             $passengersOcuped = Reserva::where('trip_no', $viaje->trip_no)
                 ->where('fecha_salida', $departureDate)
-                ->sum('pax');
-            $passengersOcuped2 = Reserva::where('trip_no', $viaje->trip_no)
+                ->sum('pax') + Reserva::where('trip_no', $viaje->trip_no)
                 ->where('fecha_salida', $departureDate)
-                ->sum('pax2');
-            $passengersOcuped3 = Reserva::where('trip_no2', $viaje->trip_no)
+                ->sum('pax2') + Reserva::where('trip_no2', $viaje->trip_no)
                 ->where('fecha_retorno', $departureDate)
-                ->sum('pax_r');
-            $passengersOcuped4 = Reserva::where('trip_no2', $viaje->trip_no)
+                ->sum('pax_r') + Reserva::where('trip_no2', $viaje->trip_no)
                 ->where('fecha_retorno', $departureDate)
                 ->sum('pax2_r');
             $passengersUsing = ReservasTripPuesto::where('trip_to', $viaje->trip_no)
@@ -129,7 +126,7 @@ class HomeController extends Controller
             } else {
                 $totalSeats = 0;
             }
-            $viaje->passengersAvailable = $totalSeats - ($passengersUsing + $passengersOcuped + $passengersOcuped2 + $passengersOcuped3 + $passengersOcuped4 + $passengers);
+            $viaje->passengersAvailable = $totalSeats - ($passengersUsing + $passengersOcuped + $passengers);
             $viaje->passengersToReserve = $passengers;
         }
         $response = array(
@@ -155,21 +152,18 @@ class HomeController extends Controller
         $type = $request->input('type');
         $passengersAvailable = Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
-            ->sum('pax');
-        $passengersAvailable2 = Reserva::where('trip_no', $tripNo)
+            ->sum('pax') + Reserva::where('trip_no', $tripNo)
             ->where('fecha_salida', $departureDate)
-            ->sum('pax2');
-        $passengersAvailable3 = Reserva::where('trip_no2', $tripNo)
+            ->sum('pax2') + Reserva::where('trip_no2', $tripNo)
             ->where('fecha_retorno', $departureDate)
-            ->sum('pax_r');
-        $passengersAvailable4 = Reserva::where('trip_no2', $tripNo)
+            ->sum('pax_r') + Reserva::where('trip_no2', $tripNo)
             ->where('fecha_retorno', $departureDate)
             ->sum('pax2_r');
         $passengersUsing = ReservasTripPuesto::where('trip_to', $tripNo)
             ->where('fecha_trip', $departureDate)
             ->whereIn('estado', ['USING', 'RENEWED'])
             ->sum('cantidad');
-        if (($passengersAvailable + $passengersAvailable2 + $passengersAvailable3 + $passengersAvailable4 + $passengersUsing + $adults + $children) <= $capacity) {
+        if (($passengersAvailable + $passengersUsing + $adults + $children) <= $capacity) {
             $reserva = new ReservasTripPuesto();
             $reserva->trip_to = $tripNo;
             $reserva->tipo = ($tripType == 'departure') ? 1 : 2;
@@ -335,11 +329,70 @@ class HomeController extends Controller
                 session()->put('reservas', $reservas);
             }
             dispatch(new SendEmailJob(session()->get('reservas', [])));
+            return $reservas;
         }
         catch (\Throwable $th) {
             Log::info($th);
         }
-    }  
+    } 
+
+    public function ingresoInvitado(){
+        return view('guest');
+
+    }
+
+    public function creacionInvitado(Request $request){
+        try {
+            $request->validate([
+                'celphone' => ['required', 'unique:users,celphone'],
+                'firstname' => ['required', 'string', 'max:255'],
+                'lastname' => ['required', 'string', 'max:255'],
+                'email' => ['nullable', 'email', 'max:255'], 
+            ]);
+            Log::info(session()->get('reservas', []));
+            $guest = new User();
+            $guest->firstname = $request->input('firstname');
+            $guest->lastname = $request->input('lastname');
+            $guest->email = $request->input('email');
+            $guest->celphone = $request->input('celphone');
+            $guest->save();
+
+            $passengersAditionals = $request->all();
+            unset($passengersAditionals['_token']);
+            unset($passengersAditionals['firstname']);
+            unset($passengersAditionals['lastname']);
+            unset($passengersAditionals['email']);
+            unset($passengersAditionals['celphone']);
+
+            $commenst = '';
+            $commenst2 = '';
+            foreach ($passengersAditionals as $key => $value) {
+                if (strpos($key, 'Departure') !== false && isset($value)) {
+                    $commenst .= "$key: $value, \n";
+                }
+                if (strpos($key, 'Return') !== false && isset($value)) {
+                    $commenst2 .= "$key: $value, \n";
+                }
+            }
+            $reservas = session()->get('reservas', []);
+            $index = 0;
+            foreach ($reservas as $key => $value) {
+                if ($index == 0) {
+                    $reservas[$key]['passengersAditionals'] = $commenst;
+                } else {
+                    $reservas[$key]['passengersAditionals'] = $commenst2;
+                }
+                $index++;
+                session()->put('reservas', $reservas);
+            }
+            dispatch(new SendEmailJob(session()->get('reservas', [])));
+            return redirect()->route('home');
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::info($th);
+
+        }
+    }
 
     // public function register(Request $request){
     //     // Validación de datos

@@ -131,7 +131,10 @@ function startPickDrop(data) {
         const data = dataReserve;
         // window.location.href = '/login';
         axios.post('/savePickDrop', data).then(function (response) {
+            window.removeEventListener('beforeunload', cancelReserva);
             console.log(response.data);
+            localStorage.setItem('reserva', JSON.stringify(response.data));
+            window.location.href = '/login';
         }).catch(function (error) {
             console.log(error);
         });
@@ -198,6 +201,4 @@ function cancelReserva(dataTrip, state = "CANCELLED") {
 
 
 // Evento para cancelar la reserva
-window.addEventListener('beforeunload', function () {
-    cancelReserva(idsReserves);
-});
+window.addEventListener('beforeunload',cancelReserva(idsReserves));

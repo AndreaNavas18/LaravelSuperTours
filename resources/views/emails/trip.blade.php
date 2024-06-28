@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Log;
         @isset($id['pickDrop'])
             <p>Pickup Dropoff: {{ json_encode($id['pickDrop']) }}</p>
         @endisset
+        @isset($id['passengersAditionals'])
+            <p>Passengers Aditionals: {{ json_encode($id['passengersAditionals']) }}</p>
+        @endisset
     @endforeach
 </body>
 </html>
