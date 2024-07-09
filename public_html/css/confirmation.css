@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.header-confirmation {
+    display: flex;
+    justify-content: space-between;
+    background-color: #003b7f;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5em;
+}
+.section {
+    margin: 20px 0;
+}
+.section h2 {
+    font-size: 1.2em;
+    color: #333;
+    border-bottom: 2px solid #003b7f;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.info {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+.info p {
+    margin: 0;
+    padding: 5px 0;
+}
+.cost-summary {
+    border-top: 2px solid #003b7f;
+    padding-top: 10px;
+}
+.cost-summary table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.cost-summary table, .cost-summary th, .cost-summary td {
+    border: 1px solid #ddd;
+}
+.cost-summary th, .cost-summary td {
+    padding: 10px;
+    text-align: left;
+}
+.total-amount {
+    text-align: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #003b7f;
+}
+.continue-button {
+    display: flex;
+    justify-content: flex-end;
+}
+.continue-button button {
+    background-color: #003b7f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+.continue-button button:hover {
+    background-color: #005bb5;
+}
+.returnDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -356,6 +356,11 @@ class HomeController extends Controller
             $guest->email = $request->input('email');
             $guest->celphone = $request->input('celphone');
             $guest->save();
+            $commenst = 'firstname: ' . $request->input('firstname') . ', ';
+            $commenst .= 'lastname: ' . $request->input('lastname') . ', ';
+            $commenst .= 'email: ' . $request->input('email') . ', ';
+            $commenst .= 'celphone: ' . $request->input('celphone') . ', ';
+            $commenst2 = '';
 
             $passengersAditionals = $request->all();
             unset($passengersAditionals['_token']);
@@ -364,14 +369,12 @@ class HomeController extends Controller
             unset($passengersAditionals['email']);
             unset($passengersAditionals['celphone']);
 
-            $commenst = '';
-            $commenst2 = '';
             foreach ($passengersAditionals as $key => $value) {
                 if (strpos($key, 'Departure') !== false && isset($value)) {
-                    $commenst .= "$key: $value, \n";
+                    $commenst .= "$key: $value, ";
                 }
                 if (strpos($key, 'Return') !== false && isset($value)) {
-                    $commenst2 .= "$key: $value, \n";
+                    $commenst2 .= "$key: $value, ";
                 }
             }
             $reservas = session()->get('reservas', []);
@@ -386,12 +389,16 @@ class HomeController extends Controller
                 session()->put('reservas', $reservas);
             }
             dispatch(new SendEmailJob(session()->get('reservas', [])));
-            return redirect()->route('home');
+            return redirect()->route('confirmInformation');
         } catch (\Throwable $th) {
             //throw $th;
             Log::info($th);
 
         }
+    }
+
+    public function confirmInformation(){
+        return view('confirmInformation')->with(['reservas' => session()->get('reservas', [])]);
     }
 
     // public function register(Request $request){

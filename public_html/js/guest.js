@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     const passengerTemplate = document.getElementById('passengerTemplate').content.cloneNode(true);
                     const divButtons = document.getElementById('divButtons');
                     const passengerNumber = i + 2;
-                    const complemento = ((retorno == 1) ? 'Departure' : 'Return') + passengerNumber;
-                    passengerTemplate.querySelector('#passengerNumber').textContent = `Passenger ${complemento}`;
-                    passengerTemplate.querySelector('#firstname').name = `firstname${complemento}`;
-                    passengerTemplate.querySelector('#lastname').name = `lastname${complemento}`;
-                    passengerTemplate.querySelector('#celphone').name = `celphone${complemento}`;
-                    passengerTemplate.querySelector('#email').name = `email${complemento}`;
+                    const typePassenger = ((i + 1) < adultos) ? 'Adult' : 'Child';
+                    const complemento = ((retorno == 1) ? 'Departure' : 'Return');
+                    const finalText = complemento + typePassenger + passengerNumber;
+                    passengerTemplate.querySelector('#passengerNumber').textContent = `${complemento} ${typePassenger} ${passengerNumber}`;
+                    passengerTemplate.querySelector('#firstname').name = `firstname${finalText}`;
+                    passengerTemplate.querySelector('#lastname').name = `lastname${finalText}`;
+                    passengerTemplate.querySelector('#celphone').name = `celphone${finalText}`;
+                    passengerTemplate.querySelector('#email').name = `email${finalText}`;
 
                     divButtons.parentNode.insertBefore(passengerTemplate, divButtons);
                 }

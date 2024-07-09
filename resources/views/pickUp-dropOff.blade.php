@@ -19,12 +19,12 @@
                         <h2 class="titleLocation">Departure Location</h2>
                         <select name="departureOutbound" id="departureOutbound" class="departureOutbound">
                             @foreach ($stopsDeparture as $stop)
-                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                                <option value="{{ $stop->place }} {{$stop->address}}">{{ $stop->place }} - {{$stop->address}}</option>
                             @endforeach
                             @if ($extensionsDeparture->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsDeparture as $ext)
-                                    <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    <option value="{{ $ext->place }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -33,12 +33,12 @@
                         <h2 class="titleLocation">Arrival Location</h2>
                         <select name="arrivalOutbound" id="arrivalOutbound" class="arrivalOutbound">
                             @foreach ($stopsArrival as $stop)
-                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                                <option value="{{ $stop->place }} {{$stop->address}}">{{ $stop->place }} - {{$stop->address}}</option>
                             @endforeach
                             @if ($extensionsArrival->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsArrival as $ext)
-                                    <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                    <option value="{{ $ext->place }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -66,12 +66,12 @@
                         <h2 class="titleLocation">Departure Location</h2>
                         <select name="departureReturn" id="departureReturn" class="departureOutbound">
                             @foreach ($stopsArrival as $stop)
-                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                                <option value="{{ $stop->place }} {{$stop->address}}">{{ $stop->place }} - {{$stop->address}}</option>
                             @endforeach
                             @if ($extensionsArrival->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsArrival as $ext)
-                                        <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                        <option value="{{ $ext->place }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
@@ -80,12 +80,12 @@
                         <h2 class="titleLocation">Arrival Location</h2>
                         <select name="arrivalReturn" id="arrivalReturn" class="arrivalOutbound">
                             @foreach ($stopsDeparture as $stop)
-                                <option value="{{ $stop->id }}">{{ $stop->place }} - {{$stop->address}}</option>
+                                <option value="{{ $stop->place }} {{$stop->address}}">{{ $stop->place }} - {{$stop->address}}</option>
                             @endforeach
                             @if ($extensionsDeparture->count() > 0)
                                 <optgroup label="Extensions">
                                     @foreach ($extensionsDeparture as $ext)
-                                        <option value="{{ $ext->id }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
+                                        <option value="{{ $ext->place }}" data-precio="{{$ext->precio_neto}}">{{ $ext->place }} - {{$ext->precio}}</option>
                                     @endforeach
                                 </optgroup>
                             @endif
