@@ -63,11 +63,19 @@ body {
     font-weight: bold;
     color: #003b7f;
 }
+.check-continue {
+    display: flex;
+    justify-content: right;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-top: 20px;
+}
 .continue-button {
     display: flex;
     justify-content: flex-end;
 }
 .continue-button button {
+    opacity: 0.5;
     background-color: #003b7f;
     color: white;
     padding: 10px 20px;

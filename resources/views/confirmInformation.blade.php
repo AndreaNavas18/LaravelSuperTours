@@ -2,9 +2,40 @@
     use Illuminate\Support\Facades\Log;
     $reservas = $reservas ?? [];
     Log::error("message1: ".json_encode($reservas));
-    $typeTrip = (count($reservas) > 1) ? 'Round Trip' : 'One Way';
+    $typeTrip = (count($reservas) > 1) ? 'Round Trip' : 'One Way Trip';
     $passengers = [];
+    $totalPassengers = 0;
+    $totalPassengers2 = 0;
+    $totalAdults = '';
+    $totalChildren = '';
+    $totalOutboundPrice = 0;
+    $totalReturnPrice = 0;
+    $count = 0;
     foreach ($reservas as $key => $value) {
+        if ($count == 0) {
+            $totalAdults .= $value['adults'];
+            $totalChildren .= $value['children'];
+            $origin = $value['pickDrop']['origin'];
+            $destination = $value['pickDrop']['destination'];
+            $priceAdult = $value['pickDrop']['priceAdult'];
+            $priceChild = $value['pickDrop']['priceChild'];
+            $totalPrice = ($value['pickDrop']['adults'] * $priceAdult) + ($value['pickDrop']['children'] * $priceChild);
+            if (intval($value['pickDrop']['departureOutboundPrice']) > 0  || intval($value['pickDrop']['arrivalOutboundPrice']) > 0) {
+                $totalOutboundPrice += $value['pickDrop']['departureOutboundPrice'] + $value['pickDrop']['arrivalOutboundPrice'];
+                $totalPassengers = $value['pickDrop']['adults'] + $value['pickDrop']['children'];
+            }
+            $count++;
+        } elseif ($count == 1) {
+            $totalAdults .= ' - ' . $value['adults'];
+            $totalChildren .= ' - ' . $value['children'];
+            $priceAdult2 = $value['pickDrop']['priceAdult'];
+            $priceChild2 = $value['pickDrop']['priceChild'];
+            $totalPrice2 = ($value['pickDrop']['adults'] * $priceAdult2) + ($value['pickDrop']['children'] * $priceChild2);
+            if (intval($value['pickDrop']['departureReturnPrice']) > 0 || intval($value['pickDrop']['arrivalReturnPrice']) > 0) {
+                $totalReturnPrice += $value['pickDrop']['departureReturnPrice'] + $value['pickDrop']['arrivalReturnPrice'];
+                $totalPassengers2 = $value['pickDrop']['adults'] + $value['pickDrop']['children'];
+            }
+        }
         $campo = explode(',', $value['passengersAditionals']);
         foreach ($campo as $texto) {
             if ($texto != ' ') {
@@ -82,43 +113,65 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Description</th>
+                        <th>Passengers</th>
+                        <th>{{$typeTrip}} Transportation From {{$origin}} To {{$destination}}</th>
                         <th>Departure</th>
-                        <th>Return</th>
+                        <th>{{(count($reservas) > 1) ? 'Return' : ''}}</th>
                         <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Round Trip Regular Ticket Rate Service</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
+                        <td>{{$totalAdults}} Adult(s) <br> {{$totalChildren}} Child(ren)</td>
+                        <td>{{$typeTrip}} Regular Ticket Rate Service</td>
+                        <td>${{ number_format($priceAdult, 2) }} <br> ${{ number_format($priceChild, 2) }}</td>
+                        <td>${{ number_format($priceAdult2, 2) }} <br> ${{ number_format($priceChild2, 2) }}</td>
+                        <td>${{ number_format($totalPrice + $totalPrice2, 2) }}</td>
                     </tr>
                     <tr>
+                        <td>{{$totalPassengers}} - {{$totalPassengers2}} Passenger(s)</td>
                         <td>Pick Up Point/Drop Off - Extension</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
-                        <td>$0.00</td>
+                        <td>${{ number_format($totalOutboundPrice, 2) }}</td>
+                        <td>${{ number_format($totalReturnPrice, 2) }}</td>
+                        <td>${{ number_format(($totalOutboundPrice * $totalPassengers) + ($totalReturnPrice * $totalPassengers2), 2) }}</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Taxes and Fees</td>
                         <td></td>
                         <td></td>
-                        <td>$0.00</td>
+                        <td>${{ number_format(($totalPrice + $totalPrice2) * 0.05, 2) }}</td>
                     </tr>
                 </tbody>
             </table>
             <div class="total-amount">
-                TOTAL AMOUNT DUE: $94.50
+                TOTAL AMOUNT DUE: ${{ number_format(($totalPrice + $totalPrice2) + (($totalOutboundPrice * $totalPassengers) + ($totalReturnPrice * $totalPassengers2)) + (($totalPrice + $totalPrice2) * 0.05), 2) }}
+            </div>
+            <div class="check-continue">
+                <input type="checkbox" name="check" id="check">
+                <label for="check">Is a travel information correct?</label>
             </div>
         </div>
         <div class="continue-button">
-            <button>Continue to Pay</button>
+            <button id="btnContinuePay" disabled>Continue to Pay</button>
         </div>
     </div>
     <div>
         @include('footer')
     </div>
+    <script>
+        document.getElementById('check').addEventListener('change', function() {
+            if (this.checked) {
+                document.querySelector('#btnContinuePay').removeAttribute('disabled');
+                document.querySelector('#btnContinuePay').style.opacity = '1';
+            } else {
+                document.querySelector('#btnContinuePay').setAttribute('disabled', 'disabled');
+                document.querySelector('#btnContinuePay').style.opacity = '0.5';
+            }
+        });
+        document.getElementById('btnContinuePay').addEventListener('click', function() {
+            console.log('Continue to Pay');
+        });
+    </script>
 </body>
 </html>
