@@ -419,6 +419,7 @@ $(function () {
 
 // Función para devolver las fechas de ayer y mañana
 function formatDate(date, d) {
+    console.log(date);
     date.setDate(date.getDate() + d);
     const year = date.getFullYear();
     const month = ("0" + (date.getMonth() + 1)).slice(-2); // Los meses en JavaScript comienzan desde 0
@@ -651,31 +652,55 @@ function createCard(viaje, section) {
             priceBtn.dataset.idOrigen = viaje.trip_from;
             priceBtn.dataset.idDestino = viaje.trip_to;
             priceBtn.textContent = 'Select';
-            priceBtn.addEventListener('click', function () {
-                selectTrip(this.dataset);
-            });
+
+            let tripDepartureDate = new Date();
+            const horaViaje = viaje.trip_departure.split(':');
+            tripDepartureDate.setHours(horaViaje[0], horaViaje[1], 0);
+
+            tripDepartureDate.setHours(tripDepartureDate.getHours() - 1);
+
+            let adjustedTripDeparture = tripDepartureDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+            console.log(new Date(viaje.fecha_ini.split('.')[0]), new Date());
+            if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
+                console.log(adjustedTripDeparture, new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }));
+                if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false })) {
+                    priceBtn.addEventListener('click', function () {
+                        selectTrip(this.dataset);
+                    });
+                } else {
+                    priceBtn.className = 'buttonCardsDisabled';
+                    priceBtn.textContent = 'Sold Out';
+                }
+            } else if (viaje.fecha_ini.split('T')[0] > formatDate(new Date(), 0)) {
+                priceBtn.addEventListener('click', function () {
+                    selectTrip(this.dataset);
+                });
+            } else {
+                priceBtn.className = 'buttonCardsDisabled';
+                priceBtn.textContent = 'Sold Out';
+            }
             price.appendChild(priceBtn);
         } else {
-            if ((viaje.wfseats - viaje.passengersToReserve) == -1) {
+            /* if ((viaje.wfseats - viaje.passengersToReserve) == -1) {
                 const textSeats = (viaje.passengersToReserve - 1) == 1 ? 'seat available.' : 'seats availables.'
                 let alertOneAvailable = document.createElement('div');
                 alertOneAvailable.className = 'alertOneAvailable';
                 alertOneAvailable.textContent = `Only ${viaje.passengersToReserve - 1} ${textSeats}`;
                 price.appendChild(alertOneAvailable);
-            }
+            } */
             priceBtn.className = 'buttonCardsDisabled';
-            priceBtn.textContent = 'Sold Out';
+            priceBtn.textContent = 'Full';
             price.appendChild(priceBtn);
         }
     }
-     // agregar los elementos al body
-     cardBody.appendChild(title);
-     cardBody.appendChild(horario);
-     cardBody.appendChild(price);
-     // agregar los elementos al card
-     card.appendChild(cardBody);
-     // agregar el card al contenedor de cards
-     document.getElementById(section).appendChild(card);
+    // agregar los elementos al body
+    cardBody.appendChild(title);
+    cardBody.appendChild(horario);
+    cardBody.appendChild(price);
+    // agregar los elementos al card
+    card.appendChild(cardBody);
+    // agregar el card al contenedor de cards
+    document.getElementById(section).appendChild(card);
 }
 
 // Función para revisar los puestos disponibles y reservarlos
