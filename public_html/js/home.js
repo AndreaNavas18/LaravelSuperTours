@@ -517,7 +517,7 @@ function searchRoutes(data) {
             $('#divHome .bodySection').addClass('hidden');
             $('#divRoutes').removeClass('hidden');
             pastDay = new Date(response.data.fecha_server + tZone);
-            pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día
+            pastDay = pastDay.setDate(pastDay.getDate() - 1) // Resta un día a la fecha actual
             if (data.day == 'yesterday') {
                 variablePastDay = new Date(data.departureDate + tZone);
             }
@@ -660,9 +660,7 @@ function createCard(viaje, section) {
             tripDepartureDate.setHours(tripDepartureDate.getHours() - 1);
 
             let adjustedTripDeparture = tripDepartureDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
-            console.log(new Date(viaje.fecha_ini.split('.')[0]), new Date());
             if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
-                console.log(adjustedTripDeparture, new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }));
                 if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false })) {
                     priceBtn.addEventListener('click', function () {
                         selectTrip(this.dataset);
@@ -689,7 +687,7 @@ function createCard(viaje, section) {
                 price.appendChild(alertOneAvailable);
             } */
             priceBtn.className = 'buttonCardsDisabled';
-            priceBtn.textContent = 'Full';
+            priceBtn.textContent = 'Select';
             price.appendChild(priceBtn);
         }
     }

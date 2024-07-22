@@ -6,15 +6,23 @@
     $passengers = [];
     $totalPassengers = 0;
     $totalPassengers2 = 0;
-    $totalAdults = '';
-    $totalChildren = '';
+    $adults = 0;
+    $adults2 = 0;
+    $children = 0;
+    $children2 = 0;
     $totalOutboundPrice = 0;
     $totalReturnPrice = 0;
+    $priceAdult = 0;
+    $priceChild = 0;
+    $priceAdult2 = 0;
+    $priceChild2 = 0;
+    $totalPrice = 0;
+    $totalPrice2 = 0;
     $count = 0;
     foreach ($reservas as $key => $value) {
-        if ($count == 0) {
-            $totalAdults .= $value['adults'];
-            $totalChildren .= $value['children'];
+        if ($value['type'] == 'departure') {
+            $adults = $value['adults'];
+            $children = $value['children'];
             $origin = $value['pickDrop']['origin'];
             $destination = $value['pickDrop']['destination'];
             $priceAdult = $value['pickDrop']['priceAdult'];
@@ -25,9 +33,9 @@
                 $totalPassengers = $value['pickDrop']['adults'] + $value['pickDrop']['children'];
             }
             $count++;
-        } elseif ($count == 1) {
-            $totalAdults .= ' - ' . $value['adults'];
-            $totalChildren .= ' - ' . $value['children'];
+        } elseif ($value['type'] == 'return') {
+            $adults2 = $value['adults'];
+            $children2 = $value['children'];
             $priceAdult2 = $value['pickDrop']['priceAdult'];
             $priceChild2 = $value['pickDrop']['priceChild'];
             $totalPrice2 = ($value['pickDrop']['adults'] * $priceAdult2) + ($value['pickDrop']['children'] * $priceChild2);
@@ -94,7 +102,7 @@
         </div>
         @foreach ($reservas as $reserva => $data)
         <div class="section">
-            <h2>{{($loop->index == 0) ? 'Departure' : 'Return'}} Details</h2>
+            <h2>{{($data['type'] == 'departure') ? 'Departure' : 'Return'}} Details</h2>
             <div class="info">
                 <p>
                     <strong>Departure Date:</strong> {{date('l, M-d-Y', strtotime($data['fecha']))}} 
@@ -122,7 +130,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{$totalAdults}} Adult(s) <br> {{$totalChildren}} Child(ren)</td>
+                        <td>{{$adults}} - {{$adults2}} Adult(s) <br> {{$children}} - {{$children2}} Child(ren)</td>
                         <td>{{$typeTrip}} Regular Ticket Rate Service</td>
                         <td>${{ number_format($priceAdult, 2) }} <br> ${{ number_format($priceChild, 2) }}</td>
                         <td>${{ number_format($priceAdult2, 2) }} <br> ${{ number_format($priceChild2, 2) }}</td>

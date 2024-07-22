@@ -133,7 +133,7 @@ class HomeController extends Controller
             'status' => 'success',
             'msg' => 'Viajes disponibles',
             'viajes' => $viajesIda,
-            'fecha_server' => now()->format('Y-m-d'),
+            'fecha_server' => date('Y-m-d'),
         );
         
         // Puedes pasar $viajesIda a la vista y mostrarlos
@@ -181,6 +181,7 @@ class HomeController extends Controller
             $reservas = session()->get('reservas', []);
             $reservas[$idReserva] = [
                 'tripType' => $type,
+                'type' => $tripType,
                 'tripNo' => $tripNo,
                 'fecha' => $departureDate,
                 'adults' => $adults,
@@ -343,19 +344,24 @@ class HomeController extends Controller
 
     public function creacionInvitado(Request $request){
         try {
-            $request->validate([
-                'celphone' => ['required', 'unique:users,celphone'],
-                'firstname' => ['required', 'string', 'max:255'],
-                'lastname' => ['required', 'string', 'max:255'],
-                'email' => ['nullable', 'email', 'max:255'], 
-            ]);
+            $cellphone = $request->input('celphone');
+            $dataUser = User::where('celphone', $cellphone)->get();
             Log::info(session()->get('reservas', []));
-            $guest = new User();
-            $guest->firstname = $request->input('firstname');
-            $guest->lastname = $request->input('lastname');
-            $guest->email = $request->input('email');
-            $guest->celphone = $request->input('celphone');
-            $guest->save();
+
+            if (count($dataUser) == 0) {
+                $request->validate([
+                    'celphone' => ['required', 'unique:users,celphone'],
+                    'firstname' => ['required', 'string', 'max:255'],
+                    'lastname' => ['required', 'string', 'max:255'],
+                    'email' => ['nullable', 'email', 'max:255'], 
+                ]);
+                $guest = new User();
+                $guest->firstname = $request->input('firstname');
+                $guest->lastname = $request->input('lastname');
+                $guest->email = $request->input('email');
+                $guest->celphone = $request->input('celphone');
+                $guest->save();
+            }
             $commenst = 'firstname: ' . $request->input('firstname') . ', ';
             $commenst .= 'lastname: ' . $request->input('lastname') . ', ';
             $commenst .= 'email: ' . $request->input('email') . ', ';

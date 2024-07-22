@@ -3,9 +3,7 @@ const reservas = JSON.parse(localStorage.getItem('reserva'));
 document.addEventListener("DOMContentLoaded", function () {
 
     if (reservas && typeof reservas == 'object') {
-        let retorno = 0;
         Object.entries(reservas).forEach(([key, value]) => {
-            retorno++;
             const adultos = value.adults;
             const children = value.children;
             const totalPassengers = parseInt(adultos) + parseInt(children) - 1;
@@ -15,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const divButtons = document.getElementById('divButtons');
                     const passengerNumber = i + 2;
                     const typePassenger = ((i + 1) < adultos) ? 'Adult' : 'Child';
-                    const complemento = ((retorno == 1) ? 'Departure' : 'Return');
+                    const complemento = ((value.type == 'departure') ? 'Departure' : 'Return');
                     const finalText = complemento + typePassenger + passengerNumber;
                     passengerTemplate.querySelector('#passengerNumber').textContent = `${complemento} ${typePassenger} ${passengerNumber}`;
                     passengerTemplate.querySelector('#firstname').name = `firstname${finalText}`;
