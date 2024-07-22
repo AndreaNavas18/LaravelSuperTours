@@ -3,7 +3,7 @@
     <nav class="wrapper flex items-center justify-between wrappermovil">
 
         <a href="/" class="w-1/3 max-w-[180px]">
-            <img src="{{ asset('images/logo.png') }}" class="w-full mdocult">
+            <img src="{{ asset('images/logo.png') }}" class="w-full ">
         </a>
 
         <input type="checkbox" id="menu" class="peer hidden">

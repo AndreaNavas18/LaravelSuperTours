@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable 
+class NewCliente extends Authenticatable 
 {
 	use Notifiable, HasFactory;
 
-	public $table = 'users';
+	public $table = 'new_clientes';
 
 	protected $fillable = [
 		'id',
@@ -33,7 +34,7 @@ class User extends Authenticatable
 		'remember_token',
 		'left_points',
 		'paid_points',
-		'role',
+		'is_encrypted',
 	];
 
 	protected $hidden = [
@@ -49,6 +50,24 @@ class User extends Authenticatable
 		$this->role = $role;
 		$this->save();
 	}
+
+	public function validateCredentials($user, array $credentials)
+    {
+        $plain = $credentials['password'];
+
+        if (!$user->is_encrypted) {
+            if ($plain === $user->password) {
+                $user->password = Hash::make($plain);
+                $user->is_encrypted = true;
+                $user->save();
+
+                return true;
+            }
+        }
+
+        // Usar la comparación estándar de Laravel para contraseñas encriptadas
+        return Hash::check($plain, $user->password);
+    }
 
 	
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\NewCliente;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'country' => ['nullable', 'string', 'max:255'],
             'zip' => ['nullable', 'string', 'max:255'],
             'celphone' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:new_clientes'],
             'password' => ['nullable', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -66,11 +66,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return \App\Models\NewCliente
      */
     protected function create(array $data)
     {
-       $user = User::create([
+       $user = NewCliente::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'address' => $data['address'],
@@ -81,7 +81,6 @@ class RegisterController extends Controller
             'celphone' => $data['celphone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'user',
         ]);
 
         return $user;

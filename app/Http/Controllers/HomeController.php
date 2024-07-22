@@ -14,7 +14,7 @@ use App\Models\Route;
 use App\Models\Clientes;
 use App\Http\Requests\RegisterRequest;
 use App\Jobs\SendEmailJob;
-use App\Models\User;
+use App\Models\NewCliente;
 
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -345,7 +345,7 @@ class HomeController extends Controller
     public function creacionInvitado(Request $request){
         try {
             $cellphone = $request->input('celphone');
-            $dataUser = User::where('celphone', $cellphone)->get();
+            $dataUser = NewCliente::where('celphone', $cellphone)->get();
             Log::info(session()->get('reservas', []));
 
             if (count($dataUser) == 0) {
@@ -355,7 +355,7 @@ class HomeController extends Controller
                     'lastname' => ['required', 'string', 'max:255'],
                     'email' => ['nullable', 'email', 'max:255'], 
                 ]);
-                $guest = new User();
+                $guest = new NewCliente();
                 $guest->firstname = $request->input('firstname');
                 $guest->lastname = $request->input('lastname');
                 $guest->email = $request->input('email');
@@ -410,11 +410,11 @@ class HomeController extends Controller
     // public function register(Request $request){
     //     // Validación de datos
     //     $request->validate([
-    //         'email' => ['required', 'email', 'unique:User'],
+    //         'email' => ['required', 'email', 'unique:new_clientes'],
     //         'password' => ['required', 'min:6'],
     //     ]);
 
-    //     $cliente = new User();
+    //     $cliente = new NewCliente();
     //     $cliente->firstname = $request->input('firstname');
     //     $cliente->lastname = $request->input('lastname');
     //     $cliente->address = $request->input('address');
