@@ -187,6 +187,7 @@
                 <button
                     onclick="allDays()"
                     class="btn"
+                    id="btnSearch"
                 >
                     Search
                 </button>

@@ -378,7 +378,6 @@ function adjustPassengers(type, amount) {
     if (document.getElementById('divPassengersReturn').style.display == 'block') {   
         let adultsReturnText = adultReturnCount > 0 ? adultReturnCount + ' Adult' + (adultReturnCount > 1 ? 's' : '') : '';
         let childrenReturnText = childReturnCount > 0 ? childReturnCount + ' Child' + (childReturnCount > 1 ? 'ren' : '') : '';
-        console.log('RETURN');
         totalCountText += "<br><span style='color:red'>" + [adultsReturnText, childrenReturnText].filter(Boolean).join(', ') + "</span>";
         altText += "<br><span style='color:red'>1 Adult</span>";
     }
@@ -419,7 +418,6 @@ $(function () {
 
 // Función para devolver las fechas de ayer y mañana
 function formatDate(date, d) {
-    console.log(date);
     date.setDate(date.getDate() + d);
     const year = date.getFullYear();
     const month = ("0" + (date.getMonth() + 1)).slice(-2); // Los meses en JavaScript comienzan desde 0
@@ -439,6 +437,7 @@ function formatHour(time) {
 
 // Función para buscar rutas disponibles por los tres dias
 function allDays() {
+    $('#btnSearch').prop('disabled', true);
     cleanRoutes();
     $('#videoHeader').addClass('searchActive');
     $('#imgHeader').addClass('showImg');
@@ -486,12 +485,13 @@ function allDays() {
         $('#divCardsreturn').addClass('hidden');
         $('#divSelectedreturn').addClass('hidden');
     }
-    Promise.all(data.map(d => searchRoutes(d))).then(() => console.log('All done!')).catch(e => console.error(e));
+    Promise.all(data.map(d => searchRoutes(d))).then(() => 
+        $('#btnSearch').prop('disabled', false)
+    ).catch(e => console.error(e));
 }
 
 function searchRoutes(data) {
     // Obtener los valores de los campos del formulario
-    console.log(data);
     const selectOrigin = globalOrigin;
     const selectDestination = globalDestination;
     const origin = (data.direction == 'departure') ? selectOrigin : selectDestination;
@@ -613,7 +613,14 @@ function createCard(viaje, section) {
             sd: { prc: [viaje.sdprc_adult, viaje.sdprc_child], name: 'Super Discount', select: false },
             sflex: { prc: [viaje.sflexprc_adult, viaje.sflexprc_child], name: 'Super Flex', select: false }
         };
-        
+        let tripDepartureDate = new Date();
+        const horaViaje = viaje.trip_departure.split(':');
+        tripDepartureDate.setHours(horaViaje[0], horaViaje[1], 0);
+
+        tripDepartureDate.setHours(tripDepartureDate.getHours() - 1);
+
+        let adjustedTripDeparture = tripDepartureDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+            
         if (viaje.tripAvilable && viaje.passengersAvailable > 0) {
             Object.entries(typesPrice).forEach(function ([nombre, type]) {
                 let divPrice = document.createElement('div');
@@ -652,16 +659,12 @@ function createCard(viaje, section) {
             priceBtn.dataset.idOrigen = viaje.trip_from;
             priceBtn.dataset.idDestino = viaje.trip_to;
             priceBtn.textContent = 'Select';
-
-            let tripDepartureDate = new Date();
-            const horaViaje = viaje.trip_departure.split(':');
-            tripDepartureDate.setHours(horaViaje[0], horaViaje[1], 0);
-
-            tripDepartureDate.setHours(tripDepartureDate.getHours() - 1);
-
-            let adjustedTripDeparture = tripDepartureDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+            console.log(viaje.fecha_ini.split('T')[0], formatDate(new Date(), 0));
+            console.log(viaje.trip_no, adjustedTripDeparture, new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }));
+            let varibleDay = (adjustedTripDeparture >= '23:00' && adjustedTripDeparture <= '23:59') ? 1 : 0;
+            console.log(varibleDay);
             if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
-                if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false })) {
+                if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }) && varibleDay == 0) {
                     priceBtn.addEventListener('click', function () {
                         selectTrip(this.dataset);
                     });
@@ -686,8 +689,18 @@ function createCard(viaje, section) {
                 alertOneAvailable.textContent = `Only ${viaje.passengersToReserve - 1} ${textSeats}`;
                 price.appendChild(alertOneAvailable);
             } */
-            priceBtn.className = 'buttonCardsDisabled';
-            priceBtn.textContent = 'Select';
+           priceBtn.className = 'buttonCardsDisabled';
+           if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
+                if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false })) {
+                    priceBtn.textContent = 'Select';
+                } else {
+                    priceBtn.textContent = 'Sold Out';
+                }
+            } else if (viaje.fecha_ini.split('T')[0] > formatDate(new Date(), 0)) {
+                priceBtn.textContent = 'Select';
+            } else {
+                priceBtn.textContent = 'Sold Out';
+            }
             price.appendChild(priceBtn);
         }
     }
