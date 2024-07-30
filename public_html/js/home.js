@@ -661,7 +661,7 @@ function createCard(viaje, section) {
             priceBtn.textContent = 'Select';
             console.log(viaje.fecha_ini.split('T')[0], formatDate(new Date(), 0));
             console.log(viaje.trip_no, adjustedTripDeparture, new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }));
-            console.log(viaje.wfseats, viaje.stseats, viaje.sdseats, viaje.spseats, viaje.spflexseats, viaje.passengersAvailable);
+            console.log(viaje.wfseats, viaje.stseats, viaje.sdseats, viaje.spseats, viaje.spflexseats, viaje.passengersAvailable, viaje.tripAvilable);
             let varibleDay = (adjustedTripDeparture >= '23:00' && adjustedTripDeparture <= '23:59') ? 1 : 0;
             console.log(varibleDay);
             if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
@@ -690,6 +690,9 @@ function createCard(viaje, section) {
                 alertOneAvailable.textContent = `Only ${viaje.passengersToReserve - 1} ${textSeats}`;
                 price.appendChild(alertOneAvailable);
             } */
+            console.log(viaje.fecha_ini.split('T')[0], formatDate(new Date(), 0));
+            console.log(viaje.trip_no, adjustedTripDeparture, new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }));
+            console.log(viaje.wfseats, viaje.stseats, viaje.sdseats, viaje.spseats, viaje.spflexseats, viaje.passengersAvailable, viaje.tripAvilable);
            priceBtn.className = 'buttonCardsDisabled';
            if (viaje.fecha_ini.split('T')[0] == formatDate(new Date(), 0)) {
                 if (adjustedTripDeparture > new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false })) {
