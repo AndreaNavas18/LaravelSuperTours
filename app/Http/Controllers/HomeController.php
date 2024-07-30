@@ -122,7 +122,7 @@ class HomeController extends Controller
                 ->sum('cantidad');
             $totalCapacity = $viaje->capacity + $viaje->capacity2 + $viaje->capacity3 + $viaje->capacity4 + $viaje->capacity5;
             if ($totalCapacity > 0 && ($viaje->wfseats > 0 || $viaje->spseats > 0 || $viaje->sdseats > 0 || $viaje->sflexseats > 0)) {
-                $totalSeats = $viaje->wfseats + $viaje->spseats + $viaje->sdseats + $viaje->sflexseats;
+                $totalSeats = $viaje->wfseats + $viaje->stseats + $viaje->spseats + $viaje->sdseats + $viaje->sflexseats;
             } else {
                 $totalSeats = 0;
             }
