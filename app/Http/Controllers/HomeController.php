@@ -350,7 +350,7 @@ class HomeController extends Controller
 
             if (count($dataUser) == 0) {
                 $request->validate([
-                    'celphone' => ['required', 'unique:users,celphone'],
+                    'celphone' => ['required', 'unique:new_clientes,celphone'],
                     'firstname' => ['required', 'string', 'max:255'],
                     'lastname' => ['required', 'string', 'max:255'],
                     'email' => ['nullable', 'email', 'max:255'], 
