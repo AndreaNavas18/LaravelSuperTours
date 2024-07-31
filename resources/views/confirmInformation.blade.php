@@ -68,7 +68,12 @@
             }
         }
     }
-
+    $reservasSession = session()->get('reservas', []);
+    $finalPrice = ($totalPrice + $totalPrice2) + (($totalOutboundPrice * $totalPassengers) + ($totalReturnPrice * $totalPassengers2)) + (($totalPrice + $totalPrice2) * 0.05);
+    foreach ($reservasSession as $key => $value) {
+        $reservas[$key]['finalPrice'] = $finalPrice;
+        session()->put('reservas', $reservas);
+    }
 @endphp
 
 <!DOCTYPE html>
@@ -79,7 +84,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('/css/estilos.css')}}">
     <link rel="stylesheet" href="{{ asset('/css/confirmation.css')}}">
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Confirm Information</title>
 </head>
 <body>
@@ -179,6 +184,14 @@
         });
         document.getElementById('btnContinuePay').addEventListener('click', function() {
             console.log('Continue to Pay');
+            axios.get('/confirmPayment')
+                .then(function(response) {
+                    console.log(response);
+                    window.location.href = '/confirmPayment';
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         });
     </script>
 </body>

@@ -342,6 +342,12 @@ class HomeController extends Controller
 
     }
 
+    public function confirmPayment(){
+        
+            dispatch(new SendEmailJob(session()->get('reservas', [])));
+            return view('formPay')->with(['reservas' => session()->get('reservas', [])]);
+    }
+
     public function creacionInvitado(Request $request){
         try {
             $cellphone = $request->input('celphone');
@@ -350,7 +356,7 @@ class HomeController extends Controller
 
             if (count($dataUser) == 0) {
                 $request->validate([
-                    'celphone' => ['required', 'unique:users,celphone'],
+                    'celphone' => ['required', 'unique:new_clientes,celphone'],
                     'firstname' => ['required', 'string', 'max:255'],
                     'lastname' => ['required', 'string', 'max:255'],
                     'email' => ['nullable', 'email', 'max:255'], 
@@ -384,14 +390,12 @@ class HomeController extends Controller
                 }
             }
             $reservas = session()->get('reservas', []);
-            $index = 0;
             foreach ($reservas as $key => $value) {
-                if ($index == 0) {
+                if ($value['type'] == 'departure') {
                     $reservas[$key]['passengersAditionals'] = $commenst;
                 } else {
                     $reservas[$key]['passengersAditionals'] = $commenst2;
                 }
-                $index++;
                 session()->put('reservas', $reservas);
             }
             dispatch(new SendEmailJob(session()->get('reservas', [])));
