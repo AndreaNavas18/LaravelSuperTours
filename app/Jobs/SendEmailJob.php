@@ -29,7 +29,7 @@ class SendEmailJob implements ShouldQueue
     public function handle(): void
     {
         Mail::send('emails.trip', ['trip' => $this->reservas], function ($message) {
-            $message->from('karennavas22@hotmail.com', 'SuperTours');
+            $message->from('supertours2024@outlook.com', 'Super Tours');
             $message->to(['karennavas333@gmail.com','andreadeveloper18@gmail.com','arsabuma2023@gmail.com']);
         });
     }
