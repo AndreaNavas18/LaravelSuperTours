@@ -44,26 +44,28 @@
                 $totalPassengers2 = $value['pickDrop']['adults'] + $value['pickDrop']['children'];
             }
         }
-        $campo = explode(',', $value['passengersAditionals']);
-        foreach ($campo as $texto) {
-            if ($texto != ' ') {
-                $string = explode(':', $texto);
-                $ultimoCaracter = substr($string[0], -1);
-                $directionPassenger = (strpos($string[0], 'Return') !== false) ? 'Return' : 'Departure';
-                $typePassenger = (strpos($string[0], 'Child') !== false) ? 'Child' : 'Adult';
-                //Log::info("message: " . $string[0] . " - " . $ultimoCaracter . " - " . $directionPassenger . " - " . $typePassenger . " - " . $string[1]);
-                if (is_numeric($ultimoCaracter) && strpos($string[0], 'celphone') === false) {
-                    $completePassenger = $directionPassenger.' '.$typePassenger.' '.$ultimoCaracter;
-                    if (!isset($passengers[$completePassenger])) {
-                        $passengers[$completePassenger] = '';
+        if ($value['passengersAditionals'] !== '') {
+            $campo = explode(',', $value['passengersAditionals']);
+            foreach ($campo as $texto) {
+                if ($texto != ' ') {
+                    $string = explode(':', $texto);
+                    $ultimoCaracter = substr($string[0], -1);
+                    $directionPassenger = (strpos($string[0], 'Return') !== false) ? 'Return' : 'Departure';
+                    $typePassenger = (strpos($string[0], 'Child') !== false) ? 'Child' : 'Adult';
+                    //Log::info("message: " . $string[0] . " - " . $ultimoCaracter . " - " . $directionPassenger . " - " . $typePassenger . " - " . $string[1]);
+                    if (is_numeric($ultimoCaracter) && strpos($string[0], 'celphone') === false) {
+                        $completePassenger = $directionPassenger.' '.$typePassenger.' '.$ultimoCaracter;
+                        if (!isset($passengers[$completePassenger])) {
+                            $passengers[$completePassenger] = '';
+                        }
+                        $passengers[$completePassenger] .= (strpos($string[0], 'email') === false) ? $string[1] : ' - '.$string[1];
+                    } elseif (strpos($string[0], 'celphone') === false) {
+                        $key = $typePassenger . ' 1';
+                        if (!isset($passengers[$key])) {
+                            $passengers[$key] = '';
+                        }
+                        $passengers[$key] .=  (strpos($string[0], 'email') === false) ? $string[1] : ' - '.$string[1];
                     }
-                    $passengers[$completePassenger] .= (strpos($string[0], 'email') === false) ? $string[1] : ' - '.$string[1];
-                } elseif (strpos($string[0], 'celphone') === false) {
-                    $key = $typePassenger . ' 1';
-                    if (!isset($passengers[$key])) {
-                        $passengers[$key] = '';
-                    }
-                    $passengers[$key] .=  (strpos($string[0], 'email') === false) ? $string[1] : ' - '.$string[1];
                 }
             }
         }
