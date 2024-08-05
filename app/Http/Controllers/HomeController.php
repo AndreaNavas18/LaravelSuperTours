@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 use DB;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -409,6 +410,18 @@ class HomeController extends Controller
 
     public function confirmInformation(){
         return view('confirmInformation')->with(['reservas' => session()->get('reservas', [])]);
+    }
+
+    public function reserve(Request $request){
+         try {
+            $data = $request->all();
+            Log::info($data);
+            session()->flush();
+            return Session::all();
+        } catch (\Throwable $th) {
+            Log::info($th);
+        }
+        
     }
 
     // public function register(Request $request){

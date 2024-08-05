@@ -12,6 +12,11 @@
     <title>Login</title>
 </head>
 <body>
+    @if(!session()->has('reservas'))
+        <script>
+            window.location.href = '{{ route('home') }}';
+        </script>
+    @endif
     @include('header2')
     <div class="contenedor">
         <form method="POST" action="{{ route('login') }}">      

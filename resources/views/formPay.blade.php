@@ -156,6 +156,13 @@
         });
         document.querySelector('.pay-button').addEventListener('click', function() {
             alert('Payment processed successfully!');
+            axios.post('/reserve', {
+                reservations: @json($reservas)
+            }).then(function(response) {
+                console.log(response);
+            }).catch(function(error) {
+                console.error(error);
+            });
         });
     </script>
 </body>

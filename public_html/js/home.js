@@ -554,6 +554,9 @@ function searchRoutes(data) {
 }
 
 function createCard(viaje, section) {
+    if (!viaje.tripAvilable) {
+        return;
+    }
      // crear el elemento card
      let card = document.createElement('div');
         card.className = (section == 'todayCards' || section == 'todayCardsReturn') ? 'initialCard' : '';
@@ -621,7 +624,7 @@ function createCard(viaje, section) {
 
         let adjustedTripDeparture = tripDepartureDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
             
-        if (viaje.tripAvilable && viaje.passengersAvailable > 0) {
+        if (viaje.passengersAvailable > 0) {
             Object.entries(typesPrice).forEach(function ([nombre, type]) {
                 let divPrice = document.createElement('div');
                 let titlePrice = document.createElement('h2');

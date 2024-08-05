@@ -24,7 +24,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/pickUp-dropOff', 'pickupDropoff')->name('pickupDropoff');
     Route::post('/savePickDrop', 'savePickDrop')->name('savePickDrop');
     Route::get('/confirmInformation', 'confirmInformation')->name('confirmInformation');
-    Route::view('/confirmPayment', 'formPay')->name('formPay'); 
+    Route::view('/confirmPayment', 'formPay')->name('formPay');
+    Route::post('/reserve', 'reserve')->name('reserve');
 });
 Route::view('/services','services');
 Route::view('/destinations','destinations');
