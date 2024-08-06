@@ -15,8 +15,13 @@
     @if(!session()->has('reservas'))
         <script>
             window.location.href = '{{ route('home') }}';
+            console.log('entro');
         </script>
-    @endif
+    @else
+        <script>
+            console.log('no entro');
+        </script>
+    @endif    
     @include('header2')
     <div class="contenedor">
         <form method="POST" action="{{ route('login') }}">      
